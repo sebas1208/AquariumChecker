@@ -8,13 +8,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MisAcuarios"
+            android:label="@string/title_activity_mis_acuarios"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".MisPlantasPeces">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AgregarPlantasPeces"
+            android:label="@string/title_activity_agregar_plantas_peces"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">AquariumChecker</string>
+    <string name="app_name">Aquarium Checker</string>
+    <string name="descripcion_mis_acuarios">%1$s (%2$f Litros)</string>
+    <string-array name="tipoAgua">
+        <item>Dulce</item>
+        <item>Salada</item>
+    </string-array>
+    <string name="title_activity_mis_acuarios">Mis Acuarios</string>
+    <string name="title_activity_agregar_plantas_peces">Agregar Plantas y Peces</string>
+    <string name="cantidad_peces_plantas">Cantidad: %1$d</string>
 </resources>
