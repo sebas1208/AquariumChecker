@@ -1,4 +1,4 @@
-package ec.edu.epn.acuario;
+package ec.edu.epn.aquariumchecker;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,8 +8,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import ec.edu.epn.acuario.adaptador.AcuarioAdapter;
-import ec.edu.epn.acuario.vo.AcuarioVO;
+import ec.edu.epn.aquariumchecker.adaptador.AcuarioAdapter;
+import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 
 public class Resumen extends AppCompatActivity {
 

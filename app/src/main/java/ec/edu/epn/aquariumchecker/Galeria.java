@@ -1,4 +1,4 @@
-package ec.edu.epn.acuario;
+package ec.edu.epn.aquariumchecker;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

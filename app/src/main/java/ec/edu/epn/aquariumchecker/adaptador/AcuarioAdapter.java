@@ -1,4 +1,4 @@
-package ec.edu.epn.acuario.adaptador;
+package ec.edu.epn.aquariumchecker.adaptador;
 
 import android.content.Context;
 import android.text.Layout;
@@ -11,8 +11,8 @@ import android.widget.TextView;
 import java.util.List;
 import java.util.zip.Inflater;
 
-import ec.edu.epn.acuario.R;
-import ec.edu.epn.acuario.vo.AcuarioVO;
+import ec.edu.epn.aquariumchecker.R;
+import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 
 /**
  * Created by natyd on 28/5/2016.

@@ -13,11 +13,42 @@
     tools:context="ec.edu.epn.aquariumchecker.MisAcuarios"
     tools:showIn="@layout/activity_mis_acuarios">
 
-    <ListView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/mis_acuarios_list">
+        android:layout_height="wrap_content"
+        android:text="Mis Acuarios"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        />
 
-    </ListView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_Resumen"
+        android:text="@string/btnResumen"
+        android:onClick="abrir_Resumenes"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_NuevoAcuario"
+        android:text="@string/btnNuevoAcuario"
+        android:onClick="abrir_NuevoAcuario"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_Galeria"
+        android:text="@string/btnGaleria"
+        android:onClick="abrir_Galeria"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_EditarAcuario"
+        android:text="@string/btnEditarAcuario"
+        android:onClick="abrir_EditarAcuario"/>
+
+
 
 </LinearLayout>

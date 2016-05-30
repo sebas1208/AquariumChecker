@@ -1,44 +1,43 @@
 package ec.edu.epn.aquariumchecker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
-import ec.edu.epn.aquariumchecker.vo.Acuario;
-import ec.edu.epn.aquariumchecker.vo.Forma;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class MisAcuarios extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.v("Mis Acuarios","Entre en mis acuarios");
         setContentView(R.layout.activity_mis_acuarios);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        List<Acuario> acuarios = new ArrayList<>();
-        acuarios.add(new Acuario("Acuario 1", "Agua Salada", new Forma("Rectangular",2.0),2.0));
-        acuarios.add(new Acuario("Acuario 2", "Agua Dulce", new Forma("Rectangular",2.0),2.0));
-        MisAcuariosAdapter adapter = new MisAcuariosAdapter(this,acuarios);
-        ListView misAcuarios = (ListView)findViewById(R.id.mis_acuarios_list);
-        misAcuarios.setAdapter(adapter);
     }
 
+    public void abrir_NuevoAcuario(View view){
+        Intent i = new Intent(this , NuevoAcuario.class);
+        startActivity(i);
+    }
+
+    public void abrir_Galeria ( View view){
+        Intent i = new Intent( this, Galeria.class);
+        startActivity(i);
+    }
+
+    public void abrir_EditarAcuario( View view){
+        Intent i = new Intent(this, EditarAcuario.class);
+        startActivity(i);
+    }
+
+    public void abrir_Resumenes( View view){
+        Intent i = new Intent(this, Resumen.class);
+        startActivity(i);
+    }
 }

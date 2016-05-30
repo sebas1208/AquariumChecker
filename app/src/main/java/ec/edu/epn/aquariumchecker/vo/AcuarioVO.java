@@ -1,4 +1,4 @@
-package ec.edu.epn.acuario.vo;
+package ec.edu.epn.aquariumchecker.vo;
 
 /**
  * Created by natyd on 28/5/2016.

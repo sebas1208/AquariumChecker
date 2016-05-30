@@ -3,69 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ec.edu.epn.acuario.NuevoAcuario"
+    android:orientation="vertical"
+    tools:context="ec.edu.epn.aquariumchecker.EditarAcuario"
     android:weightSum="1">
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/tituloNuevo"
+        android:text="@string/tituloEditar"
         android:gravity="center_horizontal"
         android:textStyle="bold"
         android:textSize="24sp"
         />
-
-    <LinearLayout
-        android:layout_width="338dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        android:layout_weight="0.16">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/nombreAcuario"
-            android:textSize="20sp"/>
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Escriba aqui el nombre"
-            android:layout_weight="0.73" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="338dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        android:layout_weight="0.17">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/TipoAgua"
-            android:textSize="20sp"/>
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/cmbTipoAgua">
-
-        </Spinner>
-
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="338dp"
@@ -78,11 +32,58 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Forma"
+            android:text="@string/nombreAcuario"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Escriba aqui el nombre"
+            android:layout_weight="0.81" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="338dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_weight="0.14">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/TipoAguaEdit"
             android:textSize="20sp"/>
 
         <Spinner
-            android:id="@+id/cmbForma"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cmbTipoAguaEdit">
+
+        </Spinner>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="338dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_weight="0.14">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/FormaEdit"
+            android:textSize="20sp"/>
+
+        <Spinner
+            android:id="@+id/cmbFormaEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -95,18 +96,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="1"
-        android:layout_weight="0.11">
+        android:layout_weight="0.12">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Medidas"
+            android:text="@string/MedidasEdit"
             android:textSize="20sp"/>
 
-      <EditText
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.97" />
 
 
     </LinearLayout>
@@ -116,18 +118,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="1"
-        android:layout_weight="0.17">
+        android:layout_weight="0.20">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Volumen"
+            android:text="@string/VolumenEdit"
             android:textSize="20sp"/>
 
-       <EditText
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -136,20 +138,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="1"
-        android:gravity="center"
-        android:layout_weight="0.19">
+        android:gravity="center_horizontal"
+        android:layout_weight="0.38">
 
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_Guardar"
-            android:layout_weight="0.20" />
+            android:text="@string/btn_GuardarEdit"
+            android:layout_weight="0.15" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_Cancelar"
+            android:text="@string/btn_CancelarEdit"
             android:layout_weight="0.14" />
 
 
