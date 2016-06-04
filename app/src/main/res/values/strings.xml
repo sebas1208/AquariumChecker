@@ -48,6 +48,29 @@
     <string name="observacionesAcuario">Observaciones</string>
     <string name="fotos">Fotos</string>
 
+    <string name="tituloRecordatorio">Recordatorios</string>
+    <string name="tituloRecordatorios">Seleciona tu acuario</string>
+    <string name="tituloCalendario">Calendario</string>
+    <string name="tituloHora">Hora</string>
+    <string name="tituloTipo1">Tipo</string>
+
+    <string name="tituloHistorial">Historial</string>
+    <string name="tituloAcuario">Acuario</string>
+    <string name="tituloTipoAcuario">Tipo Acuario</string>
+    <string name="btnCiclado">Cilado</string>
+    <string name="btnNoCiclado">No Ciclado</string>
+    <string name="tituloparametros">Parametros del acuario</string>
+    <string name="tituloParametrosAnteriores">Anteriores</string>
+    <string name="tituloParametrosActual">Actual</string>
+    <string name="tituloParametrosPh">Ph</string>
+    <string name="tituloParametrosGh">Gh</string>
+    <string name="tituloParametrosKh">Kh</string>
+    <string name="tituloParametrosCo2">Co2</string>
+    <string name="tituloParametrosIluminacion">Iluminación</string>
+    <string name="tituloParametrosObservaciones">Observaciones</string>
+    <string name="tituloParametrosFecha">Fecha</string>
+    <string name="tituloParametrosRecomendaciones">Recomendaciones</string>
+
     <string name="action_settings">Settings</string>
     <string name="agregar_peces_descripcion">Seleccione el acuario para agregar peces</string>
     <string name="title_activity_nuevo_acuario">Nuevo Acuario</string>
