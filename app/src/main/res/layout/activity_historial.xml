@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
+    android:layout_height="match_parent">
 
 
     <FrameLayout
@@ -14,17 +13,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/tituloRecordatorio"
+            android:text="@string/tituloHistorial"
             android:layout_gravity="center" />
 
+
     </FrameLayout>
-
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/tituloRecordatorios"
+        android:text="@string/tituloAcuario"
         android:id="@+id/textView2" />
 
     <Spinner
@@ -38,42 +36,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/tituloCalendario"
-        />
-
-    <CalendarView
-        android:layout_width="wrap_content"
-        android:layout_height="162dp"
-        android:id="@+id/calendarView"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.11" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/tituloHora"
-        />
-
-    <Spinner
-        android:id="@+id/cmbHora"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </Spinner>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/tituloTipo1"
-        />
-
-    <Spinner
-        android:id="@+id/cmbTipo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </Spinner>
+        android:text="@string/tituloTipoAcuario"
+         />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -84,16 +48,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="@string/btn_Guardar"/>
+            android:text="@string/btnCiclado"/>
 
         <Button
             android:id="@+id/btnCancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="@string/btn_Cancelar"/>
+            android:text="@string/btnNoCiclado"/>
 
     </FrameLayout>
+
 
 
 </LinearLayout>

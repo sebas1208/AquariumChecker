@@ -46,7 +46,17 @@
     <string name="tituloRecordatorios">Seleciona tu acuario</string>
     <string name="tituloCalendario">Calendario</string>
     <string name="tituloHora">Hora</string>
-    <string name="tituloTipo">Tipo</string>
+    <string name="tituloTipo1">Tipo</string>
+
+    <string name="tituloHistorial">Historial</string>
+    <string name="tituloAcuario">Acuario</string>
+    <string name="tituloTipoAcuario">Tipo Acuario</string>
+    <string name="btnCiclado">Cilado</string>
+    <string name="btnNoCiclado">No Ciclado</string>
+
+
+
+
 
 
 
