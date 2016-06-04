@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/tituloRecordatorio"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/tituloRecordatorios"
+        android:id="@+id/textView2" />
+
+    <Spinner
+        android:id="@+id/cmbAcuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </Spinner>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/tituloCalendario"
+        />
+
+    <CalendarView
+        android:layout_width="wrap_content"
+        android:layout_height="162dp"
+        android:id="@+id/calendarView"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.11" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/tituloHora"
+        />
+
+    <Spinner
+        android:id="@+id/cmbHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </Spinner>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/tituloTipo"
+        />
+
+    <Spinner
+        android:id="@+id/cmbTipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </Spinner>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="@string/btn_Guardar"/>
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="@string/btn_Cancelar"/>
+
+    </FrameLayout>
+
+
+</LinearLayout>

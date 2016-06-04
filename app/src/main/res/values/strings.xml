@@ -42,6 +42,13 @@
     <string name="observacionesAcuario">Observaciones</string>
     <string name="fotos">Fotos</string>
 
+    <string name="tituloRecordatorio">Recordatorios</string>
+    <string name="tituloRecordatorios">Seleciona tu acuario</string>
+    <string name="tituloCalendario">Calendario</string>
+    <string name="tituloHora">Hora</string>
+    <string name="tituloTipo">Tipo</string>
+
+
 
     <string name="action_settings">Settings</string>
 </resources>
