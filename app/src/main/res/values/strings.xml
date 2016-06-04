@@ -6,14 +6,19 @@
         <item>Salada</item>
     </string-array>
     <string name="title_activity_mis_acuarios">Mis Acuarios</string>
+    <string name="title_activity_mis_peces">Mis Peces</string>
     <string name="title_activity_agregar_plantas_peces">Agregar Plantas y Peces</string>
     <string name="cantidad_peces_plantas">Cantidad: %1$d</string>
-    <string name="btnResumen">Mis Acuarios</string>
-
 
     <string name="tituloMisAcuarios">Mis Acuarios</string>
     <string name="btnNuevoAcuario">Nuevo Acuario</string>
+    <string name="btnMisAcuarios">Acuarios</string>
     <string name="btnGaleria">Galeria</string>
+    <string name="btnPlantas">Plantas</string>
+    <string name="btnPeces">Peces</string>
+    <string name="btnRecordatorio">Recordatorios</string>
+    <string name="btnHistorial">Historial</string>
+    <string name="btnAyuda">Ayuda</string>
     <string name="btnEditarAcuario"> Editar Acuario</string>
     <string name="tituloNuevo">Nuevo Acuario</string>
     <string name="tituloEditar">Editar Acuario</string>
@@ -35,6 +40,7 @@
     <string name="VolumenEdit">Volumen</string>
     <string name="btn_GuardarEdit">Guardar</string>
     <string name="btn_CancelarEdit">Cancelar</string>
+    <string name="agregar_acuarios_descripcion">Seleccione un acuario para editarlo o en el icono + para agregar uno nuevo</string>
 
     <string name="tituloAcuarioGaleria">Acuario</string>
     <string name="nombreAcuarioGaleria">Nombre</string>
@@ -42,6 +48,21 @@
     <string name="observacionesAcuario">Observaciones</string>
     <string name="fotos">Fotos</string>
 
-
     <string name="action_settings">Settings</string>
+    <string name="agregar_peces_descripcion">Seleccione el acuario para agregar peces</string>
+    <string name="title_activity_nuevo_acuario">Nuevo Acuario</string>
+    <string name="title_activity_galeria">Galeria</string>
+    <string name="title_activity_fotos">Fotos</string>
+    <string name="title_activity_plantas">Plantas</string>
+    <string name="siguiente_icono">Siguiente</string>
+    <string name="title_activity_editar_acuario_1">Editar Acuario</string>
+    <string name="hint_nombre">Escriba aqui el nombre</string>
+    <string name="alto">Alto</string>
+    <string name="ancho">Ancho</string>
+    <string name="profundidad">Profundidad</string>
+    <string name="medida_ejemplo">10</string>
+
+    <string name="positivo">Aceptar</string>
+    <string name="negativo">Cancelar</string>
+
 </resources>

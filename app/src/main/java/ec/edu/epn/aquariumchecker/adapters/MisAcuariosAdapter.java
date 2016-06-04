@@ -1,10 +1,6 @@
 package ec.edu.epn.aquariumchecker.adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +9,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import ec.edu.epn.aquariumchecker.AgregarPlantasPeces;
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
 
@@ -36,7 +31,7 @@ public class MisAcuariosAdapter<T> extends ArrayAdapter<T> {
         View item = convertView;
         if(item == null){
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            item = inflater.inflate(R.layout.mis_acuarios_list_item,null);
+            item = inflater.inflate(R.layout.acuarios_list_item,null);
         }
         TextView lblNombre = (TextView) item.findViewById(R.id.mis_acuarios_nombre_acuario);
         lblNombre.setText(datos.get(position).getNombre());

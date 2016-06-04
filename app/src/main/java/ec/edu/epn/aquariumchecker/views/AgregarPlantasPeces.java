@@ -1,4 +1,4 @@
-package ec.edu.epn.aquariumchecker;
+package ec.edu.epn.aquariumchecker.views;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +11,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.adapters.PlantasAdapter;
 import ec.edu.epn.aquariumchecker.vo.Planta;
 
