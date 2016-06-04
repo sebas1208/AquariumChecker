@@ -53,6 +53,18 @@
     <string name="tituloTipoAcuario">Tipo Acuario</string>
     <string name="btnCiclado">Cilado</string>
     <string name="btnNoCiclado">No Ciclado</string>
+    <string name="tituloparametros">Parametros del acuario</string>
+    <string name="tituloParametrosAnteriores">Anteriores</string>
+    <string name="tituloParametrosActual">Actual</string>
+    <string name="tituloParametrosPh">Ph</string>
+    <string name="tituloParametrosGh">Gh</string>
+    <string name="tituloParametrosKh">Kh</string>
+    <string name="tituloParametrosCo2">Co2</string>
+    <string name="tituloParametrosIluminacion">Iluminación</string>
+    <string name="tituloParametrosObservaciones">Observaciones</string>
+    <string name="tituloParametrosFecha">Fecha</string>
+    <string name="tituloParametrosRecomendaciones">Recomendaciones</string>
+
 
 
 
