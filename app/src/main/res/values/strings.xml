@@ -94,5 +94,6 @@
     <string name="negativo">Cancelar</string>
     <string name="title_activity_list_recordatorios">ListRecordatorios</string>
     <string name="title_activity_list_historial">ListHistorial</string>
+    <string name="btncalendario">Ver calendario</string>
 
 </resources>
