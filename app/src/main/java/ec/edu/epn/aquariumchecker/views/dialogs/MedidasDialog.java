@@ -6,41 +6,41 @@ import android.app.Dialog;
 import android.support.v4.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
 
+import java.util.zip.Inflater;
+
 import ec.edu.epn.aquariumchecker.R;
+import ec.edu.epn.aquariumchecker.views.NuevoAcuario;
 
 /**
  * Created by sebastian on 04/06/16.
  */
 public class MedidasDialog extends DialogFragment {
-    public static int alto;
-    public int ancho;
-    public int profundidad;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-
+        final LayoutInflater inflater = getActivity().getLayoutInflater();
         builder.setView(inflater.inflate(R.layout.acuarios_medidas_dialog, null))
-                // Add action buttons
-                .setPositiveButton(R.string.positivo, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        String altoString = ((EditText)getActivity().findViewById(R.id.acuario_medida_alto)).getText().toString();
-                        alto = Integer.getInteger(altoString);
-                        mListener.onDialogPositiveClick(MedidasDialog.this);
-                    }
-                })
-                .setNegativeButton(R.string.negativo, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        mListener.onDialogNegativeClick(MedidasDialog.this);
-                    }
-                });
+            .setPositiveButton(R.string.positivo, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    mListener.onDialogPositiveClick(MedidasDialog.this);
+                }
+            })
+            .setNegativeButton(R.string.negativo, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    mListener.onDialogNegativeClick(MedidasDialog.this);
+                }
+            });
         return builder.create();
     }
+
+
 
     public interface NoticeDialogListener {
         void onDialogPositiveClick(DialogFragment dialog);
@@ -63,9 +63,5 @@ public class MedidasDialog extends DialogFragment {
             throw new ClassCastException(activity.toString()
                     + " must implement NoticeDialogListener");
         }
-    }
-
-    public int alto(){
-        return alto;
     }
 }

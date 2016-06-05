@@ -51,7 +51,7 @@ public class AquariumCherckerMain extends AppCompatActivity                     
     }
 
     public void abrirHistorial (View view){
-        Intent i = new Intent (this,Historial.class);
+        Intent i = new Intent (this,ListHistorial.class);
         startActivity(i);
     }
 }

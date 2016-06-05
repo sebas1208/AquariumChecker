@@ -24,11 +24,11 @@
     <string name="tituloEditar">Editar Acuario</string>
     <string name="tituloGaleria">Galeria</string>
 
-    <string name="nombreAcuario">Nombre</string>
-    <string name="TipoAgua">Tipo de Agua</string>
-    <string name="Forma">Forma</string>
-    <string name="Medidas">Medidas</string>
-    <string name="Volumen">Volumen</string>
+    <string name="nombreAcuario">Nombre:</string>
+    <string name="TipoAgua">Tipo de Agua:</string>
+    <string name="Forma">Forma:</string>
+    <string name="Medidas">Medidas:</string>
+    <string name="Volumen">Volumen:</string>
     <string name="btn_Guardar">Guardar</string>
     <string name="btn_Cancelar">Cancelar</string>
 
@@ -43,6 +43,7 @@
     <string name="agregar_acuarios_descripcion">Seleccione un acuario para editarlo o en el icono + para agregar uno nuevo</string>
 
     <string name="agregar_recordatorio_descripcion">Seleccione un recordatorio para editarlo o en el icono + para agregar uno nuevo</string>
+    <string name="agregar_historial_descripcion">Seleccione un historial para editarlo o en el icono + para agregar uno nuevo</string>
     <string name="tituloAcuarioGaleria">Acuario</string>
     <string name="nombreAcuarioGaleria">Nombre</string>
     <string name="fechaGaleria">Fecha</string>
@@ -87,10 +88,11 @@
     <string name="alto">Alto</string>
     <string name="ancho">Ancho</string>
     <string name="profundidad">Profundidad</string>
-    <string name="medida_ejemplo">10</string>
+    <string name="medida_ejemplo">10 cm</string>
 
     <string name="positivo">Aceptar</string>
     <string name="negativo">Cancelar</string>
     <string name="title_activity_list_recordatorios">ListRecordatorios</string>
+    <string name="title_activity_list_historial">ListHistorial</string>
 
 </resources>
