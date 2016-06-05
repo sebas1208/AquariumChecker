@@ -84,17 +84,9 @@
                 android:value="ec.edu.epn.aquariumchecker.views.EditarAcuario" />
         </activity>
         <activity
-            android:name=".views.Historial"
-            android:label="@string/title_activity_historial"
-            android:parentActivityName=".views.AquariumCherckerMain">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="ec.edu.epn.aquariumchecker.views.AquariumCherckerMain" />
-        </activity>
-        <activity
             android:name=".views.Historial_Ciclado"
             android:label="@string/title_activity_historial_ciclado"
-            android:parentActivityName=".views.Historial">
+            android:parentActivityName=".views.ListHistorial">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ec.edu.epn.aquariumchecker.views.Historial" />
@@ -110,11 +102,21 @@
         <activity
             android:name=".views.ListRecordatorios"
             android:label="@string/title_activity_list_recordatorios"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".views.AquariumCherckerMain">
+            android:parentActivityName=".views.AquariumCherckerMain"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ec.edu.epn.aquariumchecker.views.AquariumCherckerMain" />
+        </activity>
+        <activity
+            android:name=".views.ListHistorial"
+            android:label="@string/title_activity_list_historial"
+            android:parentActivityName=".views.AquariumCherckerMain"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ec.edu.epn.aquariumchecker.views.AquariumCherckerMain"/>
+
         </activity>
     </application>
 
