@@ -19,7 +19,13 @@ public class AquariumCheckerAppContract {
         public static final String COLUMNA_NOMBRE = "NOMBRE";
         public static final String COLUMNA_TIPOAGUA = "TIPOAGUA";
         public static final String COLUMNA_VOLUMEN = "VOLUMEN";
-        public static final String COLUMNA_MEDIDAS = "MEDIDAS";
+        public static final String COLUMNA_ALTO = "ALTO";
+        public static final String COLUMNA_ANCHO = "ANCHO";
+        public static final String COLUMNA_PROFUNDIDAD_MEDIDAS = "PROFUNDIDAD_MEDIDAS";
+        public static final String COLUMNA_DIAMETRO = "DIAMETRO";
+        public static final String COLUMNA_PROFUNDIDAD_REDONDO = "PROFUNDIDAD_REDONDO";
+
+
 
 
         public static final String ELIMINA_TABLAS_ACUARIO = "DROP TABLE IF EXISTS " + TablaAcuario.NOMBRE_TABLA;
@@ -29,7 +35,11 @@ public class AquariumCheckerAppContract {
                 TablaAcuario.COLUMNA_NOMBRE + TEXT_TYPE + COMMA_SEP +
                 TablaAcuario.COLUMNA_TIPOAGUA + TEXT_TYPE + COMMA_SEP +
                 TablaAcuario.COLUMNA_VOLUMEN + INTEGER_TYPE + COMMA_SEP +
-                TablaAcuario.COLUMNA_MEDIDAS + INTEGER_TYPE +  " )";
+                TablaAcuario.COLUMNA_ALTO + INTEGER_TYPE + COMMA_SEP +
+                TablaAcuario.COLUMNA_ANCHO + INTEGER_TYPE + COMMA_SEP +
+                TablaAcuario.COLUMNA_PROFUNDIDAD_MEDIDAS + INTEGER_TYPE + COMMA_SEP +
+                TablaAcuario.COLUMNA_DIAMETRO + INTEGER_TYPE + COMMA_SEP +
+                TablaAcuario.COLUMNA_PROFUNDIDAD_REDONDO + INTEGER_TYPE + " )";
 
         public static final String ELIMINA_TABLAS_PECES = "DROP TABLE IF EXISTS " + TablaPeces.NOMBRE_TABLA;
         public static final String CREA_TABLAS_TABLA_PECES = "CREATE TABLE " +
