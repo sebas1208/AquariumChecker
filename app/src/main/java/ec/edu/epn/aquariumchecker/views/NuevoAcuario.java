@@ -1,14 +1,10 @@
 package ec.edu.epn.aquariumchecker.views;
 
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -16,9 +12,11 @@ import android.widget.Spinner;
 import android.support.v4.app.DialogFragment;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.views.dialogs.MedidasDialog;
+import ec.edu.epn.aquariumchecker.views.dialogs.MedidasCilindricasDialog;
+import ec.edu.epn.aquariumchecker.views.dialogs.MedidasRectangularesDialog;
 
-public class NuevoAcuario extends AppCompatActivity implements MedidasDialog.NoticeDialogListener {
+public class NuevoAcuario extends AppCompatActivity implements
+        MedidasRectangularesDialog.NoticeDialogListener,MedidasCilindricasDialog.NoticeDialogListener {
 
     private Spinner cmbtiposAgua;
     private Spinner cmbtiposForma;
@@ -27,6 +25,9 @@ public class NuevoAcuario extends AppCompatActivity implements MedidasDialog.Not
     private Double alto;
     private Double ancho;
     private Double profundidad;
+    private Double profundidadCilindrica;
+    private Double diametro;
+    private final Double pi = Math.PI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +58,13 @@ public class NuevoAcuario extends AppCompatActivity implements MedidasDialog.Not
 
 
     public void abrirMedidasDialog(View view) {
-        DialogFragment dialog = new MedidasDialog();
-        dialog.show(getSupportFragmentManager(),"String");
+        if(cmbtiposForma.getSelectedItem() == "Rectangular"){
+            DialogFragment dialog = new MedidasRectangularesDialog();
+            dialog.show(getSupportFragmentManager(),"String");
+        }else{
+            DialogFragment dialog = new MedidasCilindricasDialog();
+            dialog.show(getSupportFragmentManager(),"String");
+        }
     }
 
 
@@ -81,7 +87,7 @@ public class NuevoAcuario extends AppCompatActivity implements MedidasDialog.Not
     }
 
     private String obtenerMedidasRectangularesString(String alto,String ancho, String profundidad){
-        return alto + "x" + ancho + "x" + profundidad;
+        return alto + "cm x " + ancho + "cm x " + profundidad + "cm";
     }
 
     private void obtenterMedidasRectangulares(String alto,String ancho, String profundidad){
@@ -92,10 +98,43 @@ public class NuevoAcuario extends AppCompatActivity implements MedidasDialog.Not
 
     private String obtenerVolumenString(){
         return "" + (alto*ancho*profundidad)*0.001 + " Litros";
-    };
+    }
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
+
+    }
+
+    @Override
+    public void onCilindricoDialogPositiveClick(DialogFragment dialog) {
+        Dialog d = dialog.getDialog();
+        EditText diametro = (EditText)d.findViewById(R.id.acuario_medidas_cilindricas_diametro);
+        EditText profundidad = (EditText)d.findViewById(R.id.acuario_medidas_cilindricas_profundidad);
+        obtenterMedidasCilindricas(
+                diametro.getText().toString(),
+                profundidad.getText().toString());
+        String medidas = obtenerMedidasCilindricasString(
+                diametro.getText().toString(),
+                profundidad.getText().toString());
+        edtMedida.setText(medidas);
+        edtVolumen.setText(obtenerVolumenCilindricoString());
+    }
+
+    private void obtenterMedidasCilindricas(String diametro, String profundidad){
+        this.diametro = Double.parseDouble(diametro);
+        this.profundidadCilindrica = Double.parseDouble(profundidad);
+    }
+
+    private String obtenerMedidasCilindricasString(String diametro, String profundidad){
+        return diametro + "cm x " + profundidad + "cm";
+    }
+
+    private String obtenerVolumenCilindricoString(){
+        return "" + ((diametro/2)*(diametro/2)*pi)*profundidadCilindrica*0.001 + " Litros";
+    }
+
+    @Override
+    public void onCilindricoonDialogNegativeClick(DialogFragment dialog) {
 
     }
 }
