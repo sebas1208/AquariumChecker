@@ -57,7 +57,7 @@
     <string name="tituloHistorial">Historial</string>
     <string name="tituloAcuario">Acuario</string>
     <string name="tituloTipoAcuario">Tipo Acuario</string>
-    <string name="btnCiclado">Cilado</string>
+    <string name="btnParametros">Parametros</string>
     <string name="btnNoCiclado">No Ciclado</string>
     <string name="tituloparametros">Parametros del acuario</string>
     <string name="tituloParametrosAnteriores">Anteriores</string>

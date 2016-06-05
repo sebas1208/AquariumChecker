@@ -48,14 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="@string/btnCiclado"/>
-
-        <Button
-            android:id="@+id/btnCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="@string/btnNoCiclado"/>
+            android:text="@string/btnParametros"
+            android:onClick="abrirParametros"/>
 
     </FrameLayout>
 
