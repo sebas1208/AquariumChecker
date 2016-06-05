@@ -24,11 +24,11 @@
     <string name="tituloEditar">Editar Acuario</string>
     <string name="tituloGaleria">Galeria</string>
 
-    <string name="nombreAcuario">Nombre</string>
-    <string name="TipoAgua">Tipo de Agua</string>
-    <string name="Forma">Forma</string>
-    <string name="Medidas">Medidas</string>
-    <string name="Volumen">Volumen</string>
+    <string name="nombreAcuario">Nombre:</string>
+    <string name="TipoAgua">Tipo de Agua:</string>
+    <string name="Forma">Forma:</string>
+    <string name="Medidas">Medidas:</string>
+    <string name="Volumen">Volumen:</string>
     <string name="btn_Guardar">Guardar</string>
     <string name="btn_Cancelar">Cancelar</string>
 
