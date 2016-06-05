@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_historial"
         android:text="@string/btnHistorial"
-        android:onClick="abrirHistoria"/>
+        android:onClick="abrirHistorial"/>
 
     <Button
         android:layout_width="match_parent"

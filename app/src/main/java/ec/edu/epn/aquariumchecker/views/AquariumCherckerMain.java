@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 
 import ec.edu.epn.aquariumchecker.R;
+import ec.edu.epn.aquariumchecker.views.dialogs.Historial;
+import ec.edu.epn.aquariumchecker.views.dialogs.Historial_Ciclado;
 
 public class AquariumCherckerMain extends AppCompatActivity                                                     {
 
@@ -41,6 +43,17 @@ public class AquariumCherckerMain extends AppCompatActivity                     
 
     public void abrirNuevoAcuario(View view){
         Intent i = new Intent(this, NuevoAcuario.class);
+        startActivity(i);
+    }
+
+
+    public void abrirRecordatorio (View view){
+        Intent i = new Intent (this,Recordatorios.class);
+        startActivity(i);
+    }
+
+    public void abrirHistorial (View view){
+        Intent i = new Intent (this,Historial.class);
         startActivity(i);
     }
 }
