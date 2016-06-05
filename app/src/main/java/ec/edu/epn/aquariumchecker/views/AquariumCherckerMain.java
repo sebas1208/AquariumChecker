@@ -7,8 +7,6 @@ import android.util.Log;
 import android.view.View;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.views.dialogs.Historial;
-import ec.edu.epn.aquariumchecker.views.dialogs.Historial_Ciclado;
 
 public class AquariumCherckerMain extends AppCompatActivity                                                     {
 

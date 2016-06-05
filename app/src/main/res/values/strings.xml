@@ -78,7 +78,10 @@
     <string name="title_activity_fotos">Fotos</string>
     <string name="title_activity_plantas">Plantas</string>
     <string name="siguiente_icono">Siguiente</string>
-    <string name="title_activity_editar_acuario_1">Editar Acuario</string>
+    <string name="title_activity_editar_acuario">Editar Acuario</string>
+    <string name="title_activity_historial">Historial</string>
+    <string name="title_activity_historial_ciclado">Historial Ciclado</string>
+    <string name="title_activity_recordatorios">Recordatorios</string>
     <string name="hint_nombre">Escriba aqui el nombre</string>
     <string name="alto">Alto</string>
     <string name="ancho">Ancho</string>

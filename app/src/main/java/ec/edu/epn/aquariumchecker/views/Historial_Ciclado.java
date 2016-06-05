@@ -1,4 +1,4 @@
-package ec.edu.epn.aquariumchecker.views.dialogs;
+package ec.edu.epn.aquariumchecker.views;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
