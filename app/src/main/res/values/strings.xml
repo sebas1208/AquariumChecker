@@ -43,6 +43,7 @@
     <string name="agregar_acuarios_descripcion">Seleccione un acuario para editarlo o en el icono + para agregar uno nuevo</string>
 
     <string name="agregar_recordatorio_descripcion">Seleccione un recordatorio para editarlo o en el icono + para agregar uno nuevo</string>
+    <string name="agregar_historial_descripcion">Seleccione un historial para editarlo o en el icono + para agregar uno nuevo</string>
     <string name="tituloAcuarioGaleria">Acuario</string>
     <string name="nombreAcuarioGaleria">Nombre</string>
     <string name="fechaGaleria">Fecha</string>
@@ -92,5 +93,6 @@
     <string name="positivo">Aceptar</string>
     <string name="negativo">Cancelar</string>
     <string name="title_activity_list_recordatorios">ListRecordatorios</string>
+    <string name="title_activity_list_historial">ListHistorial</string>
 
 </resources>
