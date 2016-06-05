@@ -87,7 +87,7 @@
     <string name="alto">Alto</string>
     <string name="ancho">Ancho</string>
     <string name="profundidad">Profundidad</string>
-    <string name="medida_ejemplo">10</string>
+    <string name="medida_ejemplo">10 cm</string>
 
     <string name="positivo">Aceptar</string>
     <string name="negativo">Cancelar</string>

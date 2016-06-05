@@ -2,6 +2,7 @@ package ec.edu.epn.aquariumchecker.views;
 
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +24,9 @@ public class NuevoAcuario extends AppCompatActivity implements MedidasDialog.Not
     private Spinner cmbtiposForma;
     private EditText edtMedida;
     private EditText edtVolumen;
-    private EditText edtAlto;
+    private Double alto;
+    private Double ancho;
+    private Double profundidad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,6 @@ public class NuevoAcuario extends AppCompatActivity implements MedidasDialog.Not
         cmbtiposForma = (Spinner) findViewById(R.id.cmbForma);
         edtMedida = (EditText) findViewById(R.id.medidas_editText);
         edtVolumen = (EditText) findViewById(R.id.volumen_editText);
-        edtVolumen.setText("Hola");
 
 
         String[] tiposAgua = {"Dulce", "Salada"};
@@ -55,37 +57,42 @@ public class NuevoAcuario extends AppCompatActivity implements MedidasDialog.Not
 
 
     public void abrirMedidasDialog(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        final LayoutInflater inflater = this.getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.acuarios_medidas_dialog, null));
-        builder.setPositiveButton(R.string.positivo, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                edtAlto = (EditText)findViewById(R.id.acuario_medida_alto);
-                edtVolumen.setText(edtAlto.getText());
-            }
-        }).setNegativeButton(R.string.negativo, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        DialogFragment dialog = new MedidasDialog();
+        dialog.show(getSupportFragmentManager(),"String");
     }
 
-    public void actualizarMedidas(String v) {
-        edtVolumen.setText(v);
-    }
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-//        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
-//        View v = inflater.inflate(R.layout.acuarios_activity_nuevo, null);
-//        EditText e = (EditText)v.findViewById(R.id.acuario_medida_alto);
-//        Log.v("Edit Text","Hola" + e.getText().toString());
-//        String a = e.getText();
-//        edtMedida.setText(a);
+        Dialog d = dialog.getDialog();
+        EditText alto = (EditText)d.findViewById(R.id.acuario_medida_alto);
+        EditText ancho = (EditText)d.findViewById(R.id.acuario_medida_ancho);
+        EditText profundidad = (EditText)d.findViewById(R.id.acuario_medida_profundidad);
+        obtenterMedidasRectangulares(
+                alto.getText().toString(),
+                ancho.getText().toString(),
+                profundidad.getText().toString());
+        String medidas = obtenerMedidasRectangularesString(
+                alto.getText().toString(),
+                ancho.getText().toString(),
+                profundidad.getText().toString());
+        edtMedida.setText(medidas);
+        edtVolumen.setText(obtenerVolumenString());
     }
+
+    private String obtenerMedidasRectangularesString(String alto,String ancho, String profundidad){
+        return alto + "x" + ancho + "x" + profundidad;
+    }
+
+    private void obtenterMedidasRectangulares(String alto,String ancho, String profundidad){
+        this.alto = Double.parseDouble(alto);
+        this.ancho = Double.parseDouble(ancho);
+        this.profundidad = Double.parseDouble(profundidad);
+    }
+
+    private String obtenerVolumenString(){
+        return "" + (alto*ancho*profundidad)*0.001 + " Litros";
+    };
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {

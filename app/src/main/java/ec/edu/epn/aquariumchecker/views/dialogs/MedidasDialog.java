@@ -20,35 +20,27 @@ import ec.edu.epn.aquariumchecker.views.NuevoAcuario;
  * Created by sebastian on 04/06/16.
  */
 public class MedidasDialog extends DialogFragment {
-//    public static int alto;
-    public int ancho;
-    public int profundidad;
-    private EditText alto;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         final LayoutInflater inflater = getActivity().getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.acuarios_medidas_dialog, null));
-        View v = inflater.inflate(R.layout.acuarios_medidas_dialog, null);
-        alto = (EditText) v.findViewById(R.id.acuario_medida_alto);
-
-        builder.setPositiveButton(R.string.positivo, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        ((NuevoAcuario)getActivity()).actualizarMedidas(alto.getText().toString());
-                        mListener.onDialogPositiveClick(MedidasDialog.this);
-                    }
-                })
-                .setNegativeButton(R.string.negativo, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        mListener.onDialogNegativeClick(MedidasDialog.this);
-                    }
-                });
+        builder.setView(inflater.inflate(R.layout.acuarios_medidas_dialog, null))
+            .setPositiveButton(R.string.positivo, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    mListener.onDialogPositiveClick(MedidasDialog.this);
+                }
+            })
+            .setNegativeButton(R.string.negativo, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    mListener.onDialogNegativeClick(MedidasDialog.this);
+                }
+            });
         return builder.create();
     }
 
-    
+
 
     public interface NoticeDialogListener {
         void onDialogPositiveClick(DialogFragment dialog);
