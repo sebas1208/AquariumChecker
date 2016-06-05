@@ -29,6 +29,11 @@ public class Recordatorios extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recordatorios);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       // setSupportActionBar(toolbar);
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         cmbAcuarios = (Spinner)findViewById(R.id.cmbAcuario);
         cmbHora = (Spinner)findViewById(R.id.cmbHora);
         cmbTipo = (Spinner)findViewById(R.id.cmbTipo);

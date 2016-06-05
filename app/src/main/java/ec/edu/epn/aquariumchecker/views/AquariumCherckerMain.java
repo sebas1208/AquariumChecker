@@ -46,7 +46,7 @@ public class AquariumCherckerMain extends AppCompatActivity                     
 
 
     public void abrirRecordatorio (View view){
-        Intent i = new Intent (this,Recordatorios.class);
+        Intent i = new Intent (this,ListRecordatorios.class);
         startActivity(i);
     }
 

@@ -102,12 +102,20 @@
         <activity
             android:name=".views.Recordatorios"
             android:label="@string/title_activity_recordatorios"
+            android:parentActivityName=".views.ListRecordatorios">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ec.edu.epn.aquariumchecker.views.AquariumCherckerMain" />
+        </activity>
+        <activity
+            android:name=".views.ListRecordatorios"
+            android:label="@string/title_activity_list_recordatorios"
+            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".views.AquariumCherckerMain">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ec.edu.epn.aquariumchecker.views.AquariumCherckerMain" />
         </activity>
-
     </application>
 
 </manifest>
