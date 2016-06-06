@@ -1,13 +1,8 @@
 package ec.edu.epn.aquariumchecker.views;
-
-
 import android.app.Dialog;
-<<<<<<< HEAD
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
-=======
->>>>>>> f5dc4e648bdbfc07201c9ae11bbf9e1e60586cca
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,14 +13,11 @@ import android.widget.Spinner;
 import android.support.v4.app.DialogFragment;
 
 import ec.edu.epn.aquariumchecker.R;
-<<<<<<< HEAD
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
-import ec.edu.epn.aquariumchecker.views.dialogs.MedidasDialog;
-=======
 import ec.edu.epn.aquariumchecker.views.dialogs.MedidasCilindricasDialog;
 import ec.edu.epn.aquariumchecker.views.dialogs.MedidasRectangularesDialog;
->>>>>>> f5dc4e648bdbfc07201c9ae11bbf9e1e60586cca
+
 
 public class NuevoAcuario extends AppCompatActivity implements
         MedidasRectangularesDialog.NoticeDialogListener,MedidasCilindricasDialog.NoticeDialogListener {
@@ -81,6 +73,8 @@ public class NuevoAcuario extends AppCompatActivity implements
         valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ALTO,alto);
         valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ANCHO,ancho);
         valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_MEDIDAS,profundidad);
+        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_DIAMETRO,diametro);
+        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_REDONDO,profundidadCilindrica);
         valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_VOLUMEN,Double.parseDouble(edtVolumen.getText().toString()));
         db.insert(AquariumCheckerAppContract.TablaAcuario.NOMBRE_TABLA, null, valores);
         db.close();
@@ -128,13 +122,11 @@ public class NuevoAcuario extends AppCompatActivity implements
     }
 
     private String obtenerVolumenString(){
-<<<<<<< HEAD
+
         return "" + (alto*ancho*profundidad)*0.001;
     };
-=======
-        return "" + (alto*ancho*profundidad)*0.001 + " Litros";
-    }
->>>>>>> f5dc4e648bdbfc07201c9ae11bbf9e1e60586cca
+
+
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
@@ -166,7 +158,7 @@ public class NuevoAcuario extends AppCompatActivity implements
     }
 
     private String obtenerVolumenCilindricoString(){
-        return "" + ((diametro/2)*(diametro/2)*pi)*profundidadCilindrica*0.001 + " Litros";
+        return "" + ((diametro/2)*(diametro/2)*pi)*profundidadCilindrica*0.001;
     }
 
     @Override
