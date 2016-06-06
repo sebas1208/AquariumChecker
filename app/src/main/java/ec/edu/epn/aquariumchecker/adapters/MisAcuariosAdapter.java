@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.vo.Acuario;
+import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 
 
 /**
@@ -18,12 +18,12 @@ import ec.edu.epn.aquariumchecker.vo.Acuario;
  */
 public class MisAcuariosAdapter<T> extends ArrayAdapter<T> {
 
-    List<Acuario> datos;
+    List<AcuarioVO> datos;
 
     public MisAcuariosAdapter(Context context, List<T> objects){
         super(context, 0,objects);
 
-        datos = (List<Acuario>) objects;
+        datos = (List<AcuarioVO>) objects;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MisAcuariosAdapter<T> extends ArrayAdapter<T> {
 
         TextView lblDescripcion = (TextView) item.findViewById(R.id.mis_acuarios_descripcion);
         lblDescripcion.setText(String.format(getContext().getString(R.string.descripcion_mis_acuarios)
-                ,datos.get(position).getTipoAgua(),datos.get(position).getVolumen()));
+                ,datos.get(position).getTipo_agua(),datos.get(position).getVolumen()));
 
         return item;
     }

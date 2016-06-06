@@ -14,7 +14,7 @@ import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
-import ec.edu.epn.aquariumchecker.vo.Acuario;
+import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 import ec.edu.epn.aquariumchecker.vo.Forma;
 
 public class MisPeces extends AppCompatActivity {
@@ -36,9 +36,9 @@ public class MisPeces extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        List<Acuario> acuarios = new ArrayList<>();
-        acuarios.add(new Acuario("Acuario 1", "Agua Salada", new Forma("Rectangular",2.0),2.0));
-        acuarios.add(new Acuario("Acuario 2", "Agua Dulce", new Forma("Rectangular",2.0),2.0));
+        List<AcuarioVO> acuarios = new ArrayList<>();
+        /*acuarios.add(new AcuarioVO("Acuario 1", "Agua Salada", new Forma("Rectangular",2.0),2.0));
+        acuarios.add(new AcuarioVO("Acuario 2", "Agua Dulce", new Forma("Rectangular",2.0),2.0)); */
         MisAcuariosAdapter adapter = new MisAcuariosAdapter(this,acuarios);
         ListView misAcuarios = (ListView)findViewById(R.id.mis_acuarios_list);
         misAcuarios.setAdapter(adapter);

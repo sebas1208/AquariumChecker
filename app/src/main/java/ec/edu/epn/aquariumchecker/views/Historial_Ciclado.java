@@ -1,23 +1,11 @@
 package ec.edu.epn.aquariumchecker.views;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Spinner;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
-import ec.edu.epn.aquariumchecker.vo.Acuario;
-import ec.edu.epn.aquariumchecker.vo.Forma;
 
 
 public class Historial_Ciclado extends AppCompatActivity {
