@@ -3,7 +3,6 @@ package ec.edu.epn.aquariumchecker.views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 import ec.edu.epn.aquariumchecker.R;
@@ -13,7 +12,6 @@ public class AquariumCherckerMain extends AppCompatActivity                     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.v("Mis Acuarios","Entre en mis acuarios");
         setContentView(R.layout.main_activity);
     }
 
@@ -29,7 +27,7 @@ public class AquariumCherckerMain extends AppCompatActivity                     
     }
 
     public void abrirPeces(View view){
-        Intent i = new Intent(this, MisPeces.class);
+        Intent i = new Intent(this, MisPecesAcuarios.class);
         startActivity(i);
     }
 
