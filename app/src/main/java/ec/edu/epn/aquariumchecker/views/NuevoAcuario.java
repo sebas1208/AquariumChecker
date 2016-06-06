@@ -48,7 +48,7 @@ public class NuevoAcuario extends AppCompatActivity implements
         edtVolumen = (EditText) findViewById(R.id.volumen_editText);
 
         String[] tiposAgua = {"Dulce", "Salada"};
-        String[] tiposForma = {"Rectangular", "Redondo"};
+        String[] tiposForma = {"Rectangular", "Cilindrico"};
 
         ArrayAdapter<String> adaptadorTiposAgua = new ArrayAdapter<>
                 (this, android.R.layout.simple_spinner_dropdown_item, tiposAgua);
@@ -76,7 +76,6 @@ public class NuevoAcuario extends AppCompatActivity implements
         valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_VOLUMEN,Double.parseDouble(edtVolumen.getText().toString()));
         db.insert(AquariumCheckerAppContract.TablaAcuario.NOMBRE_TABLA, null, valores);
         db.close();
-
     }
 
 

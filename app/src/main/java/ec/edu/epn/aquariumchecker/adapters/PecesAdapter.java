@@ -10,19 +10,19 @@ import android.widget.TextView;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.vo.Planta;
+import ec.edu.epn.aquariumchecker.vo.Peces;
 
 /**
- * Created by sebastian on 28/05/16.
+ * Created by sebastian on 05/06/16.
  */
-public class PlantasAdapter<T> extends ArrayAdapter<T> {
+public class PecesAdapter<T> extends ArrayAdapter<T> {
 
-    List<Planta> datos;
+    List<Peces> datos;
 
-    public PlantasAdapter(Context context, List<T> objects) {
+    public PecesAdapter(Context context, List<T> objects) {
         super(context, 0, objects);
 
-        datos = (List<Planta>) objects;
+        datos = (List<Peces>) objects;
     }
 
     @Override
@@ -38,7 +38,6 @@ public class PlantasAdapter<T> extends ArrayAdapter<T> {
         TextView lblCantidad = (TextView) item.findViewById(R.id.cantidad_peces);
         lblCantidad.setText(String.format(getContext().getString(R.string.cantidad_peces_plantas),
                 datos.get(position).getCantidad()));
-
 
         TextView lblDescripcion = (TextView) item.findViewById(R.id.descripcion_peces);
         lblDescripcion.setText(datos.get(position).getDescripcion());

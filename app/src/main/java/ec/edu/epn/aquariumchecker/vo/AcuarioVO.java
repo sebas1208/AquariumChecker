@@ -1,9 +1,11 @@
 package ec.edu.epn.aquariumchecker.vo;
 
+import java.io.Serializable;
+
 /**
  * Created by natyd on 5/6/2016.
  */
-public class AcuarioVO {
+public class AcuarioVO implements Serializable{
 
     private String nombre;
     private String tipo_agua;
@@ -14,11 +16,12 @@ public class AcuarioVO {
     private double diametro;
     private double profundidad_redondo;
     private double volumen;
+    private int id;
 
     public AcuarioVO() {
     }
 
-    public AcuarioVO(String nombre, String tipo_agua, String forma, double alto, double ancho, double profundidad_rectangular, double diametro, double profundidad_redondo, double volumen) {
+    public AcuarioVO(String nombre, String tipo_agua, String forma, double alto, double ancho, double profundidad_rectangular, double diametro, double profundidad_redondo, double volumen, int id) {
         this.nombre = nombre;
         this.tipo_agua = tipo_agua;
         this.forma = forma;
@@ -28,6 +31,15 @@ public class AcuarioVO {
         this.diametro = diametro;
         this.profundidad_redondo = profundidad_redondo;
         this.volumen = volumen;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
