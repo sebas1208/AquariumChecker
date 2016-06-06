@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Planta;
 
 /**

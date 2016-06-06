@@ -14,8 +14,6 @@ import java.util.List;
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
 import ec.edu.epn.aquariumchecker.adapters.PecesAdapter;
-import ec.edu.epn.aquariumchecker.vo.Acuario;
-import ec.edu.epn.aquariumchecker.vo.Forma;
 import ec.edu.epn.aquariumchecker.vo.Peces;
 
 public class MisPeces extends AppCompatActivity {

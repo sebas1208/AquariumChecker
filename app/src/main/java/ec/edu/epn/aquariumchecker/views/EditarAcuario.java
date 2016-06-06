@@ -1,9 +1,9 @@
 package ec.edu.epn.aquariumchecker.views;
 
 import android.app.Dialog;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,27 +12,38 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.Objects;
+
 import ec.edu.epn.aquariumchecker.R;
+import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
+import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
 import ec.edu.epn.aquariumchecker.views.dialogs.MedidasCilindricasDialog;
 import ec.edu.epn.aquariumchecker.views.dialogs.MedidasRectangularesDialog;
+import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 
 public class EditarAcuario extends AppCompatActivity implements
         MedidasRectangularesDialog.NoticeDialogListener,MedidasCilindricasDialog.NoticeDialogListener {
 
     private Spinner cmbtiposAgua;
     private Spinner cmbtiposForma;
+    private EditText edtNombre;
     private EditText edtMedida;
     private EditText edtVolumen;
-    private Double alto;
-    private Double ancho;
-    private Double profundidad;
-    private Double profundidadCilindrica;
-    private Double diametro;
     private final Double pi = Math.PI;
+    private AcuarioVO acuarioEditar;
+
+    private String[] tiposAgua = {"Dulce", "Salada"};
+    private String[] tiposForma = {"Rectangular", "Cilindrico"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initComponents();
+        getAcuarioEdit();
+        setEditFields();
+    }
+
+    private void initComponents(){
         setContentView(R.layout.acuarios_activity_nuevo);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -40,9 +51,9 @@ public class EditarAcuario extends AppCompatActivity implements
 
         cmbtiposAgua = (Spinner) findViewById(R.id.cmbTipoAgua);
         cmbtiposForma = (Spinner) findViewById(R.id.cmbForma);
-
-        String[] tiposAgua = {"Dulce", "Salada"};
-        String[] tiposForma = {"Rectangular", "Redondo"};
+        edtNombre = (EditText) findViewById(R.id.txtnombreAcuario);
+        edtMedida = (EditText) findViewById(R.id.medidas_editText);
+        edtVolumen = (EditText) findViewById(R.id.volumen_editText);
 
         ArrayAdapter<String> adaptadorTiposAgua = new ArrayAdapter<>
                 (this, android.R.layout.simple_spinner_dropdown_item, tiposAgua);
@@ -52,6 +63,37 @@ public class EditarAcuario extends AppCompatActivity implements
 
         cmbtiposAgua.setAdapter(adaptadorTiposAgua);
         cmbtiposForma.setAdapter(adaptadorTiposFormas);
+    }
+
+    private void getAcuarioEdit(){
+        acuarioEditar = (AcuarioVO)getIntent().getSerializableExtra("acuarioEditar");
+        if(acuarioEditar == null){
+            acuarioEditar = new AcuarioVO();
+        }
+    }
+
+    private void setEditFields(){
+        edtNombre.setText(acuarioEditar.getNombre());
+        if(Objects.equals(acuarioEditar.getTipo_agua(), tiposAgua[0])){
+            cmbtiposAgua.setSelection(0);
+        }
+        else {
+            cmbtiposAgua.setSelection(1);
+        }
+
+        if(Objects.equals(acuarioEditar.getForma(), tiposForma[0])){
+            cmbtiposForma.setSelection(0);
+            edtMedida.setText(obtenerMedidasRectangularesString(Double.toString(acuarioEditar.getAlto()),
+                    Double.toString(acuarioEditar.getAncho()),Double.toString(acuarioEditar.getProfundidad_rectangular())));
+            edtVolumen.setText(obtenerVolumenRectangularString());
+        }
+        else {
+            cmbtiposForma.setSelection(1);
+            edtMedida.setText(obtenerMedidasCilindricasString(Double.toString(acuarioEditar.getDiametro()),
+                    Double.toString(acuarioEditar.getProfundidad_redondo())));
+            edtVolumen.setText(obtenerVolumenCilindricoString(acuarioEditar.getDiametro(),
+                    acuarioEditar.getProfundidad_redondo()));
+        }
     }
 
     public void abrirMedidasDialog(View view) {
@@ -79,8 +121,9 @@ public class EditarAcuario extends AppCompatActivity implements
                 alto.getText().toString(),
                 ancho.getText().toString(),
                 profundidad.getText().toString());
+        obtenerVolumenRectangular();
         edtMedida.setText(medidas);
-        edtVolumen.setText(obtenerVolumenString());
+        edtVolumen.setText(obtenerVolumenRectangularString());
     }
 
     private String obtenerMedidasRectangularesString(String alto,String ancho, String profundidad){
@@ -88,13 +131,25 @@ public class EditarAcuario extends AppCompatActivity implements
     }
 
     private void obtenterMedidasRectangulares(String alto,String ancho, String profundidad){
-        this.alto = Double.parseDouble(alto);
-        this.ancho = Double.parseDouble(ancho);
-        this.profundidad = Double.parseDouble(profundidad);
+        acuarioEditar.setAlto(Double.parseDouble(alto));
+        acuarioEditar.setAncho(Double.parseDouble(ancho));
+        acuarioEditar.setProfundidad_rectangular(Double.parseDouble(profundidad));
     }
 
-    private String obtenerVolumenString(){
-        return "" + (alto*ancho*profundidad)*0.001 + " Litros";
+    private void obtenerVolumenRectangular(){
+        acuarioEditar.setVolumen((acuarioEditar.getAlto()*acuarioEditar.getAncho()*
+                acuarioEditar.getProfundidad_rectangular())*0.001);
+    }
+
+    private void obtenerVolumenCilindrico(){
+        acuarioEditar.setVolumen(((acuarioEditar.getDiametro()/2)*(acuarioEditar.getDiametro()/2)*pi)*
+                acuarioEditar.getProfundidad_redondo()*0.001);
+    }
+
+
+    private String obtenerVolumenRectangularString(){
+        return "" + (acuarioEditar.getAlto()*acuarioEditar.getAncho()*
+                acuarioEditar.getProfundidad_rectangular())*0.001 + " Litros";
     }
 
     @Override
@@ -115,11 +170,12 @@ public class EditarAcuario extends AppCompatActivity implements
                 profundidad.getText().toString());
         edtMedida.setText(medidas);
         edtVolumen.setText(obtenerVolumenCilindricoString());
+        obtenerVolumenCilindrico();
     }
 
     private void obtenterMedidasCilindricas(String diametro, String profundidad){
-        this.diametro = Double.parseDouble(diametro);
-        this.profundidadCilindrica = Double.parseDouble(profundidad);
+        acuarioEditar.setDiametro(Double.parseDouble(diametro));
+        acuarioEditar.setProfundidad_redondo(Double.parseDouble(profundidad));
     }
 
     private String obtenerMedidasCilindricasString(String diametro, String profundidad){
@@ -127,12 +183,37 @@ public class EditarAcuario extends AppCompatActivity implements
     }
 
     private String obtenerVolumenCilindricoString(){
+        return "" + ((acuarioEditar.getDiametro()/2)*(acuarioEditar.getDiametro()/2)*pi)*
+                acuarioEditar.getProfundidad_redondo()*0.001 + " Litros";
+    }
+
+    private String obtenerVolumenCilindricoString(Double diametro, Double profundidadCilindrica){
         return "" + ((diametro/2)*(diametro/2)*pi)*profundidadCilindrica*0.001 + " Litros";
     }
 
     @Override
     public void onCilindricoonDialogNegativeClick(DialogFragment dialog) {
 
+    }
+
+    public void guardarAcuario(View view){
+        AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(getApplicationContext());
+        SQLiteDatabase db = op.getWritableDatabase();
+        String[] id = {Integer.toString(acuarioEditar.getId())};
+
+        ContentValues valores = new ContentValues();
+        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_NOMBRE,edtNombre.getText().toString());
+        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_TIPOAGUA,cmbtiposAgua.getSelectedItem().toString());
+        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_FORMA,cmbtiposForma.getSelectedItem().toString());
+        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ALTO,acuarioEditar.getAlto());
+        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ANCHO,acuarioEditar.getAncho());
+        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_MEDIDAS,acuarioEditar.getProfundidad_rectangular());
+        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_DIAMETRO,acuarioEditar.getDiametro());
+        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_REDONDO,acuarioEditar.getProfundidad_redondo());
+        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_VOLUMEN,acuarioEditar.getVolumen());
+        db.update(AquariumCheckerAppContract.TablaAcuario.NOMBRE_TABLA,valores,
+                AquariumCheckerAppContract.TablaAcuario._ID + " = ?",id);
+        db.close();
     }
 
 }
