@@ -150,7 +150,6 @@
             android:text="@string/btn_Cancelar"
             android:layout_weight="0.14" />
 
-
     </LinearLayout>
 
 </LinearLayout>
