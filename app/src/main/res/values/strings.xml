@@ -105,5 +105,12 @@
     <string name="guardar_galeria">Guardar</string>
     <string name="title_activity_nuevo_pez">NuevoPez</string>
     <string name="foto">Tomar Foto</string>
+    <string name="title_activity_ayuda">Ayuda</string>
+    <string name="ayuda">Aquarium Checker es una aplicación para mantener tus acuarios al día.\n
+La pantalla principal te muestra los menus disponibles.
+Al hacer clic en uno de ellos se abrirá una pantalla para escojer un acuario.
+Si no tienes ningun acuario podras crear uno desde esa misma pantalla.\n
+Una vez escogido el acuario se te abrira una pantalla dependiendo el Menu.\n
+Podras crear acuarios, tomar una galeria de fotos de tu acuario, agregar peces y plantas, configurar recordatorios e historiales</string>
 
 </resources>
