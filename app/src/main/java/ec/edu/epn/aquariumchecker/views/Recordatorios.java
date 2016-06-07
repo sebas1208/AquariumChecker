@@ -20,10 +20,18 @@ import java.util.Calendar;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
+<<<<<<< HEAD
 import ec.edu.epn.aquariumchecker.services.RecordatorioService;
 import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 import ec.edu.epn.aquariumchecker.vo.Recordatorio;
 
+=======
+import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
+import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
+import ec.edu.epn.aquariumchecker.vo.Forma;
+import ec.edu.epn.aquariumchecker.vo.Recordatorio;
+import ec.edu.epn.aquariumchecker.R;
+>>>>>>> 717ecf0f4b61c52af0de6de4f17d3d952060721e
 
 public class Recordatorios extends AppCompatActivity implements View.OnClickListener {
     private Spinner cmbAcuarios;

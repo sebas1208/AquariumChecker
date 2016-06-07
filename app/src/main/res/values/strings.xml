@@ -99,5 +99,10 @@
     <string name="btncalendario">Ver calendario</string>
     <string name="btnhora">Ver hora</string>
     <string name="title_activity_mis_plantas_acuario">MisPlantasAcuario</string>
+    <string name="title_activity_nueva_galeria">NuevaGaleria</string>
+    <string name="observaciones_galeria">Observaciones</string>
+    <string name="tomar_foto">Tomar Foto</string>
+    <string name="guardar_galeria">Guardar</string>
+    <string name="title_activity_nuevo_pez">NuevoPez</string>
 
 </resources>

@@ -7,51 +7,74 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
+import ec.edu.epn.aquariumchecker.adapters.GaleriaAdapter;
+import ec.edu.epn.aquariumchecker.services.GaleriaService;
+import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 
 public class Galeria extends AppCompatActivity {
-
-    private Spinner cmbAcuariosGaleria;
-    private Spinner cmbFechasGaleria;
+    private List<ec.edu.epn.aquariumchecker.vo.Galeria> galeriasList = new ArrayList<>();
+    private AcuarioVO acuarioSeleccionado;
+    private ListView galerias;
+    static final int NUEVA_GALERIA_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initComponents();
+        obtenerAcuarioSeleccionado();
+        obtenerGaleriasPorAcuario();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();initComponents();
+        obtenerAcuarioSeleccionado();
+        obtenerGaleriasPorAcuario();
+    }
+
+    private void initComponents(){
         setContentView(R.layout.galeria_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        cmbAcuariosGaleria = (Spinner) findViewById(R.id.cmbAcuarioGaleria);
-        cmbFechasGaleria = (Spinner) findViewById(R.id.cmbfechaGaleria);
-
-
-        String [] acuarios = {"Sra. Benavides", "Sr. Cesto", "Casa", "Trabajo"};
-        String [] fechas = {"Fecha de modificacion1", "Fecha de modificacion2", "Fecha de modificacion3", "Fecha de modificacionN"};
-
-        ArrayAdapter<String> adaptadorAcuarios = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,acuarios);
-        ArrayAdapter <String> adaptadorFechas = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,fechas);
-
-        cmbAcuariosGaleria.setAdapter(adaptadorAcuarios);
-        cmbFechasGaleria.setAdapter(adaptadorFechas);
+        GaleriaAdapter adapter = new GaleriaAdapter(this, galeriasList);
+        galerias = (ListView) findViewById(R.id.galeria_list);
+        galerias.setAdapter(adapter);
     }
 
-    public void abrir_Fotos(View view){
-        Intent i = new Intent(this, Fotos.class);
-        startActivity(i);
+    private void obtenerAcuarioSeleccionado(){
+        acuarioSeleccionado = (AcuarioVO)getIntent().getSerializableExtra("acuarioSeleccionado");
+        if(acuarioSeleccionado == null){
+            acuarioSeleccionado = new AcuarioVO();
+        }
     }
 
+    private void obtenerGaleriasPorAcuario(){
+        GaleriaService service = new GaleriaService(getApplicationContext());
+        galeriasList.addAll(service.listGaleriasPorAcuario(acuarioSeleccionado));
+    }
+
+    public void abrirNuevaGaleria(View view){
+        Intent i = new Intent(this,NuevaGaleria.class);
+        i.putExtra("acuarioSeleccionado",acuarioSeleccionado);
+        startActivityForResult(i,NUEVA_GALERIA_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == NUEVA_GALERIA_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                obtenerAcuarioSeleccionado();
+                obtenerGaleriasPorAcuario();
+            }
+        }
+    }
 
 }
