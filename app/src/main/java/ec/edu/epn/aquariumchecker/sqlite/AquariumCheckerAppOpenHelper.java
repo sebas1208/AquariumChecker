@@ -28,6 +28,11 @@ public class AquariumCheckerAppOpenHelper extends SQLiteOpenHelper {
         db.execSQL(AquariumCheckerAppContract.TablaAcuario.CREA_TABLAS_HISTORIAL);
         db.execSQL(AquariumCheckerAppContract.TablaAcuario.CREA_TABLAS_RECORDATORIO);
 
+        if (!db.isReadOnly()) {
+            // Enable foreign key constraints
+            db.execSQL("PRAGMA foreign_keys=ON;");
+        }
+
     }
 
     @Override
@@ -52,6 +57,8 @@ public class AquariumCheckerAppOpenHelper extends SQLiteOpenHelper {
             db.execSQL(AquariumCheckerAppContract.TablaAcuario.CREA_TABLAS_RECORDATORIO);
         }
     }
+
+
 }
 
 
