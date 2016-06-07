@@ -85,6 +85,7 @@ public class AcuarioService {
                     cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario._ID)));
             l.add(acuario);
         }
+        db.close();
         return l;
     }
 

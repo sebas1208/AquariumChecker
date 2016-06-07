@@ -85,7 +85,7 @@ public class MisPecesAcuarios extends AppCompatActivity {
     public void abrirAcuario(View v) {
         int position = misAcuarios.getPositionForView((LinearLayout)v.getParent());
         Intent i = new Intent(this, MisPeces.class);
-        i.putExtra("acuarioPeces",acuarios.get(position));
+        i.putExtra("acuarioSeleccionado",acuarios.get(position));
         startActivity(i);
     }
 }

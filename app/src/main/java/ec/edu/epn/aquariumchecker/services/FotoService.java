@@ -75,6 +75,7 @@ public class FotoService {
             );
             l.add(foto);
         }
+        db.close();
         return l;
     }
 
@@ -110,6 +111,7 @@ public class FotoService {
                    );
             l.add(foto);
         }
+        db.close();
         return l;
     }
 

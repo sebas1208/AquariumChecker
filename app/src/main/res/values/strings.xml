@@ -104,5 +104,6 @@
     <string name="tomar_foto">Tomar Foto</string>
     <string name="guardar_galeria">Guardar</string>
     <string name="title_activity_nuevo_pez">NuevoPez</string>
+    <string name="foto">Tomar Foto</string>
 
 </resources>

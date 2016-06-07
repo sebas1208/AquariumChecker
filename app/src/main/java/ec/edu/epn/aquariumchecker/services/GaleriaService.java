@@ -85,6 +85,7 @@ public class GaleriaService {
                     cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaGaleria.ACUARIO_ID)));
             l.add(galeria);
         }
+        db.close();
         return l;
     }
 
@@ -128,6 +129,7 @@ public class GaleriaService {
                     cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaGaleria.ACUARIO_ID)));
             l.add(galeria);
         }
+        db.close();
         return l;
     }
 
