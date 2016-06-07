@@ -7,12 +7,16 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.Calendar;
 
 import ec.edu.epn.aquariumchecker.R;
+import ec.edu.epn.aquariumchecker.services.AcuarioService;
+import ec.edu.epn.aquariumchecker.services.HistorialService;
+import ec.edu.epn.aquariumchecker.vo.Historiales;
 
 
 public class Historial_Ciclado extends AppCompatActivity implements View.OnClickListener {
@@ -22,12 +26,20 @@ public class Historial_Ciclado extends AppCompatActivity implements View.OnClick
     private int anio,mes,dia,hora,minuto;
     private Spinner cmbIluminacion;
     private TextView txtFecha,txtHora;
+    private EditText txtph,txtgh,txtkh,txtphact,txtghact,txtkhact,txtobs;
+    private Historiales nuevoHistorial = new Historiales();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historial_ciclado);
         btnCalendario = (Button) findViewById(R.id.btnCalendario);
         txtFecha = (TextView) findViewById(R.id.txtFechaView);
+        txtph =(EditText) findViewById(R.id.txtph);
+        txtgh =(EditText) findViewById(R.id.txtgh);
+        txtkh =(EditText) findViewById(R.id.txtkh);
+        txtphact =(EditText) findViewById(R.id.txtphact);
+        txtghact =(EditText) findViewById(R.id.txtghact);
+        txtkhact =(EditText) findViewById(R.id.txtkhact);
 
         cmbCo2 = (Spinner)findViewById(R.id.cmbCo2);
         cmbIluminacion = (Spinner)findViewById(R.id.cmbIluminacion);
@@ -72,6 +84,18 @@ public class Historial_Ciclado extends AppCompatActivity implements View.OnClick
                     }, anio, mes, dia);
             datePickerDialog.show();
         }
+    }
+
+    public void guardarHistorial (View view){
+        nuevoHistorial.setFecha(txtFecha.getText().toString());
+        nuevoHistorial.setPh(txtph.toString());
+        nuevoHistorial.setGh(txtgh.toString());
+        nuevoHistorial.setKh(txtkh.toString());
+        nuevoHistorial.setCo2(cmbCo2.getSelectedItem().toString());
+        nuevoHistorial.setIluminacion(cmbIluminacion.getSelectedItem().toString());
+
+        HistorialService service = new HistorialService(getApplicationContext());
+        service.crearHistorial(nuevoHistorial);
     }
 
     }

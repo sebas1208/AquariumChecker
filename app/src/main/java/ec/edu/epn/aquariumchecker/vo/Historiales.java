@@ -19,6 +19,7 @@ public class Historiales implements Serializable {
 
     }
 
+    public Historiales(){}
     public String getAcuario() {
         return acuario;
     }

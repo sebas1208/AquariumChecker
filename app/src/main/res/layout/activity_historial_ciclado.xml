@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/tituloParametrosFecha"
+        android:text="@string/tituloParametrosFecha1"
         />
 
     <Button
@@ -90,7 +90,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText" />
+                android:id="@+id/txtph" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText4"
+                android:id="@+id/txtphact"
                 android:layout_column="11" />
 
         </TableRow>
@@ -125,7 +125,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText2" />
+                android:id="@+id/txtgh" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -139,7 +139,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText5"
+                android:id="@+id/txtghact"
                 android:layout_column="11" />
         </TableRow>
 
@@ -157,7 +157,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText3" />
+                android:id="@+id/txtkh" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -171,7 +171,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText6"
+                android:id="@+id/txtkhact"
                 android:layout_column="11" />
         </TableRow>
 
@@ -224,7 +224,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText7" />
+        android:id="@+id/txtobs" />
 
 
     <FrameLayout
@@ -236,7 +236,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="@string/btn_Guardar"/>
+            android:text="@string/btn_Guardar"
+            android:onClick="guardarHistorial"/>
 
         <Button
             android:id="@+id/btnCancelar"
