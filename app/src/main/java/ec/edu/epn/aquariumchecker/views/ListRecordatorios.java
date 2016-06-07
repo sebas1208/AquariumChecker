@@ -2,9 +2,11 @@ package ec.edu.epn.aquariumchecker.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -13,9 +15,16 @@ import java.util.List;
 import ec.edu.epn.aquariumchecker.R;
 
 import ec.edu.epn.aquariumchecker.adapters.RecordatoriosAdapter;
+import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 import ec.edu.epn.aquariumchecker.vo.Recordatorio;
 
 public class ListRecordatorios extends AppCompatActivity {
+
+
+    ListView misAcuarios;
+    ListView misRecordatorios;
+    List<Recordatorio> acuarios = new ArrayList<>();
+    List<Recordatorio> recordatorios = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +34,9 @@ public class ListRecordatorios extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        List<Recordatorio> recordatorios = new ArrayList<>();
-        recordatorios.add(new Recordatorio("Acuario 1","2016-02-02",1,"Abonado"));
+        recordatorios.add(new Recordatorio("Acuario 1","2016-02-02","1","Abonado"));
         RecordatoriosAdapter adapter = new RecordatoriosAdapter(this,recordatorios);
-        ListView misRecordatorios = (ListView)findViewById(R.id.recordatorios_list);
+        misRecordatorios = (ListView)findViewById(R.id.recordatorios_list);
         misRecordatorios.setAdapter(adapter);
     }
 
@@ -38,7 +46,9 @@ public class ListRecordatorios extends AppCompatActivity {
     }
 
     public void abrirRecordatorio(View v){
+        int position = misRecordatorios.getPositionForView((LinearLayout)v.getParent());
         Intent i = new Intent(this, Recordatorios.class);
+        i.putExtra("EditarRecordatorio", (Parcelable) recordatorios.get(position));
         startActivity(i);
     }
 
