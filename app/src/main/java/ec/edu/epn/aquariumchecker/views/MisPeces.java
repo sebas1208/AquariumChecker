@@ -97,10 +97,12 @@ public class MisPeces extends AppCompatActivity {
 
     public void abrirPez(View v) {
         int position = listapeces.getPositionForView((LinearLayout)v.getParent());
-        Intent i = new Intent(this, Peces.class);
+        Intent i = new Intent(this, NuevoPez.class);
         i.putExtra("peces", peces.get(position));
         startActivity(i);
     }
+
+
 
 
 
