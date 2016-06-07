@@ -32,7 +32,7 @@ public class AquariumCherckerMain extends AppCompatActivity                     
     }
 
     public void abrirPlantas(View view){
-        Intent i = new Intent(this, MisPlantas.class);
+        Intent i = new Intent(this, MisPlantasAcuario.class);
         startActivity(i);
     }
 

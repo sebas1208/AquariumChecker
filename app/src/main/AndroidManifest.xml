@@ -26,9 +26,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".views.AgregarPlantasPeces"
-            android:label="@string/title_activity_agregar_plantas_peces" />
-        <activity
             android:name=".views.MisAcuarios"
             android:label="@string/title_activity_mis_acuarios"
             android:parentActivityName=".views.AquariumCherckerMain"
@@ -183,7 +180,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ec.edu.epn.aquariumchecker.views.AquariumCherckerMain" />
-
+        </activity>
+        <activity
+            android:name=".views.NuevoPlanta"
+            android:label="@string/title_activity_nuevo_planta"
+            android:parentActivityName=".views.MisPlantasAcuario"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ec.edu.epn.aquariumchecker.views.MisPlantasAcuario" />
         </activity>
     </application>
 
