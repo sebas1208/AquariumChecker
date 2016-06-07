@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -65,6 +66,13 @@ public class Galeria extends AppCompatActivity {
         Intent i = new Intent(this,NuevaGaleria.class);
         i.putExtra("acuarioSeleccionado",acuarioSeleccionado);
         startActivityForResult(i,NUEVA_GALERIA_REQUEST);
+    }
+
+    public void abrirFotos(View view){
+        int position = galerias.getPositionForView((LinearLayout)view.getParent());
+        Intent i = new Intent(this, Fotos.class);
+        i.putExtra("galeriaSeleccionada",galeriasList.get(position));
+        startActivity(i);
     }
 
     @Override

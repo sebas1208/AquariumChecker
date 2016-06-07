@@ -30,7 +30,7 @@ public class GaleriaService {
     public GaleriaService() {
     }
 
-    public void createGaleria(Galeria galeria){
+    public long createGaleria(Galeria galeria){
         AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
         SQLiteDatabase db = op.getWritableDatabase();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -41,8 +41,9 @@ public class GaleriaService {
         valores.put(AquariumCheckerAppContract.TablaGaleria.COLUMNA_OBSERVACIONES,galeria.getObservaciones());
         valores.put(AquariumCheckerAppContract.TablaGaleria.COLUMNA_FOTOS,"");
         valores.put(AquariumCheckerAppContract.TablaGaleria.ACUARIO_ID,galeria.getIdAcuario());
-        db.insert(AquariumCheckerAppContract.TablaGaleria.NOMBRE_TABLA, null, valores);
+        long id = db.insert(AquariumCheckerAppContract.TablaGaleria.NOMBRE_TABLA, null, valores);
         db.close();
+        return id;
     }
 
     public List<Galeria> listGalerias(){

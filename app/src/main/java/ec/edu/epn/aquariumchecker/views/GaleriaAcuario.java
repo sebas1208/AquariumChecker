@@ -50,11 +50,6 @@ public class GaleriaAcuario extends AppCompatActivity {
         acuarios.addAll(service.listAcuarios());
     }
 
-    public void abrir_Fotos(View view){
-        Intent i = new Intent(this, Fotos.class);
-        startActivity(i);
-    }
-
     public void abrirAcuario(View v) {
         int position = misAcuarios.getPositionForView((LinearLayout)v.getParent());
         Intent i = new Intent(this, Galeria.class);
