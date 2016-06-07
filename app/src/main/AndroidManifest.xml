@@ -142,12 +142,13 @@
         <activity
             android:name=".views.NuevaGaleria"
             android:label="@string/title_activity_nueva_galeria"
-            android:parentActivityName=".views.Galeria"
+            android:parentActivityName=".views.GaleriaAcuario"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ec.edu.epn.aquariumchecker.views.Galeria" />
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+                android:value="ec.edu.epn.aquariumchecker.views.GaleriaAcuario"
+                android:theme="@style/AppTheme.NoActionBar"/>
+        </activity>
         <activity
             android:name=".views.NuevoPez"
             android:label="@string/title_activity_nuevo_pez"

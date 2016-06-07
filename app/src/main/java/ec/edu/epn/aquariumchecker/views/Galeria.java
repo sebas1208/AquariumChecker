@@ -14,7 +14,6 @@ import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.adapters.GaleriaAdapter;
-import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
 import ec.edu.epn.aquariumchecker.services.GaleriaService;
 import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 
@@ -72,7 +71,8 @@ public class Galeria extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == NUEVA_GALERIA_REQUEST) {
             if (resultCode == RESULT_OK) {
-
+                obtenerAcuarioSeleccionado();
+                obtenerGaleriasPorAcuario();
             }
         }
     }

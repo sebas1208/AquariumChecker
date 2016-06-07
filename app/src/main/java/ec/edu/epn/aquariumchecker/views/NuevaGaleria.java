@@ -1,5 +1,6 @@
 package ec.edu.epn.aquariumchecker.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -49,6 +50,10 @@ public class NuevaGaleria extends AppCompatActivity {
 
         GaleriaService service = new GaleriaService(getApplicationContext());
         service.createGaleria(nuevaGaleria);
+
+        Intent i = new Intent(this, ec.edu.epn.aquariumchecker.views.Galeria.class);
+        i.putExtra("acuarioSeleccionado",acuarioSeleccionado);
+        startActivity(i);
     }
 
 }
