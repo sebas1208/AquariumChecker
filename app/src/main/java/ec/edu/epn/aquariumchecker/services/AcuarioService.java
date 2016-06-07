@@ -2,6 +2,7 @@ package ec.edu.epn.aquariumchecker.services;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
@@ -43,6 +44,50 @@ public class AcuarioService {
         db.close();
     }
 
+    public List<AcuarioVO> listAcuarios(){
+        AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
+        List<AcuarioVO> l = new ArrayList<>();
+
+        SQLiteDatabase db = oh.getReadableDatabase();
+        String[] columnas = {AquariumCheckerAppContract.TablaAcuario.COLUMNA_NOMBRE,
+                AquariumCheckerAppContract.TablaAcuario.COLUMNA_TIPOAGUA,
+                AquariumCheckerAppContract.TablaAcuario.COLUMNA_FORMA,
+                AquariumCheckerAppContract.TablaAcuario.COLUMNA_ALTO,
+                AquariumCheckerAppContract.TablaAcuario.COLUMNA_ANCHO,
+                AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_MEDIDAS,
+                AquariumCheckerAppContract.TablaAcuario.COLUMNA_DIAMETRO,
+                AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_REDONDO,
+                AquariumCheckerAppContract.TablaAcuario.COLUMNA_VOLUMEN,
+                AquariumCheckerAppContract.TablaAcuario._ID
+        };
+
+
+        Cursor cur = db.query(
+                AquariumCheckerAppContract.TablaAcuario.NOMBRE_TABLA,
+                columnas,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        while (cur.moveToNext()) {
+            AcuarioVO acuario = new AcuarioVO(cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_NOMBRE)),
+                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_TIPOAGUA)),
+                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_FORMA)),
+                    cur.getDouble(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ALTO)),
+                    cur.getDouble(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ANCHO)),
+                    cur.getDouble(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_MEDIDAS)),
+                    cur.getDouble(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_DIAMETRO)),
+                    cur.getDouble(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_REDONDO)),
+                    cur.getDouble(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_VOLUMEN)),
+                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario._ID)));
+            l.add(acuario);
+        }
+        return l;
+    }
+
     public void editarAcuario(AcuarioVO acuarioEditar){
         AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
         SQLiteDatabase db = op.getWritableDatabase();
@@ -61,10 +106,6 @@ public class AcuarioService {
         db.update(AquariumCheckerAppContract.TablaAcuario.NOMBRE_TABLA,valores,
                 AquariumCheckerAppContract.TablaAcuario._ID + " = ?",id);
         db.close();
-    }
-
-    public List<AcuarioVO> listAcuarios(){
-        return new ArrayList<>();
     }
 
     public Context getAppContext() {
