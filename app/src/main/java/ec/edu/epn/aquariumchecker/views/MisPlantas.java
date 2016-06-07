@@ -60,9 +60,10 @@ public class MisPlantas extends AppCompatActivity {
     }
 
     private void obtenerListaPlantas(){
-        PlantasService plantasService = new PlantasService((getApplicationContext()));
-        plantas.addAll(plantasService.listaPlantasPorAcuario((accuarioSeleccionado)));
+        PlantasService plantasService = new PlantasService(getApplicationContext());
+        plantas.addAll(plantasService.listaPlantasPorAcuario(accuarioSeleccionado));
     }
+
 
     public void abrirPlantas(View v) {
         Intent i = new Intent(this, NuevoPlanta.class);

@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class Galeria extends AppCompatActivity {
     private List<ec.edu.epn.aquariumchecker.vo.Galeria> galeriasList = new ArrayList<>();
     private AcuarioVO acuarioSeleccionado;
     private ListView galerias;
+    private GaleriaAdapter adapter;
     static final int NUEVA_GALERIA_REQUEST = 1;
     static final int MOSTRAR_GALERIA_REQUEST = 1;
 
@@ -44,7 +46,7 @@ public class Galeria extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        GaleriaAdapter adapter = new GaleriaAdapter(this, galeriasList);
+        adapter = new GaleriaAdapter(this, galeriasList);
         galerias = (ListView) findViewById(R.id.galeria_list);
         galerias.setAdapter(adapter);
     }
@@ -72,6 +74,15 @@ public class Galeria extends AppCompatActivity {
         Intent i = new Intent(this, Fotos.class);
         i.putExtra("galeriaSeleccionada",galeriasList.get(position));
         startActivityForResult(i, MOSTRAR_GALERIA_REQUEST);
+    }
+
+    public void eliminarGaleria(View view){
+        int position = galerias.getPositionForView((LinearLayout)view.getParent());
+        GaleriaService galeriaService = new GaleriaService(getApplicationContext());
+        galeriaService.removeGaleria(galeriasList.get(position));
+
+        adapter.notifyDataSetChanged();
+        Toast.makeText(getApplicationContext(),"Se elimino la Galeria",Toast.LENGTH_SHORT).show();
     }
 
     @Override

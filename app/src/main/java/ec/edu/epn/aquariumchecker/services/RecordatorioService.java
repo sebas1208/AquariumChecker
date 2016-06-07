@@ -11,6 +11,7 @@ import java.util.List;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
 import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
+import ec.edu.epn.aquariumchecker.vo.Peces;
 import ec.edu.epn.aquariumchecker.vo.Recordatorio;
 
 /**
@@ -52,11 +53,10 @@ public class RecordatorioService{
             String[] columnas = {AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_FECHA,
                     AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_HORA,
                     AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_TIPORECORDATORIO,
-                    AquariumCheckerAppContract.TablaRecordatorio.ACUARIO_ID,
                     AquariumCheckerAppContract.TablaRecordatorio._ID,
+                    AquariumCheckerAppContract.TablaRecordatorio.ACUARIO_ID
 
             };
-
 
             Cursor cur = db.query(
                     AquariumCheckerAppContract.TablaRecordatorio.NOMBRE_TABLA,
@@ -71,27 +71,28 @@ public class RecordatorioService{
                 Recordatorio recordatorio = new Recordatorio(cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_FECHA)),
                         cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_HORA)),
                         cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_TIPORECORDATORIO)),
-                        cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaRecordatorio._ID)));
+                        cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaRecordatorio._ID)),
+                        cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaRecordatorio.ACUARIO_ID)));
                 l.add(recordatorio);
             }
             return l;
         }
 
-     /*   public void editarRecordatorio(Recordatorio editarRecordatorio){
-            AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
-            SQLiteDatabase db = op.getWritableDatabase();
-            String[] id = {Integer.toString(acuario.getId())};
 
-            ContentValues valores = new ContentValues();
-            valores.put(AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_FECHA,editarRecordatorio.getFecha());
-            valores.put(AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_HORA,editarRecordatorio.getHora());
-            valores.put(AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_TIPORECORDATORIO,editarRecordatorio.getTipoCambio());
+    public boolean removeRecordatorio(Recordatorio recordatorio){
+        AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
+        SQLiteDatabase db = op.getWritableDatabase();
+        String[] id = { recordatorio.getId()};
 
-            db.update(AquariumCheckerAppContract.TablaRecordatorio.NOMBRE_TABLA,valores,
-                    AquariumCheckerAppContract.TablaRecordatorio.ACUARIO_ID + " = ?",id);
-            db.close();
-        }
-*/
+        db.delete(AquariumCheckerAppContract.TablaRecordatorio.NOMBRE_TABLA,
+                AquariumCheckerAppContract.TablaRecordatorio._ID + " = ?",
+                id);
+        db.close();
+        return true ;
+    }
+
+
+
         public Context getAppContext() {
             return appContext;
         }
