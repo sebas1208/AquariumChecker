@@ -103,5 +103,6 @@
     <string name="observaciones_galeria">Observaciones</string>
     <string name="tomar_foto">Tomar Foto</string>
     <string name="guardar_galeria">Guardar</string>
+    <string name="title_activity_nuevo_pez">NuevoPez</string>
 
 </resources>

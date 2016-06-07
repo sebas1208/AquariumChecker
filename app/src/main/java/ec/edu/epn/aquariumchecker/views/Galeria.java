@@ -72,7 +72,7 @@ public class Galeria extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == NUEVA_GALERIA_REQUEST) {
             if (resultCode == RESULT_OK) {
-                
+
             }
         }
     }

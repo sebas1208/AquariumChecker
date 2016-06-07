@@ -27,6 +27,7 @@ public class EditarAcuario extends AppCompatActivity implements
     private EditText edtMedida;
     private EditText edtVolumen;
     private final Double pi = Math.PI;
+
     private AcuarioVO acuarioEditar;
 
     private String[] tiposAgua = {"Dulce", "Salada"};

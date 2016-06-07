@@ -47,9 +47,12 @@ public class AquariumCheckerAppContract {
                 TablaPeces.NOMBRE_TABLA + " (" +
                 TablaPeces._ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT" + COMMA_SEP +
                 TablaPeces.ACUARIO_ID + INTEGER_TYPE + COMMA_SEP +
-                TablaPeces.COLUMNA_FOTO + TEXT_TYPE + COMMA_SEP +
+                TablaPeces.COLUMNA_NOMBRE + TEXT_TYPE + COMMA_SEP +
                 TablaPeces.COLUMNA_DESCRIPCION + TEXT_TYPE + COMMA_SEP +
-                "FOREIGN KEY (ACUARIO_ID) REFERENCES ACUARIO (_ID)" + " )";
+                TablaPeces.COLUMNA_CANTIDAD + INTEGER_TYPE + COMMA_SEP +
+                TablaPeces.COLUMNA_FOTO + TEXT_TYPE + COMMA_SEP +
+                "FOREIGN KEY (ACUARIO_ID) REFERENCES ACUARIO (_ID)"+" )";
+
 
         public static final String ELIMINA_TABLAS_PLANTAS = "DROP TABLE IF EXISTS " + TablaPlantas.NOMBRE_TABLA;
         public static final String CREA_TABLAS_PLANTAS = "CREATE TABLE " +
@@ -108,8 +111,11 @@ public class AquariumCheckerAppContract {
     //TABLA PECES
     public static abstract class TablaPeces implements BaseColumns {
         public static final String NOMBRE_TABLA = "PECES";
-        public static final String COLUMNA_FOTO = "FOTO";
+        public static final String COLUMNA_NOMBRE = "NOMBRE";
         public static final String COLUMNA_DESCRIPCION = "DESCRIPCION";
+        public static final String COLUMNA_CANTIDAD = "CANTIDAD";
+        public static final String COLUMNA_FOTO = "FOTO";
+
         public static final String ACUARIO_ID = "ACUARIO_ID";
     }
 
