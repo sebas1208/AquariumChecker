@@ -46,9 +46,7 @@ public class ListRecordatorios extends AppCompatActivity {
     }
 
     public void abrirRecordatorio(View v){
-        int position = misRecordatorios.getPositionForView((LinearLayout)v.getParent());
         Intent i = new Intent(this, Recordatorios.class);
-        i.putExtra("EditarRecordatorio", (Parcelable) recordatorios.get(position));
         startActivity(i);
     }
 

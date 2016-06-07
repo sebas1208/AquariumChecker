@@ -20,18 +20,15 @@ import java.util.Calendar;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
-<<<<<<< HEAD
 import ec.edu.epn.aquariumchecker.services.RecordatorioService;
 import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 import ec.edu.epn.aquariumchecker.vo.Recordatorio;
 
-=======
 import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
 import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 import ec.edu.epn.aquariumchecker.vo.Forma;
 import ec.edu.epn.aquariumchecker.vo.Recordatorio;
 import ec.edu.epn.aquariumchecker.R;
->>>>>>> 717ecf0f4b61c52af0de6de4f17d3d952060721e
 
 public class Recordatorios extends AppCompatActivity implements View.OnClickListener {
     private Spinner cmbAcuarios;
@@ -41,8 +38,7 @@ public class Recordatorios extends AppCompatActivity implements View.OnClickList
     private Button  btnHoras;
     private int anio,mes,dia,hora,minuto;
     private Recordatorio nuevoRecordatorio = new Recordatorio();
-    List<AcuarioVO> acuarios;
-
+    private List<AcuarioVO> acuarios = new ArrayList<>();
 
 
     @Override
@@ -62,7 +58,12 @@ public class Recordatorios extends AppCompatActivity implements View.OnClickList
         anio = cal.get(Calendar.YEAR);
         mes = cal.get(Calendar.MONTH);
         dia = cal.get(Calendar.DAY_OF_MONTH);
-        String[]Acuarios ={""};
+        String[]Acuarios= new String[100];
+
+
+        for(int i=0;i<acuarios.size();i++){
+            Acuarios[i] = acuarios.get(i).getNombre();
+        }
 
         ArrayAdapter<String> adaptadorAcuarios =
                 new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, Acuarios);
@@ -126,7 +127,6 @@ public class Recordatorios extends AppCompatActivity implements View.OnClickList
         nuevoRecordatorio.setFecha(txtFecha.getText().toString());
         nuevoRecordatorio.setHora(txtHora.getText().toString());
         nuevoRecordatorio.setTipoCambio(cmbTipo.getSelectedItem().toString());
-        nuevoRecordatorio.setAcuario(cmbAcuarios.getSelectedItem().toString());
 
         RecordatorioService service = new RecordatorioService(getApplicationContext());
         service.crearRecordatorio(nuevoRecordatorio);

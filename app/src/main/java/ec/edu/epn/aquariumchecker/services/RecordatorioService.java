@@ -36,7 +36,6 @@ public class RecordatorioService{
             valores.put(AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_FECHA,nuevoRecordatorio.getFecha());
             valores.put(AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_HORA,nuevoRecordatorio.getHora());
             valores.put(AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_TIPORECORDATORIO,nuevoRecordatorio.getTipoCambio());
-            valores.put(AquariumCheckerAppContract.TablaRecordatorio.ACUARIO_ID,nuevoRecordatorio.getAcuario());
             db.insert(AquariumCheckerAppContract.TablaRecordatorio.NOMBRE_TABLA, null, valores);
             db.close();
         }
