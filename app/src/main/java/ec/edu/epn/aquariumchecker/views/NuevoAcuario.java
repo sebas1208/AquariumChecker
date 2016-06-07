@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.support.v4.app.DialogFragment;
 
 import ec.edu.epn.aquariumchecker.R;
+import ec.edu.epn.aquariumchecker.services.AcuarioService;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
 import ec.edu.epn.aquariumchecker.views.dialogs.MedidasCilindricasDialog;
@@ -23,7 +24,7 @@ import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 public class NuevoAcuario extends AppCompatActivity implements
         MedidasRectangularesDialog.NoticeDialogListener,MedidasCilindricasDialog.NoticeDialogListener {
 
-    private EditText nombreAcuario;
+    private EditText edtNombre;
     private Spinner cmbtiposAgua;
     private Spinner cmbtiposForma;
     private EditText edtMedida;
@@ -31,24 +32,28 @@ public class NuevoAcuario extends AppCompatActivity implements
     private final Double pi = Math.PI;
 
     AcuarioVO acuario = new AcuarioVO();
+    String[] tiposAgua = {"Dulce", "Salada"};
+    String[] tiposForma = {"Rectangular", "Cilindrico"};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initComponents();
+    }
+
+    private void initComponents(){
         setContentView(R.layout.acuarios_activity_nuevo);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        nombreAcuario = (EditText) findViewById(R.id.txtnombreAcuario);
         cmbtiposAgua = (Spinner) findViewById(R.id.cmbTipoAgua);
         cmbtiposForma = (Spinner) findViewById(R.id.cmbForma);
         edtMedida = (EditText) findViewById(R.id.medidas_editText);
         edtVolumen = (EditText) findViewById(R.id.volumen_editText);
+        edtNombre = (EditText) findViewById(R.id.txtnombreAcuario);
 
-        String[] tiposAgua = {"Dulce", "Salada"};
-        String[] tiposForma = {"Rectangular", "Cilindrico"};
 
         ArrayAdapter<String> adaptadorTiposAgua = new ArrayAdapter<>
                 (this, android.R.layout.simple_spinner_dropdown_item, tiposAgua);
@@ -58,24 +63,6 @@ public class NuevoAcuario extends AppCompatActivity implements
 
         cmbtiposAgua.setAdapter(adaptadorTiposAgua);
         cmbtiposForma.setAdapter(adaptadorTiposFormas);
-    }
-
-    public void guardarAcuario (View view){
-        AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(getApplicationContext());
-        SQLiteDatabase db = op.getWritableDatabase();
-
-        ContentValues valores = new ContentValues();
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_NOMBRE,nombreAcuario.getText().toString());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_TIPOAGUA,cmbtiposAgua.getSelectedItem().toString());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_FORMA,cmbtiposForma.getSelectedItem().toString());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ALTO,acuario.getAlto());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ANCHO,acuario.getAncho());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_MEDIDAS,acuario.getProfundidad_rectangular());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_DIAMETRO,acuario.getDiametro());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_REDONDO,acuario.getProfundidad_redondo());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_VOLUMEN,Double.parseDouble(edtVolumen.getText().toString()));
-        db.insert(AquariumCheckerAppContract.TablaAcuario.NOMBRE_TABLA, null, valores);
-        db.close();
     }
 
 
@@ -91,7 +78,7 @@ public class NuevoAcuario extends AppCompatActivity implements
 
 
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
+    public void onDialogRectangularPositiveClick(DialogFragment dialog) {
         Dialog d = dialog.getDialog();
         EditText alto = (EditText)d.findViewById(R.id.acuario_medida_alto);
         EditText ancho = (EditText)d.findViewById(R.id.acuario_medida_ancho);
@@ -129,7 +116,7 @@ public class NuevoAcuario extends AppCompatActivity implements
 
 
     @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
+    public void onDialogRectangularNegativeClick(DialogFragment dialog) {
 
     }
 
@@ -161,8 +148,13 @@ public class NuevoAcuario extends AppCompatActivity implements
         return "" + ((acuario.getDiametro()/2)*(acuario.getDiametro()/2)*pi)*acuario.getProfundidad_redondo()*0.001;
     }
 
+    public void guardarAcuario (View view){
+        AcuarioService service = new AcuarioService(getApplicationContext());
+        service.crearAcuario(acuario);
+    }
+
     @Override
-    public void onCilindricoonDialogNegativeClick(DialogFragment dialog) {
+    public void onCilindricoDialogNegativeClick(DialogFragment dialog) {
 
     }
 }

@@ -10,12 +10,12 @@ public class AcuarioVO implements Serializable{
     private String nombre;
     private String tipo_agua;
     private String forma;
-    private double alto;
-    private double ancho;
-    private double profundidad_rectangular;
-    private double diametro;
-    private double profundidad_redondo;
-    private double volumen;
+    private Double alto;
+    private Double ancho;
+    private Double profundidad_rectangular;
+    private Double diametro;
+    private Double profundidad_redondo;
+    private Double volumen;
     private int id;
 
     public AcuarioVO() {
@@ -32,6 +32,37 @@ public class AcuarioVO implements Serializable{
         this.profundidad_redondo = profundidad_redondo;
         this.volumen = volumen;
         this.id = id;
+    }
+
+    public String obtenerMedidasRectangularesString(){
+        return alto + "cm x " + ancho + "cm x " + profundidad_rectangular + "cm";
+    }
+
+    public String obtenerVolumenRectangularString(){
+        return "" + alto*ancho*profundidad_rectangular*0.001 + " Litros";
+    }
+
+    public String obtenerMedidasCilindricasString(){
+        return diametro + "cm x " + profundidad_redondo + "cm";
+    }
+
+    public String obtenerVolumenCilindricoString(){
+        return "" + ((diametro/2)*(diametro/2)*Math.PI)*
+                profundidad_redondo*0.001 + " Litros";
+    }
+
+
+    public void setVolumenDatosRectangulares(){
+        if(alto != null && ancho != null && profundidad_rectangular != null){
+            volumen = alto*ancho*profundidad_rectangular*0.001;
+        }
+    }
+
+    public void setVolumenDatosCilindricos(){
+        if(diametro != null && profundidad_redondo != null){
+            volumen = (diametro/2)*(diametro/2)*Math.PI*
+            profundidad_redondo*0.001;
+        }
     }
 
     public int getId() {
