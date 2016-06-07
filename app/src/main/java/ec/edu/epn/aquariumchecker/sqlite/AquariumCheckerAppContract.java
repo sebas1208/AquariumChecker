@@ -79,6 +79,7 @@ public class AquariumCheckerAppContract {
                 TablaFoto._ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT" + COMMA_SEP +
                 TablaFoto.GALERIA_ID + INTEGER_TYPE + COMMA_SEP +
                 TablaFoto.COLUMNA_DESCRIPCION + TEXT_TYPE + COMMA_SEP +
+                TablaFoto.COLUMNA_PATH + TEXT_TYPE + COMMA_SEP +
                 "FOREIGN KEY (GALERIA_ID) REFERENCES GALERIA (_ID)" + " )";
 
         public static final String ELIMINA_TABLAS_HISTORIAL = "DROP TABLE IF EXISTS " + TablaHistorial.NOMBRE_TABLA;
@@ -143,6 +144,7 @@ public class AquariumCheckerAppContract {
     public static abstract class TablaFoto implements BaseColumns {
         public static final String NOMBRE_TABLA = "FOTO";
         public static final String COLUMNA_DESCRIPCION = "DESCRIPCION";
+        public static final String COLUMNA_PATH = "PATH";
         public static final String GALERIA_ID = "GALERIA_ID";
     }
 

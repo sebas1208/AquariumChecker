@@ -1,9 +1,11 @@
 package ec.edu.epn.aquariumchecker.vo;
 
+import java.io.Serializable;
+
 /**
  * Created by angel on 6/5/2016.
  */
-public class Historiales {
+public class Historiales implements Serializable {
     private String acuario,fecha,ph,gh,kh,co2,iluminacion,observaciones;
     public Historiales(String acuario, String fecha, String ph, String gh, String kh, String Co2, String Iluminacion, String observaciones) {
         this.acuario=acuario;
@@ -17,6 +19,7 @@ public class Historiales {
 
     }
 
+    public Historiales(){}
     public String getAcuario() {
         return acuario;
     }

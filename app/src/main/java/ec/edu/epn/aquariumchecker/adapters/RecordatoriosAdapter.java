@@ -11,6 +11,7 @@ import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
 
+import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 import ec.edu.epn.aquariumchecker.vo.Recordatorio;
 
 /**
@@ -24,6 +25,7 @@ public class RecordatoriosAdapter<T> extends ArrayAdapter<T> {
         super(context, 0,objects);
 
         datos = (List<Recordatorio>) objects;
+
     }
 
     @Override
@@ -34,12 +36,11 @@ public class RecordatoriosAdapter<T> extends ArrayAdapter<T> {
             item = inflater.inflate(R.layout.recordatorio_list_item,null);
         }
         TextView lblNombre = (TextView) item.findViewById(R.id.mis_recordatorios_nombre_recordatorio);
-        lblNombre.setText(datos.get(position).getAcuario()+ ",Tipo:  "+datos.get(position).getTipoCambio());
-
-
-
+        lblNombre.setText(datos.get(position).getAcuario()+": ");
         TextView lblDescripcion = (TextView) item.findViewById(R.id.mis_recordatorios_descripcion);
         lblDescripcion.setText("Fecha: "+datos.get(position).getFecha()+",Hora: "+ datos.get(position).getHora());
+        TextView lblDescripcion2 = (TextView) item.findViewById(R.id.mis_recordatorios_descripcion2);
+        lblDescripcion.setText("Tipo de recordatorio: "+datos.get(position).getTipoCambio());
 
         return item;
     }

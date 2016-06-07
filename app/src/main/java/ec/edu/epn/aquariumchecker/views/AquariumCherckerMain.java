@@ -52,4 +52,9 @@ public class AquariumCherckerMain extends AppCompatActivity                     
         Intent i = new Intent (this,ListHistorial.class);
         startActivity(i);
     }
+
+    public void abrirAyuda (View view){
+        Intent i = new Intent (this,Ayuda.class);
+        startActivity(i);
+    }
 }

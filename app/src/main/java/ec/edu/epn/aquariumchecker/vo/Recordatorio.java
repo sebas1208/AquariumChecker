@@ -1,5 +1,6 @@
 package ec.edu.epn.aquariumchecker.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,19 +8,21 @@ import java.util.Date;
  */
 
 
-public class Recordatorio {
+public class Recordatorio implements Serializable {
 
     private String acuario;
     private String fecha;
-    private int hora;
+    private String hora;
     private String tipoCambio;
 
-    public Recordatorio(String acuario, String fecha, int hora, String tipoCambio) {
+    public Recordatorio(String acuario, String fecha, String hora, String tipoCambio) {
         this.acuario=acuario;
         this.fecha=fecha;
         this.hora=hora;
         this.tipoCambio=tipoCambio;
     }
+
+    public Recordatorio(){};
 
     public String getAcuario() {
         return acuario;
@@ -38,11 +41,11 @@ public class Recordatorio {
         this.fecha = fecha;
     }
 
-    public int getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(int hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 

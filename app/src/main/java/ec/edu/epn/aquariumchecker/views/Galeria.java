@@ -2,11 +2,10 @@ package ec.edu.epn.aquariumchecker.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -22,6 +21,7 @@ public class Galeria extends AppCompatActivity {
     private AcuarioVO acuarioSeleccionado;
     private ListView galerias;
     static final int NUEVA_GALERIA_REQUEST = 1;
+    static final int MOSTRAR_GALERIA_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +65,13 @@ public class Galeria extends AppCompatActivity {
         Intent i = new Intent(this,NuevaGaleria.class);
         i.putExtra("acuarioSeleccionado",acuarioSeleccionado);
         startActivityForResult(i,NUEVA_GALERIA_REQUEST);
+    }
+
+    public void abrirFotos(View view){
+        int position = galerias.getPositionForView((LinearLayout)view.getParent());
+        Intent i = new Intent(this, Fotos.class);
+        i.putExtra("galeriaSeleccionada",galeriasList.get(position));
+        startActivityForResult(i, MOSTRAR_GALERIA_REQUEST);
     }
 
     @Override

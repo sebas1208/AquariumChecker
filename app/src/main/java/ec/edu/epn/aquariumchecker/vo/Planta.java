@@ -1,9 +1,11 @@
 package ec.edu.epn.aquariumchecker.vo;
 
+import java.io.Serializable;
+
 /**
  * Created by sebastian on 28/05/16.
  */
-public class Planta {
+public class Planta implements Serializable {
     private String nombre;
     private String descripcion;
     private int cantidad;

@@ -30,13 +30,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/tituloParametrosFecha"
+        android:text="@string/tituloParametrosFecha1"
         />
 
-    <DatePicker
+    <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
-        android:layout_height="65dp"
-        android:id="@+id/datePicker" />
+        android:layout_height="wrap_content"
+        android:text="@string/btncalendario"
+        android:id="@+id/btnCalendario" />
+    <TextView
+        android:id="@+id/txtFechaView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Fecha"
+        />
+
+
 
     <TableLayout
         android:layout_width="match_parent"
@@ -51,18 +62,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/tituloParametrosAnteriores"
+                android:text="Parametros"
                 android:layout_gravity="left" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/tituloParametrosActual"
-                android:layout_gravity="left"
-                android:id="@+id/textView3"
-                android:layout_column="10" />
-        </TableRow>
+             </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
@@ -79,22 +82,9 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText" />
+                android:id="@+id/txtph" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/tituloParametrosPh"
-                android:layout_gravity="left"
-                android:id="@+id/textView4"
-                android:layout_column="10" />
 
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText4"
-                android:layout_column="11" />
 
         </TableRow>
 
@@ -111,25 +101,12 @@
                 android:text="@string/tituloParametrosGh"
                 android:layout_gravity="left" />
 
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText2" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/tituloParametrosGh"
-                android:layout_gravity="left"
-                android:id="@+id/textView5"
-                android:layout_column="10" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText5"
-                android:layout_column="11" />
+                android:id="@+id/txtghact"
+                 />
         </TableRow>
 
         <TableRow
@@ -146,23 +123,9 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText3" />
+                android:id="@+id/txtkh" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/tituloParametrosKh"
-                android:layout_gravity="left"
-                android:id="@+id/textView6"
-                android:layout_column="10" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText6"
-                android:layout_column="11" />
-        </TableRow>
+               </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
@@ -213,7 +176,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText7" />
+        android:id="@+id/txtobservaciones" />
 
 
     <FrameLayout
@@ -225,14 +188,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="@string/btn_Guardar"/>
+            android:text="@string/btn_Guardar"
+            android:onClick="guardarHistorial"/>
 
         <Button
             android:id="@+id/btnCancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="@string/btn_Cancelar"/>
+            android:text="@string/btn_Cancelar"
+            android:onClick="cancelar"/>
 
     </FrameLayout>
 

@@ -38,7 +38,7 @@ public class MisAcuariosAdapter<T> extends ArrayAdapter<T> {
 
         TextView lblDescripcion = (TextView) item.findViewById(R.id.mis_acuarios_descripcion);
         lblDescripcion.setText(String.format(getContext().getString(R.string.descripcion_mis_acuarios)
-                ,datos.get(position).getTipo_agua(),datos.get(position).getVolumen()));
+                ,datos.get(position).getTipo_agua(),datos.get(position).getVolumen() + ""));
 
         return item;
     }
