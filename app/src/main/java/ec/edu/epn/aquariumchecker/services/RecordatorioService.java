@@ -19,16 +19,16 @@ import ec.edu.epn.aquariumchecker.vo.Recordatorio;
 public class RecordatorioService{
         private Recordatorio recordatorio;
         private Context appContext;
-        private AcuarioVO acuario;
 
-    public RecordatorioService(Context appContext) {
+
+    public  RecordatorioService(Context appContext) {
             this.appContext = appContext;
         }
 
         public RecordatorioService() {
         }
 
-        public void crearRecordatorio(Recordatorio nuevoRecordatorio){
+        public long crearRecordatorio(Recordatorio nuevoRecordatorio){
             AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
             SQLiteDatabase db = op.getWritableDatabase();
 
@@ -36,20 +36,24 @@ public class RecordatorioService{
             valores.put(AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_FECHA,nuevoRecordatorio.getFecha());
             valores.put(AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_HORA,nuevoRecordatorio.getHora());
             valores.put(AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_TIPORECORDATORIO,nuevoRecordatorio.getTipoCambio());
-            db.insert(AquariumCheckerAppContract.TablaRecordatorio.NOMBRE_TABLA, null, valores);
+            valores.put(AquariumCheckerAppContract.TablaHistorial.ACUARIO_ID,nuevoRecordatorio.getAcuario());
+            long idinsert = db.insert(AquariumCheckerAppContract.TablaRecordatorio.NOMBRE_TABLA, null, valores);
             db.close();
+            return idinsert;
+
         }
 
-        public List<Recordatorio> listRecordatorios(){
+        public List<Recordatorio> listRecordatorios(AcuarioVO acuario){
             AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
             List<Recordatorio> l = new ArrayList<>();
-            String[] id = {Integer.toString(acuario.getId())};
+            String[] selectionValues = {String.valueOf(acuario.getId())};
 
             SQLiteDatabase db = oh.getReadableDatabase();
             String[] columnas = {AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_FECHA,
                     AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_HORA,
                     AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_TIPORECORDATORIO,
                     AquariumCheckerAppContract.TablaRecordatorio.ACUARIO_ID,
+                    AquariumCheckerAppContract.TablaRecordatorio._ID,
 
             };
 
@@ -57,7 +61,7 @@ public class RecordatorioService{
             Cursor cur = db.query(
                     AquariumCheckerAppContract.TablaRecordatorio.NOMBRE_TABLA,
                     columnas,
-                    AquariumCheckerAppContract.TablaRecordatorio.ACUARIO_ID + " = ?",id,
+                    AquariumCheckerAppContract.TablaRecordatorio.ACUARIO_ID + " = ?",selectionValues,
                     null,
                     null,
                     null
@@ -67,13 +71,13 @@ public class RecordatorioService{
                 Recordatorio recordatorio = new Recordatorio(cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_FECHA)),
                         cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_HORA)),
                         cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaRecordatorio.COLUMNA_TIPORECORDATORIO)),
-                        cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaRecordatorio.ACUARIO_ID)));
+                        cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaRecordatorio._ID)));
                 l.add(recordatorio);
             }
             return l;
         }
 
-        public void editarRecordatorio(Recordatorio editarRecordatorio){
+     /*   public void editarRecordatorio(Recordatorio editarRecordatorio){
             AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
             SQLiteDatabase db = op.getWritableDatabase();
             String[] id = {Integer.toString(acuario.getId())};
@@ -87,7 +91,7 @@ public class RecordatorioService{
                     AquariumCheckerAppContract.TablaRecordatorio.ACUARIO_ID + " = ?",id);
             db.close();
         }
-
+*/
         public Context getAppContext() {
             return appContext;
         }

@@ -116,5 +116,6 @@ Podras crear acuarios, tomar una galeria de fotos de tu acuario, agregar peces y
     <string name="ayuda_peces">Puede eliminar un item o crear uno nuevo</string>
     <string name="title_activity_historiales">Historiales</string>
     <string name="ayuda_historiales">Seleccionea un historial para editarlo</string>
+    <string name="title_activity_rcordatorios_lista_acuaruios">Recordatorios</string>
 
 </resources>
