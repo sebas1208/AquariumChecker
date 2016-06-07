@@ -14,14 +14,14 @@ public class AcuarioVO implements Serializable{
     private Double ancho;
     private Double profundidad_rectangular;
     private Double diametro;
-    private Double profundidad_redondo;
+    private Double profundidad_cilindrica;
     private Double volumen;
     private int id;
 
     public AcuarioVO() {
     }
 
-    public AcuarioVO(String nombre, String tipo_agua, String forma, double alto, double ancho, double profundidad_rectangular, double diametro, double profundidad_redondo, double volumen, int id) {
+    public AcuarioVO(String nombre, String tipo_agua, String forma, double alto, double ancho, double profundidad_rectangular, double diametro, double profundidad_cilindrica, double volumen, int id) {
         this.nombre = nombre;
         this.tipo_agua = tipo_agua;
         this.forma = forma;
@@ -29,9 +29,25 @@ public class AcuarioVO implements Serializable{
         this.ancho = ancho;
         this.profundidad_rectangular = profundidad_rectangular;
         this.diametro = diametro;
-        this.profundidad_redondo = profundidad_redondo;
+        this.profundidad_cilindrica = profundidad_cilindrica;
         this.volumen = volumen;
         this.id = id;
+    }
+
+    public void setMedidasRectangulares(Double alto, Double ancho, Double profundidad_rectangular){
+        this.alto = alto;
+        this.ancho = ancho;
+        this.profundidad_rectangular = profundidad_rectangular;
+        this.diametro = 0.0;
+        this.profundidad_cilindrica = 0.0;
+    }
+
+    public void setMedidasCilindricas(Double diametro, Double profundidad_cilindrica){
+        this.diametro = diametro;
+        this.profundidad_cilindrica = profundidad_cilindrica;
+        this.alto = 0.0;
+        this.ancho = 0.0;
+        this.profundidad_rectangular = 0.0;
     }
 
     public String obtenerMedidasRectangularesString(){
@@ -43,12 +59,12 @@ public class AcuarioVO implements Serializable{
     }
 
     public String obtenerMedidasCilindricasString(){
-        return diametro + "cm x " + profundidad_redondo + "cm";
+        return diametro + "cm x " + profundidad_cilindrica + "cm";
     }
 
     public String obtenerVolumenCilindricoString(){
         return "" + ((diametro/2)*(diametro/2)*Math.PI)*
-                profundidad_redondo*0.001 + " Litros";
+                profundidad_cilindrica *0.001 + " Litros";
     }
 
 
@@ -59,9 +75,9 @@ public class AcuarioVO implements Serializable{
     }
 
     public void setVolumenDatosCilindricos(){
-        if(diametro != null && profundidad_redondo != null){
+        if(diametro != null && profundidad_cilindrica != null){
             volumen = (diametro/2)*(diametro/2)*Math.PI*
-            profundidad_redondo*0.001;
+                    profundidad_cilindrica *0.001;
         }
     }
 
@@ -129,12 +145,12 @@ public class AcuarioVO implements Serializable{
         this.diametro = diametro;
     }
 
-    public double getProfundidad_redondo() {
-        return profundidad_redondo;
+    public double getProfundidad_cilindrica() {
+        return profundidad_cilindrica;
     }
 
-    public void setProfundidad_redondo(double profundidad_redondo) {
-        this.profundidad_redondo = profundidad_redondo;
+    public void setProfundidad_cilindrica(double profundidad_cilindrica) {
+        this.profundidad_cilindrica = profundidad_cilindrica;
     }
 
     public double getVolumen() {

@@ -119,16 +119,14 @@ public class EditarAcuario extends AppCompatActivity implements
                 edtAlto.getText().toString(),
                 edtAncho.getText().toString(),
                 edtProfundidad.getText().toString());
-
         setVolumenRectangular();
         edtMedida.setText(acuarioEditar.obtenerMedidasRectangularesString());
         edtVolumen.setText(acuarioEditar.obtenerVolumenRectangularString());
     }
 
     private void setMedidasRectangulares(String alto, String ancho, String profundidad){
-        acuarioEditar.setAlto(Double.parseDouble(alto));
-        acuarioEditar.setAncho(Double.parseDouble(ancho));
-        acuarioEditar.setProfundidad_rectangular(Double.parseDouble(profundidad));
+        acuarioEditar.setMedidasRectangulares(Double.parseDouble(alto),Double.parseDouble(ancho),
+                Double.parseDouble(profundidad));
     }
 
     private void setVolumenRectangular(){
@@ -147,14 +145,14 @@ public class EditarAcuario extends AppCompatActivity implements
         obtenterMedidasCilindricas(
                 diametro.getText().toString(),
                 profundidad.getText().toString());
+        setVolumenCilindrico();
         edtMedida.setText(acuarioEditar.obtenerMedidasCilindricasString());
         edtVolumen.setText(acuarioEditar.obtenerVolumenCilindricoString());
-        setVolumenCilindrico();
     }
 
     private void obtenterMedidasCilindricas(String diametro, String profundidad){
         acuarioEditar.setDiametro(Double.parseDouble(diametro));
-        acuarioEditar.setProfundidad_redondo(Double.parseDouble(profundidad));
+        acuarioEditar.setProfundidad_cilindrica(Double.parseDouble(profundidad));
     }
 
     public void guardarAcuario(View view){

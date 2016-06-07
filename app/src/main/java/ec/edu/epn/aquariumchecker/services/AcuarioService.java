@@ -37,7 +37,7 @@ public class AcuarioService {
         valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ANCHO,nuevoAcuario.getAncho());
         valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_MEDIDAS,nuevoAcuario.getProfundidad_rectangular());
         valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_DIAMETRO,nuevoAcuario.getDiametro());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_REDONDO,nuevoAcuario.getProfundidad_redondo());
+        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_REDONDO,nuevoAcuario.getProfundidad_cilindrica());
         valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_VOLUMEN,nuevoAcuario.getVolumen());
         db.insert(AquariumCheckerAppContract.TablaAcuario.NOMBRE_TABLA, null, valores);
         db.close();
@@ -56,7 +56,7 @@ public class AcuarioService {
         valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ANCHO,acuarioEditar.getAncho());
         valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_MEDIDAS,acuarioEditar.getProfundidad_rectangular());
         valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_DIAMETRO,acuarioEditar.getDiametro());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_REDONDO,acuarioEditar.getProfundidad_redondo());
+        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_REDONDO,acuarioEditar.getProfundidad_cilindrica());
         valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_VOLUMEN,acuarioEditar.getVolumen());
         db.update(AquariumCheckerAppContract.TablaAcuario.NOMBRE_TABLA,valores,
                 AquariumCheckerAppContract.TablaAcuario._ID + " = ?",id);
