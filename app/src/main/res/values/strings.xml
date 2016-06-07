@@ -96,5 +96,5 @@
     <string name="title_activity_list_recordatorios">ListRecordatorios</string>
     <string name="title_activity_list_historial">ListHistorial</string>
     <string name="btncalendario">Ver calendario</string>
-
+    <string name="btnhora">Ver hora</string>
 </resources>

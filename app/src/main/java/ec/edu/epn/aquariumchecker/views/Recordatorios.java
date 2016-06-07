@@ -2,6 +2,7 @@ package ec.edu.epn.aquariumchecker.views;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,15 +26,18 @@ import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Forma;
+import ec.edu.epn.aquariumchecker.vo.Recordatorio;
 
 
 public class Recordatorios extends AppCompatActivity {
     private Spinner cmbAcuarios;
-    private Spinner cmbHora;
+
     private Spinner cmbTipo;
     private Button  btnCalendario;
-    private int anio,mes,dia;
+    private Button  btnHoras;
+    private int anio,mes,dia,hora,minuto;
     static final int di_log = 0;
+    static final int di_log1 = 0;
 
 
     @Override
@@ -42,7 +47,6 @@ public class Recordatorios extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         cmbAcuarios = (Spinner)findViewById(R.id.cmbAcuario);
-        cmbHora = (Spinner)findViewById(R.id.cmbHora);
         cmbTipo = (Spinner)findViewById(R.id.cmbTipo);
 
 
@@ -60,14 +64,6 @@ public class Recordatorios extends AppCompatActivity {
 
         cmbAcuarios.setAdapter(adaptadorAcuarios);
 
-        String[]Hora= {"1","2","3","4","5","6","7","8","9","10","12","13","14","15","16","17","18","19","20","21","22","23","24"};
-        ArrayAdapter<String> adaptadorHora =
-                new ArrayAdapter<String>(this,
-                        android.R.layout.simple_spinner_item,
-                        Hora);
-
-        cmbHora.setAdapter(adaptadorHora);
-
         String[]Tipo= {"Cambio de agua","Abonado","Agregar Plantas","Agregar Peces" };
         ArrayAdapter<String> adaptadorTipo =
                 new ArrayAdapter<String>(this,
@@ -75,7 +71,9 @@ public class Recordatorios extends AppCompatActivity {
                         Tipo);
 
         cmbTipo.setAdapter(adaptadorTipo);
+
         showDialogOnButtonClick();
+        showTimePickerDialog();
 
     }
 
@@ -90,13 +88,34 @@ public class Recordatorios extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected Dialog onCreateDialog(int id){
+    public void showTimePickerDialog(){
+        btnHoras = (Button)findViewById(R.id.btnhora);
+
+        btnHoras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(di_log1);
+            }
+        });
+    }
+
+    protected Dialog onCreateDialog(int id,int id2){
         if(id == di_log)
             return new DatePickerDialog(this,dpickerListener, anio,mes,dia);
-            return null;
+        if(id2 == di_log1)
+            return new TimePickerDialog(Recordatorios.this,kTimepickerListener, hora,minuto,false);
+        return null;
 
     }
+
+    protected TimePickerDialog.OnTimeSetListener kTimepickerListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                hora= hourOfDay;
+                minuto = minute;
+            Toast.makeText(Recordatorios.this, hora+":"+minuto,Toast.LENGTH_LONG).show();
+        }
+    };
     private DatePickerDialog.OnDateSetListener dpickerListener = new DatePickerDialog.OnDateSetListener(){
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
