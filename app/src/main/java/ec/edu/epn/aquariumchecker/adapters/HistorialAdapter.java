@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
@@ -33,12 +34,12 @@ public class HistorialAdapter<T> extends ArrayAdapter<T> {
             item = inflater.inflate(R.layout.historial_list_item,null);
         }
         TextView lblNombre = (TextView) item.findViewById(R.id.historiales_nombre_historiales);
-        lblNombre.setText(datos.get(position).getAcuario());
+        lblNombre.setText(new SimpleDateFormat("yyyy-MM-dd").format(datos.get(position).getFecha()));
 
 
 
         TextView lblDescripcion = (TextView) item.findViewById(R.id.historial_descripcion);
-        lblDescripcion.setText("Obs: "+datos.get(position).getObservaciones()+" Fecha: "+datos.get(position).getFecha());
+        lblDescripcion.setText("Observacion: "+ datos.get(position).getObservaciones());
 
         return item;
     }
