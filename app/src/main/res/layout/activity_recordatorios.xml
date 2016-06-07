@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Fecha"
+
         />
 
     <Button
@@ -69,6 +69,7 @@
         android:id="@+id/btnhora" />
 
     <TextView
+        android:id="@+id/txtHoraView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"

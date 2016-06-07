@@ -6,35 +6,33 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ArrayAdapter;
-<<<<<<< HEAD
+
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
-=======
->>>>>>> 6792d7ab91295e1ac15db52576a56b7aaf3a2ca5
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
-import ec.edu.epn.aquariumchecker.vo.Acuario;
+
 import ec.edu.epn.aquariumchecker.vo.Forma;
 import ec.edu.epn.aquariumchecker.vo.Recordatorio;
-=======
 import ec.edu.epn.aquariumchecker.R;
->>>>>>> 6792d7ab91295e1ac15db52576a56b7aaf3a2ca5
 
 
-public class Recordatorios extends AppCompatActivity {
+public class Recordatorios extends AppCompatActivity implements View.OnClickListener {
     private Spinner cmbAcuarios;
-
+    private TextView txtFecha,txtHora;
     private Spinner cmbTipo;
     private Button  btnCalendario;
     private Button  btnHoras;
@@ -51,7 +49,10 @@ public class Recordatorios extends AppCompatActivity {
 
         cmbAcuarios = (Spinner)findViewById(R.id.cmbAcuario);
         cmbTipo = (Spinner)findViewById(R.id.cmbTipo);
-
+        btnCalendario = (Button) findViewById(R.id.btnCalendario);
+        btnHoras = (Button) findViewById(R.id.btnhora);
+        txtFecha = (TextView) findViewById(R.id.txtFechaView);
+        txtHora =(TextView) findViewById(R.id.txtHoraView);
 
         final Calendar cal = Calendar.getInstance();
         anio = cal.get(Calendar.YEAR);
@@ -75,14 +76,57 @@ public class Recordatorios extends AppCompatActivity {
 
         cmbTipo.setAdapter(adaptadorTipo);
 
-        showDialogOnButtonClick();
-        showTimePickerDialog();
+
+        btnHoras.setOnClickListener(this);
+        btnCalendario.setOnClickListener(this);
+      //  showDialogOnButtonClick();
+      //  showTimePickerDialog();
 
     }
 
-    public void showDialogOnButtonClick(){
-        btnCalendario = (Button)findViewById(R.id.btnCalendario);
 
+
+    public void onClick(View v) {
+
+        if (v == btnCalendario) {
+
+            // Get Current Date
+            final Calendar c = Calendar.getInstance();
+            anio = c.get(Calendar.YEAR);
+            mes = c.get(Calendar.MONTH);
+            dia = c.get(Calendar.DAY_OF_MONTH);
+
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            txtFecha.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        }
+                    }, anio, mes, dia);
+            datePickerDialog.show();
+        }
+        if (v == btnHoras) {
+
+            // Get Current Time
+            final Calendar c = Calendar.getInstance();
+            hora = c.get(Calendar.HOUR_OF_DAY);
+            minuto = c.get(Calendar.MINUTE);
+
+            // Launch Time Picker Dialog
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                    new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,int minute) {
+                            txtHora.setText(hourOfDay + ":" + minute);
+                        }
+                    }, hora, minuto, false);
+            timePickerDialog.show();
+        }
+    }
+    /*
+    public void showDialogOnButtonClick(){
         btnCalendario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,8 +136,6 @@ public class Recordatorios extends AppCompatActivity {
     }
 
     public void showTimePickerDialog(){
-        btnHoras = (Button)findViewById(R.id.btnhora);
-
         btnHoras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,7 +171,7 @@ public class Recordatorios extends AppCompatActivity {
         }
 
     };
-
+*/
 
 
 }
