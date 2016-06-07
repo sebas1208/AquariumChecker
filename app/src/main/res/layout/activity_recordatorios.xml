@@ -69,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/tituloTipo1"
+        android:text="Tipo de recordatorio"
         />
 
     <Spinner
@@ -88,14 +88,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="@string/btn_Guardar"/>
+            android:text="@string/btn_Guardar"
+            android:onClick="guardarRecordatorio"/>
 
         <Button
             android:id="@+id/btnCancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="@string/btn_Cancelar"/>
+            android:text="@string/btn_Cancelar"
+            android:onClick="cancelar"
+            />
 
     </FrameLayout>
 

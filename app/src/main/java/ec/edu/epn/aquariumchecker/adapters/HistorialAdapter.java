@@ -35,8 +35,6 @@ public class HistorialAdapter<T> extends ArrayAdapter<T> {
         TextView lblNombre = (TextView) item.findViewById(R.id.historiales_nombre_historiales);
         lblNombre.setText(datos.get(position).getAcuario());
 
-
-
         TextView lblDescripcion = (TextView) item.findViewById(R.id.historial_descripcion);
         lblDescripcion.setText("Obs: "+datos.get(position).getObservaciones()+" Fecha: "+datos.get(position).getFecha());
 
