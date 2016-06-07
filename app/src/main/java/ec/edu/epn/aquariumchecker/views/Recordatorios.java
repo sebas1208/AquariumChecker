@@ -27,8 +27,6 @@ import ec.edu.epn.aquariumchecker.vo.Forma;
 import ec.edu.epn.aquariumchecker.vo.Recordatorio;
 import ec.edu.epn.aquariumchecker.R;
 
-
-
 public class Recordatorios extends AppCompatActivity implements View.OnClickListener {
     private Spinner cmbAcuarios;
     private TextView txtFecha,txtHora;

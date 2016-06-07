@@ -17,7 +17,7 @@ public class AquariumCherckerMain extends AppCompatActivity                     
 
 
     public void abrirGaleria(View view){
-        Intent i = new Intent(this, Galeria.class);
+        Intent i = new Intent(this, GaleriaAcuario.class);
         startActivity(i);
     }
 

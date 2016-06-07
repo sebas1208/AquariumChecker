@@ -20,6 +20,10 @@ public class AquariumCheckerAppOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        if (!db.isReadOnly()) {
+            // Enable foreign key constraints
+            db.execSQL("PRAGMA foreign_keys=ON;");
+        }
         db.execSQL(AquariumCheckerAppContract.TablaAcuario.CREA_TABLAS_ACUARIO);
         db.execSQL(AquariumCheckerAppContract.TablaAcuario.CREA_TABLAS_TABLA_PECES);
         db.execSQL(AquariumCheckerAppContract.TablaAcuario.CREA_TABLAS_PLANTAS);

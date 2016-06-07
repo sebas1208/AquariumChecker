@@ -28,15 +28,13 @@ public class AquariumCheckerAppContract {
         public static final String COLUMNA_VOLUMEN = "VOLUMEN";
 
 
-
-
         public static final String ELIMINA_TABLAS_ACUARIO = "DROP TABLE IF EXISTS " + TablaAcuario.NOMBRE_TABLA;
         public static final String CREA_TABLAS_ACUARIO = "CREATE TABLE " +
                 TablaAcuario.NOMBRE_TABLA + " (" +
                 TablaAcuario._ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT" + COMMA_SEP +
                 TablaAcuario.COLUMNA_NOMBRE + TEXT_TYPE + COMMA_SEP +
                 TablaAcuario.COLUMNA_TIPOAGUA + TEXT_TYPE + COMMA_SEP +
-                TablaAcuario.COLUMNA_FORMA + TEXT_TYPE + COMMA_SEP  +
+                TablaAcuario.COLUMNA_FORMA + TEXT_TYPE + COMMA_SEP +
                 TablaAcuario.COLUMNA_ALTO + DOUBLE_TYPE + COMMA_SEP +
                 TablaAcuario.COLUMNA_ANCHO + DOUBLE_TYPE + COMMA_SEP +
                 TablaAcuario.COLUMNA_PROFUNDIDAD_MEDIDAS + DOUBLE_TYPE + COMMA_SEP +
@@ -53,8 +51,8 @@ public class AquariumCheckerAppContract {
                 TablaPeces.COLUMNA_DESCRIPCION + TEXT_TYPE + COMMA_SEP +
                 TablaPeces.COLUMNA_CANTIDAD + INTEGER_TYPE + COMMA_SEP +
                 TablaPeces.COLUMNA_FOTO + TEXT_TYPE + COMMA_SEP +
-
                 "FOREIGN KEY (ACUARIO_ID) REFERENCES ACUARIO (_ID)"+" )";
+
 
         public static final String ELIMINA_TABLAS_PLANTAS = "DROP TABLE IF EXISTS " + TablaPlantas.NOMBRE_TABLA;
         public static final String CREA_TABLAS_PLANTAS = "CREATE TABLE " +
@@ -63,7 +61,7 @@ public class AquariumCheckerAppContract {
                 TablaPlantas.ACUARIO_ID + INTEGER_TYPE + COMMA_SEP +
                 TablaPlantas.COLUMNA_FOTO + TEXT_TYPE + COMMA_SEP +
                 TablaPlantas.COLUMNA_DESCRIPCION + TEXT_TYPE + COMMA_SEP +
-                "FOREIGN KEY (ACUARIO_ID) REFERENCES ACUARIO (_ID)"+" )";
+                "FOREIGN KEY (ACUARIO_ID) REFERENCES ACUARIO (_ID)" + " )";
 
         public static final String ELIMINA_TABLAS_GALERIA = "DROP TABLE IF EXISTS " + TablaGaleria.NOMBRE_TABLA;
         public static final String CREA_TABLAS_GALERIA = "CREATE TABLE " +
@@ -71,17 +69,17 @@ public class AquariumCheckerAppContract {
                 TablaGaleria._ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT" + COMMA_SEP +
                 TablaGaleria.ACUARIO_ID + INTEGER_TYPE + COMMA_SEP +
                 TablaGaleria.COLUMNA_FECHA + DATE + COMMA_SEP +
-                TablaGaleria.COLUMNA_OBSERVACIONES + TEXT_TYPE +  COMMA_SEP +
+                TablaGaleria.COLUMNA_OBSERVACIONES + TEXT_TYPE + COMMA_SEP +
                 TablaGaleria.COLUMNA_FOTOS + TEXT_TYPE + COMMA_SEP +
-                "FOREIGN KEY (ACUARIO_ID) REFERENCES ACUARIO (_ID)"+" )";
+                "FOREIGN KEY (ACUARIO_ID) REFERENCES ACUARIO (_ID)" + " )";
 
         public static final String ELIMINA_TABLAS_FOTO = "DROP TABLE IF EXISTS " + TablaFoto.NOMBRE_TABLA;
         public static final String CREA_TABLAS_FOTO = "CREATE TABLE " +
                 TablaFoto.NOMBRE_TABLA + " (" +
                 TablaFoto._ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT" + COMMA_SEP +
                 TablaFoto.GALERIA_ID + INTEGER_TYPE + COMMA_SEP +
-                TablaFoto.COLUMNA_DESCRIPCION + TEXT_TYPE +  COMMA_SEP +
-                "FOREIGN KEY (GALERIA_ID) REFERENCES GALERIA (_ID)"+" )";
+                TablaFoto.COLUMNA_DESCRIPCION + TEXT_TYPE + COMMA_SEP +
+                "FOREIGN KEY (GALERIA_ID) REFERENCES GALERIA (_ID)" + " )";
 
         public static final String ELIMINA_TABLAS_HISTORIAL = "DROP TABLE IF EXISTS " + TablaHistorial.NOMBRE_TABLA;
         public static final String CREA_TABLAS_HISTORIAL = "CREATE TABLE " +
@@ -93,9 +91,9 @@ public class AquariumCheckerAppContract {
                 TablaHistorial.COLUMNA_KH + INTEGER_TYPE + COMMA_SEP +
                 TablaHistorial.COLUMNA_GH + INTEGER_TYPE + COMMA_SEP +
                 TablaHistorial.COLUMNA_CO2 + INTEGER_TYPE + COMMA_SEP +
-                TablaHistorial.COLUMNA_OBSERVACIONES + TEXT_TYPE +  COMMA_SEP +
+                TablaHistorial.COLUMNA_OBSERVACIONES + TEXT_TYPE + COMMA_SEP +
                 TablaHistorial.COLUMNA_ILUMINACION + TEXT_TYPE + COMMA_SEP +
-                "FOREIGN KEY (ACUARIO_ID) REFERENCES ACUARIO (_ID)"+ " )";
+                "FOREIGN KEY (ACUARIO_ID) REFERENCES ACUARIO (_ID)" + " )";
 
         public static final String ELIMINA_TABLAS_RECORDATORIO = "DROP TABLE IF EXISTS " + TablaRecordatorio.NOMBRE_TABLA;
         public static final String CREA_TABLAS_RECORDATORIO = "CREATE TABLE " +
@@ -105,7 +103,7 @@ public class AquariumCheckerAppContract {
                 TablaRecordatorio.COLUMNA_FECHA + DATE + COMMA_SEP +
                 TablaRecordatorio.COLUMNA_HORA + INTEGER_TYPE + COMMA_SEP +
                 TablaRecordatorio.COLUMNA_TIPORECORDATORIO + TEXT_TYPE + COMMA_SEP +
-                "FOREIGN KEY (ACUARIO_ID) REFERENCES ACUARIO (_ID)"+" )";
+                "FOREIGN KEY (ACUARIO_ID) REFERENCES ACUARIO (_ID)" + " )";
 
     }
 
@@ -127,49 +125,49 @@ public class AquariumCheckerAppContract {
         public static final String NOMBRE_TABLA = "PLANTAS";
         public static final String COLUMNA_FOTO = "NOMBRE";
         public static final String COLUMNA_DESCRIPCION = "DESCRIPCION";
-        public static final String ACUARIO_ID = "ACUARIO_ID" ;
+        public static final String ACUARIO_ID = "ACUARIO_ID";
     }
 
     //TABLA GALERIA
     public static abstract class TablaGaleria implements BaseColumns {
-        public static final String NOMBRE_TABLA="GALERIA";
-        public static final String COLUMNA_FECHA="FECHA";
-        public static final String COLUMNA_OBSERVACIONES="OBSERVACIONES";
-        public static final String COLUMNA_FOTOS="FOTOS";
+        public static final String NOMBRE_TABLA = "GALERIA";
+        public static final String COLUMNA_FECHA = "FECHA";
+        public static final String COLUMNA_OBSERVACIONES = "OBSERVACIONES";
+        public static final String COLUMNA_FOTOS = "FOTOS";
 
 
         public static final String ACUARIO_ID = "ACUARIO_ID";
     }
 
-//TABLA FOTO
+    //TABLA FOTO
     public static abstract class TablaFoto implements BaseColumns {
-    public static final String NOMBRE_TABLA="FOTO";
-    public static final String COLUMNA_DESCRIPCION="DESCRIPCION";
-    public static final String GALERIA_ID = "GALERIA_ID" ;
-}
+        public static final String NOMBRE_TABLA = "FOTO";
+        public static final String COLUMNA_DESCRIPCION = "DESCRIPCION";
+        public static final String GALERIA_ID = "GALERIA_ID";
+    }
 
 
-//TABLA HISTORIAL
+    //TABLA HISTORIAL
     public static abstract class TablaHistorial implements BaseColumns {
-    public static final String NOMBRE_TABLA="HISTORIAL";
-    public static final String COLUMNA_FECHA="FECHA";
-    public static final String COLUMNA_PH="PH";
-    public static final String COLUMNA_KH="KH";
-    public static final String COLUMNA_GH="GH";
-    public static final String COLUMNA_CO2="CO2";
-    public static final String COLUMNA_OBSERVACIONES="OBSERVACIONES";
-    public static final String COLUMNA_ILUMINACION="ILUMINACION";
+        public static final String NOMBRE_TABLA = "HISTORIAL";
+        public static final String COLUMNA_FECHA = "FECHA";
+        public static final String COLUMNA_PH = "PH";
+        public static final String COLUMNA_KH = "KH";
+        public static final String COLUMNA_GH = "GH";
+        public static final String COLUMNA_CO2 = "CO2";
+        public static final String COLUMNA_OBSERVACIONES = "OBSERVACIONES";
+        public static final String COLUMNA_ILUMINACION = "ILUMINACION";
 
-    public static final String ACUARIO_ID = "ACUARIO_ID";
-}
+        public static final String ACUARIO_ID = "ACUARIO_ID";
+    }
 
 //TABLA RECORDATORIO
 
     public static abstract class TablaRecordatorio implements BaseColumns {
-        public static final String NOMBRE_TABLA="RECORDATORIO";
-        public static final String COLUMNA_FECHA="FECHA";
-        public static final String COLUMNA_HORA="HORA";
-        public static final String COLUMNA_TIPORECORDATORIO="TIPO";
+        public static final String NOMBRE_TABLA = "RECORDATORIO";
+        public static final String COLUMNA_FECHA = "FECHA";
+        public static final String COLUMNA_HORA = "HORA";
+        public static final String COLUMNA_TIPORECORDATORIO = "TIPO";
 
 
         public static final String ACUARIO_ID = "ACUARIO_ID";
