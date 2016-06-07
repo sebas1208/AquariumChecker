@@ -79,9 +79,6 @@ public class Recordatorios extends AppCompatActivity implements View.OnClickList
 
         btnHoras.setOnClickListener(this);
         btnCalendario.setOnClickListener(this);
-      //  showDialogOnButtonClick();
-      //  showTimePickerDialog();
-
     }
 
 
@@ -125,53 +122,7 @@ public class Recordatorios extends AppCompatActivity implements View.OnClickList
             timePickerDialog.show();
         }
     }
-    /*
-    public void showDialogOnButtonClick(){
-        btnCalendario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog(di_log);
-            }
-        });
-    }
 
-    public void showTimePickerDialog(){
-        btnHoras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog(di_log1);
-            }
-        });
-    }
-
-    protected Dialog onCreateDialog(int id,int id2){
-        if(id == di_log)
-            return new DatePickerDialog(this,dpickerListener, anio,mes,dia);
-        if(id2 == di_log1)
-            return new TimePickerDialog(Recordatorios.this,kTimepickerListener, hora,minuto,false);
-        return null;
-
-    }
-
-    protected TimePickerDialog.OnTimeSetListener kTimepickerListener = new TimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                hora= hourOfDay;
-                minuto = minute;
-            Toast.makeText(Recordatorios.this, hora+":"+minuto,Toast.LENGTH_LONG).show();
-        }
-    };
-    private DatePickerDialog.OnDateSetListener dpickerListener = new DatePickerDialog.OnDateSetListener(){
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                anio = year;
-                mes = monthOfYear+1;
-                dia = dayOfMonth;
-            Toast.makeText(Recordatorios.this, anio+ "/" + mes+"/"+dia,Toast.LENGTH_LONG).show();
-        }
-
-    };
-*/
 
 
 }
