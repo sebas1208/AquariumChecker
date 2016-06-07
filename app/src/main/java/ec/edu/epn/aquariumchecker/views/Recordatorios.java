@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
-
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -17,17 +16,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
-
-import ec.edu.epn.aquariumchecker.vo.Forma;
-import ec.edu.epn.aquariumchecker.vo.Recordatorio;
-import ec.edu.epn.aquariumchecker.R;
 
 
 public class Recordatorios extends AppCompatActivity implements View.OnClickListener {

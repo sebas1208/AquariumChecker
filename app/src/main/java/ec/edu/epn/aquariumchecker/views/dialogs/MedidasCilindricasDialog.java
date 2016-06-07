@@ -27,7 +27,7 @@ public class MedidasCilindricasDialog extends DialogFragment {
                 })
                 .setNegativeButton(R.string.negativo, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        mListener.onCilindricoonDialogNegativeClick(MedidasCilindricasDialog.this);
+                        mListener.onCilindricoDialogNegativeClick(MedidasCilindricasDialog.this);
                     }
                 });
         return builder.create();
@@ -37,7 +37,7 @@ public class MedidasCilindricasDialog extends DialogFragment {
 
     public interface NoticeDialogListener {
         void onCilindricoDialogPositiveClick(DialogFragment dialog);
-        void onCilindricoonDialogNegativeClick(DialogFragment dialog);
+        void onCilindricoDialogNegativeClick(DialogFragment dialog);
     }
 
     // Use this instance of the interface to deliver action events

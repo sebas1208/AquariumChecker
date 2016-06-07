@@ -23,12 +23,12 @@ public class MedidasRectangularesDialog extends DialogFragment {
             .setPositiveButton(R.string.positivo, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int id) {
-                    mListener.onDialogPositiveClick(MedidasRectangularesDialog.this);
+                    mListener.onDialogRectangularPositiveClick(MedidasRectangularesDialog.this);
                 }
             })
             .setNegativeButton(R.string.negativo, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    mListener.onDialogNegativeClick(MedidasRectangularesDialog.this);
+                    mListener.onDialogRectangularNegativeClick(MedidasRectangularesDialog.this);
                 }
             });
         return builder.create();
@@ -37,8 +37,8 @@ public class MedidasRectangularesDialog extends DialogFragment {
 
 
     public interface NoticeDialogListener {
-        void onDialogPositiveClick(DialogFragment dialog);
-        void onDialogNegativeClick(DialogFragment dialog);
+        void onDialogRectangularPositiveClick(DialogFragment dialog);
+        void onDialogRectangularNegativeClick(DialogFragment dialog);
     }
 
     // Use this instance of the interface to deliver action events
