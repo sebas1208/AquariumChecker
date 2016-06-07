@@ -65,7 +65,7 @@ public class MisPeces extends AppCompatActivity {
         Cursor cur = db.query(
                 TablaPeces.NOMBRE_TABLA,
                 columnas,
-                TablaPeces.ACUARIO_ID + " = ", id,
+                TablaPeces.ACUARIO_ID + " = ?", id,
                 null,
                 null,
                 null

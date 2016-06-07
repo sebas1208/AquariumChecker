@@ -22,14 +22,11 @@ import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
-<<<<<<< HEAD
 import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 import ec.edu.epn.aquariumchecker.vo.Forma;
 import ec.edu.epn.aquariumchecker.vo.Recordatorio;
 import ec.edu.epn.aquariumchecker.R;
 
-=======
->>>>>>> 9b2dbac9902c710d990cb77912fc6ce335059c0e
 
 
 public class Recordatorios extends AppCompatActivity implements View.OnClickListener {
