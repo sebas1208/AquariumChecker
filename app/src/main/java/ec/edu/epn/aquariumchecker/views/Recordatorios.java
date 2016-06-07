@@ -4,20 +4,20 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
+<<<<<<< HEAD
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
+=======
+>>>>>>> 6792d7ab91295e1ac15db52576a56b7aaf3a2ca5
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -27,6 +27,9 @@ import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Forma;
 import ec.edu.epn.aquariumchecker.vo.Recordatorio;
+=======
+import ec.edu.epn.aquariumchecker.R;
+>>>>>>> 6792d7ab91295e1ac15db52576a56b7aaf3a2ca5
 
 
 public class Recordatorios extends AppCompatActivity {

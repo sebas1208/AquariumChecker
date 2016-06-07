@@ -95,6 +95,11 @@
     <string name="negativo">Cancelar</string>
     <string name="title_activity_list_recordatorios">ListRecordatorios</string>
     <string name="title_activity_list_historial">ListHistorial</string>
+<<<<<<< HEAD
     <string name="btncalendario">Ver calendario</string>
     <string name="btnhora">Ver hora</string>
+=======
+    <string name="title_activity_mis_plantas_acuario">MisPlantasAcuario</string>
+
+>>>>>>> 6792d7ab91295e1ac15db52576a56b7aaf3a2ca5
 </resources>
