@@ -17,6 +17,7 @@ import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.adapters.HistorialAdapter;
 import ec.edu.epn.aquariumchecker.adapters.RecordatoriosAdapter;
 import ec.edu.epn.aquariumchecker.services.HistorialService;
+import ec.edu.epn.aquariumchecker.services.PecesService;
 import ec.edu.epn.aquariumchecker.services.RecordatorioService;
 import ec.edu.epn.aquariumchecker.vo.*;
 
@@ -26,13 +27,14 @@ public class RcordatoriosListaAcuaruios extends AppCompatActivity {
         private ListView recordatorios;
         static final int NUEVO_RECORDATORIO_REQUEST = 1;
         static final int MOSTRAR_RECORDATORIO_REQUEST = 1;
-
+        private RecordatoriosAdapter adapter;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             initComponents();
             obtenerAcuarioSeleccionado();
             obtenerRecordatorioPorAcuario();
+
         }
 
         @Override
@@ -40,7 +42,7 @@ public class RcordatoriosListaAcuaruios extends AppCompatActivity {
             super.onRestart();initComponents();
             obtenerAcuarioSeleccionado();
             obtenerRecordatorioPorAcuario();
-        }
+            }
 
     private void initComponents(){
         setContentView(R.layout.activity_rcordatorios_lista_acuaruios);
@@ -48,7 +50,7 @@ public class RcordatoriosListaAcuaruios extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        RecordatoriosAdapter adapter = new RecordatoriosAdapter(this, recordatorioslist);
+        adapter = new RecordatoriosAdapter(this, recordatorioslist);
         recordatorios = (ListView) findViewById(R.id.recordatorios_list);
         recordatorios.setAdapter(adapter);
     }
@@ -64,6 +66,15 @@ public class RcordatoriosListaAcuaruios extends AppCompatActivity {
         RecordatorioService service = new RecordatorioService(getApplicationContext());
         recordatorioslist.addAll(service.listRecordatorios(acuarioSeleccionado));
     }
+
+    public void eliminar(View view){
+        int position = recordatorios.getPositionForView((LinearLayout)view.getParent());
+        RecordatorioService service = new RecordatorioService(getApplicationContext());
+        service.removeRecordatorio(recordatorioslist.get(position));
+        recordatorioslist.remove(position);
+        adapter.notifyDataSetChanged();
+    }
+
 
     public void abrirNuevoRecordatorio(View view){
         Intent i = new Intent(this,Recordatorios.class);

@@ -14,14 +14,23 @@ public class Recordatorio implements Serializable {
     private String fecha;
     private String hora;
     private String tipoCambio;
+    private String id;
 
-    public Recordatorio(String fecha, String hora, String tipoCambio, String acuario) {
+    public Recordatorio(String fecha, String hora, String tipoCambio,String id ,String acuario) {
         this.fecha=fecha;
         this.hora=hora;
         this.tipoCambio=tipoCambio;
-
+        this.id=id;
         this.acuario=acuario;
         }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Recordatorio(){};
 
