@@ -61,14 +61,18 @@ public class Recordatorios extends AppCompatActivity implements View.OnClickList
         String[]Acuarios= new String[100];
 
 
+//        acuarios = (AcuarioVO)getIntent().getSerializableExtra("acuarioEditar");
+
         for(int i=0;i<acuarios.size();i++){
             Acuarios[i] = acuarios.get(i).getNombre();
         }
 
+        MisAcuariosAdapter adapter = new MisAcuariosAdapter(this, acuarios);
+
         ArrayAdapter<String> adaptadorAcuarios =
                 new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, Acuarios);
 
-        cmbAcuarios.setAdapter(adaptadorAcuarios);
+        cmbAcuarios.setAdapter(adapter);
 
         String[]Tipo= {"Cambio de agua","Abonado","Agregar Plantas","Agregar Peces" };
         ArrayAdapter<String> adaptadorTipo =

@@ -1,5 +1,6 @@
 package ec.edu.epn.aquariumchecker.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  */
 
 
-public class Recordatorio {
+public class Recordatorio implements Serializable {
 
     private String acuario;
     private String fecha;

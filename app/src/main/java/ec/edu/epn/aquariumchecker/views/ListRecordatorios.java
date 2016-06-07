@@ -15,15 +15,16 @@ import java.util.List;
 import ec.edu.epn.aquariumchecker.R;
 
 import ec.edu.epn.aquariumchecker.adapters.RecordatoriosAdapter;
+import ec.edu.epn.aquariumchecker.services.RecordatorioService;
 import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 import ec.edu.epn.aquariumchecker.vo.Recordatorio;
 
 public class ListRecordatorios extends AppCompatActivity {
 
 
-    ListView misAcuarios;
+
     ListView misRecordatorios;
-    List<Recordatorio> acuarios = new ArrayList<>();
+
     List<Recordatorio> recordatorios = new ArrayList<>();
 
     @Override
@@ -34,10 +35,15 @@ public class ListRecordatorios extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        recordatorios.add(new Recordatorio("Acuario 1","2016-02-02","1","Abonado"));
+
+        recordatorios.add(new Recordatorio("acuarios 1","2016-02-02","1","Abonado"));
         RecordatoriosAdapter adapter = new RecordatoriosAdapter(this,recordatorios);
         misRecordatorios = (ListView)findViewById(R.id.recordatorios_list);
         misRecordatorios.setAdapter(adapter);
+
+        RecordatorioService service = new RecordatorioService(getApplicationContext());
+        recordatorios.addAll(service.listRecordatorios());
+
     }
 
     public void abrirNuevoRecordatorio(View view){
