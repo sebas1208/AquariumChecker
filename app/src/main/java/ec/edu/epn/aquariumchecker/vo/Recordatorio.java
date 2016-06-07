@@ -15,12 +15,13 @@ public class Recordatorio implements Serializable {
     private String hora;
     private String tipoCambio;
 
-    public Recordatorio(String acuario, String fecha, String hora, String tipoCambio) {
-        this.acuario=acuario;
+    public Recordatorio(String fecha, String hora, String tipoCambio, String acuario) {
         this.fecha=fecha;
         this.hora=hora;
         this.tipoCambio=tipoCambio;
-    }
+
+        this.acuario=acuario;
+        }
 
     public Recordatorio(){};
 

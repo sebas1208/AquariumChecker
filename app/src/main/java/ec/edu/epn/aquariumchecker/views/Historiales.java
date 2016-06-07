@@ -2,8 +2,6 @@ package ec.edu.epn.aquariumchecker.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,9 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.adapters.GaleriaAdapter;
 import ec.edu.epn.aquariumchecker.adapters.HistorialAdapter;
-import ec.edu.epn.aquariumchecker.services.GaleriaService;
 import ec.edu.epn.aquariumchecker.services.HistorialService;
 import ec.edu.epn.aquariumchecker.vo.*;
 
@@ -62,7 +58,7 @@ public class Historiales extends AppCompatActivity {
 
     private void obtenerHistorialesPorAcuario(){
         HistorialService service = new HistorialService(getApplicationContext());
-        historialeslist.addAll(service.listHistoriales(acuarioSeleccionado));
+        historialeslist.addAll(service.listHistorialesPorAcuario(acuarioSeleccionado));
     }
 
     public void abrirNuevoHistorial(View view){

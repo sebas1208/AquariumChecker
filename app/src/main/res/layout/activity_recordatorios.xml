@@ -25,19 +25,7 @@
     </FrameLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/tituloRecordatorios"
-        android:id="@+id/textView2" />
 
-    <Spinner
-        android:id="@+id/cmbAcuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </Spinner>
 
     <TextView
         android:layout_width="wrap_content"
@@ -58,6 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Fecha"
 
         />
 
@@ -80,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/tituloTipo1"
+        android:text="Tipo de recordatorio"
         />
 
     <Spinner
@@ -99,14 +88,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="@string/btn_Guardar"/>
+            android:text="@string/btn_Guardar"
+            android:onClick="guardarRecordatorio"/>
 
         <Button
             android:id="@+id/btnCancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="@string/btn_Cancelar"/>
+            android:text="@string/btn_Cancelar"
+            android:onClick="cancelar"
+            />
 
     </FrameLayout>
 

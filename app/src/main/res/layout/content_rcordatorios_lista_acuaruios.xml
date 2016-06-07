@@ -10,21 +10,20 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="ec.edu.epn.aquariumchecker.views.Historiales"
-    tools:showIn="@layout/activity_historiales">
+    tools:context="ec.edu.epn.aquariumchecker.views.RcordatoriosListaAcuaruios"
+    tools:showIn="@layout/activity_rcordatorios_lista_acuaruios">
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ayuda_historiales"
+        android:text="Selecciones un recordatorio"
         android:textSize="20sp"/>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/historial_list">
+        android:id="@+id/recordatorios_list">
     </ListView>
-
 
 </LinearLayout>

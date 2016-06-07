@@ -14,7 +14,9 @@ import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
 
+import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
 import ec.edu.epn.aquariumchecker.adapters.RecordatoriosAdapter;
+import ec.edu.epn.aquariumchecker.services.AcuarioService;
 import ec.edu.epn.aquariumchecker.services.RecordatorioService;
 import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 import ec.edu.epn.aquariumchecker.vo.Recordatorio;
@@ -22,37 +24,34 @@ import ec.edu.epn.aquariumchecker.vo.Recordatorio;
 public class ListRecordatorios extends AppCompatActivity {
 
 
-
-    ListView misRecordatorios;
-
-    List<Recordatorio> recordatorios = new ArrayList<>();
+    private ListView misAcuarios;
+    private List<AcuarioVO> acuarios = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_recordatorios);
+        setContentView(R.layout.acuarios_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        MisAcuariosAdapter adapter = new MisAcuariosAdapter(this, acuarios);
+        misAcuarios = (ListView) findViewById(R.id.mis_acuarios_list);
+        misAcuarios.setAdapter(adapter);
 
-        recordatorios.add(new Recordatorio("acuarios 1","2016-02-02","1","Abonado"));
-        RecordatoriosAdapter adapter = new RecordatoriosAdapter(this,recordatorios);
-        misRecordatorios = (ListView)findViewById(R.id.recordatorios_list);
-        misRecordatorios.setAdapter(adapter);
-
-        RecordatorioService service = new RecordatorioService(getApplicationContext());
-        recordatorios.addAll(service.listRecordatorios());
-
+        AcuarioService service = new AcuarioService(getApplicationContext());
+        acuarios.addAll(service.listAcuarios());
     }
 
-    public void abrirNuevoRecordatorio(View view){
-        Intent i = new Intent(this, Recordatorios.class);
+    public void abrirAcuario(View v) {
+        int position = misAcuarios.getPositionForView((LinearLayout)v.getParent());
+        Intent i = new Intent(this, ec.edu.epn.aquariumchecker.views.RcordatoriosListaAcuaruios.class);
+        i.putExtra("acuarioSeleccionado",acuarios.get(position));
         startActivity(i);
     }
 
-    public void abrirRecordatorio(View v){
-        Intent i = new Intent(this, Recordatorios.class);
+    public void abrirNuevoAcuario(View view) {
+        Intent i = new Intent(this, NuevoAcuario.class);
         startActivity(i);
     }
 

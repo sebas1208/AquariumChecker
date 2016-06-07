@@ -177,7 +177,17 @@
             android:label="@string/title_activity_historiales"
             android:parentActivityName=".views.ListHistorial"
             android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
+        <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ec.edu.epn.aquariumchecker.views.AquariumCherckerMain" />
+        </activity>
+        <activity
+            android:name=".views.RcordatoriosListaAcuaruios"
+            android:label="@string/title_activity_rcordatorios_lista_acuaruios"
+            android:parentActivityName=".views.ListRecordatorios"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ec.edu.epn.aquariumchecker.views.AquariumCherckerMain" />
         </activity>
@@ -190,6 +200,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ec.edu.epn.aquariumchecker.views.MisPlantasAcuario" />
         </activity>
+
     </application>
 
 </manifest>

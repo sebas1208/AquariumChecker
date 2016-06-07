@@ -93,7 +93,7 @@ public class AquariumCheckerAppContract {
                 TablaHistorial.COLUMNA_PH + INTEGER_TYPE + COMMA_SEP +
                 TablaHistorial.COLUMNA_KH + INTEGER_TYPE + COMMA_SEP +
                 TablaHistorial.COLUMNA_GH + INTEGER_TYPE + COMMA_SEP +
-                TablaHistorial.COLUMNA_CO2 + INTEGER_TYPE + COMMA_SEP +
+                TablaHistorial.COLUMNA_CO2 + TEXT_TYPE + COMMA_SEP +
                 TablaHistorial.COLUMNA_OBSERVACIONES + TEXT_TYPE + COMMA_SEP +
                 TablaHistorial.COLUMNA_ILUMINACION + TEXT_TYPE + COMMA_SEP +
                 "FOREIGN KEY (ACUARIO_ID) REFERENCES ACUARIO (_ID)" + " )";
