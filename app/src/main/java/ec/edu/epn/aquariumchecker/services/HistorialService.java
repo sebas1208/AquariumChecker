@@ -28,7 +28,7 @@ public class HistorialService {
         public HistorialService() {
     }
 
-    public void crearHistorial(Historiales nuevoHistorial){
+    public long crearHistorial(Historiales nuevoHistorial){
         AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
         SQLiteDatabase db = op.getWritableDatabase();
 
@@ -40,15 +40,18 @@ public class HistorialService {
         valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_CO2,nuevoHistorial.getCo2());
         valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_ILUMINACION,nuevoHistorial.getIluminacion());
         valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_OBSERVACIONES,nuevoHistorial.getObservaciones());
+        valores.put(AquariumCheckerAppContract.TablaHistorial.ACUARIO_ID,nuevoHistorial.getAcuario());
 
 
-        db.insert(AquariumCheckerAppContract.TablaHistorial.NOMBRE_TABLA, null, valores);
+        long idinsert = db.insert(AquariumCheckerAppContract.TablaHistorial.NOMBRE_TABLA, null, valores);
         db.close();
+        return idinsert;
     }
 
-    public List<Historiales> listHistoriales(){
+    public List<Historiales> listHistoriales(AcuarioVO acuario){
         AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
         List<Historiales> l = new ArrayList<>();
+        String[] selectionValues = {String.valueOf(acuario.getId())};
 
         SQLiteDatabase db = oh.getReadableDatabase();
         String[] columnas = {AquariumCheckerAppContract.TablaHistorial.COLUMNA_FECHA,
@@ -58,15 +61,17 @@ public class HistorialService {
                 AquariumCheckerAppContract.TablaHistorial.COLUMNA_CO2,
                 AquariumCheckerAppContract.TablaHistorial.COLUMNA_ILUMINACION,
                 AquariumCheckerAppContract.TablaHistorial.COLUMNA_OBSERVACIONES,
-                AquariumCheckerAppContract.TablaHistorial._ID
+                AquariumCheckerAppContract.TablaHistorial.ACUARIO_ID,
+                AquariumCheckerAppContract.TablaHistorial._ID,
+
         };
 
 
         Cursor cur = db.query(
                 AquariumCheckerAppContract.TablaHistorial.NOMBRE_TABLA,
                 columnas,
-                null,
-                null,
+                AquariumCheckerAppContract.TablaHistorial.ACUARIO_ID + " = ?",
+                selectionValues,
                 null,
                 null,
                 null
@@ -83,11 +88,12 @@ public class HistorialService {
                     cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial._ID)));
             l.add(historial);
         }
+        db.close();
         return l;
     }
 
     public void editHistorial(Historiales historialEditar){
-        AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
+       /* AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
         SQLiteDatabase db = op.getWritableDatabase();
         String[] id = {historialEditar.getAcuario()};
 
@@ -101,7 +107,7 @@ public class HistorialService {
         valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_OBSERVACIONES,historialEditar.getObservaciones());
         db.update(AquariumCheckerAppContract.TablaHistorial.NOMBRE_TABLA,valores,
                 AquariumCheckerAppContract.TablaHistorial._ID + " = ?",id);
-        db.close();
+        db.close();*/
     }
 
     public Context getAppContext() {
