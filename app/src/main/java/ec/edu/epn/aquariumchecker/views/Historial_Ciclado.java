@@ -29,10 +29,10 @@ public class Historial_Ciclado extends AppCompatActivity implements View.OnClick
 
     private Spinner cmbCo2;
     private Button btnCalendario;
-    private int anio,mes,dia,hora,minuto;
+    private int anio, mes, dia, hora, minuto;
     private Spinner cmbIluminacion;
-    private TextView txtFecha,txtHora;
-    private EditText txtph,txtgh,txtkh,txtobs;
+    private TextView txtFecha, txtHora;
+    private EditText txtph, txtgh, txtkh, txtobs;
 
     private AcuarioVO acuarioSeleccionado;
     private ec.edu.epn.aquariumchecker.vo.Historiales nuevoHistorial = new ec.edu.epn.aquariumchecker.vo.Historiales();
@@ -40,43 +40,48 @@ public class Historial_Ciclado extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initComponents();
+        obtenerAcuarioSeleccionado();
+    }
+
+    private void initComponents(){
         setContentView(R.layout.activity_historial_ciclado);
         btnCalendario = (Button) findViewById(R.id.btnCalendario);
         txtFecha = (TextView) findViewById(R.id.txtFechaView);
-        txtph =(EditText) findViewById(R.id.txtph);
-        txtgh =(EditText) findViewById(R.id.txtghact);
-        txtkh =(EditText) findViewById(R.id.txtkh);
-        txtobs=(EditText) findViewById(R.id.txtobservaciones);
-        cmbCo2 = (Spinner)findViewById(R.id.cmbCo2);
-        cmbIluminacion = (Spinner)findViewById(R.id.cmbIluminacion);
+        txtph = (EditText) findViewById(R.id.txtph);
+        txtgh = (EditText) findViewById(R.id.txtghact);
+        txtkh = (EditText) findViewById(R.id.txtkh);
+        txtobs = (EditText) findViewById(R.id.txtobservaciones);
+        cmbCo2 = (Spinner) findViewById(R.id.cmbCo2);
+        cmbIluminacion = (Spinner) findViewById(R.id.cmbIluminacion);
 
         //combo de co2
-        String[]co2= {"Si","No"};
+        String[] co2 = {"Si", "No"};
         ArrayAdapter<String> adaptadorCo2 =
-                new ArrayAdapter<String>(this,
-                        android.R.layout.simple_spinner_item,
+                new ArrayAdapter<>(this,
+                        android.R.layout.simple_spinner_dropdown_item,
                         co2);
         cmbCo2.setAdapter(adaptadorCo2);
         btnCalendario.setOnClickListener(this);
 
 
         //combo de iluminacion
-        String[]iluminacion= {"Alta","Media","Baja"};
+        String[] iluminacion = {"Alta", "Media", "Baja"};
         ArrayAdapter<String> adaptadorIluminacion =
                 new ArrayAdapter<String>(this,
-                        android.R.layout.simple_spinner_item,
+                        android.R.layout.simple_spinner_dropdown_item,
                         iluminacion);
 
         cmbIluminacion.setAdapter(adaptadorIluminacion);
-        obtenerAcuarioSeleccionado();
-
     }
-    private void obtenerAcuarioSeleccionado(){
-        acuarioSeleccionado = (AcuarioVO)getIntent().getSerializableExtra("acuarioSeleccionado");
-        if(acuarioSeleccionado == null){
+
+    private void obtenerAcuarioSeleccionado() {
+        acuarioSeleccionado = (AcuarioVO) getIntent().getSerializableExtra("acuarioSeleccionado");
+        if (acuarioSeleccionado == null) {
             acuarioSeleccionado = new AcuarioVO();
         }
     }
+
     public void onClick(View v) {
 
         if (v == btnCalendario) {
@@ -99,23 +104,25 @@ public class Historial_Ciclado extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public void guardarHistorial(View v){
-        nuevoHistorial.setFecha(txtFecha.getText().toString());
-        nuevoHistorial.setPh(txtph.getText().toString());
-        nuevoHistorial.setGh(txtgh.getText().toString());
-        nuevoHistorial.setKh(txtkh.getText().toString());
+    public void guardarHistorial(View v) {
+        nuevoHistorial.setFecha(new Date());
+        nuevoHistorial.setPh(Integer.valueOf(txtph.getText().toString()));
+        nuevoHistorial.setGh(Integer.valueOf(txtgh.getText().toString()));
+        nuevoHistorial.setKh(Integer.valueOf(txtkh.getText().toString()));
         nuevoHistorial.setCo2(cmbCo2.getSelectedItem().toString());
         nuevoHistorial.setIluminacion(cmbIluminacion.getSelectedItem().toString());
         nuevoHistorial.setObservaciones(txtobs.getText().toString());
 
-        nuevoHistorial.setAcuario(String.valueOf(acuarioSeleccionado.getId()));
+        nuevoHistorial.setIdAcuario(acuarioSeleccionado.getId());
 
         HistorialService historialService = new HistorialService(getApplicationContext());
         historialService.crearHistorial(nuevoHistorial);
-        Toast.makeText(Historial_Ciclado.this, "Datos almacenados",Toast.LENGTH_LONG).show();
+
+        Intent i = new Intent(this, ListHistorial.class);
+        startActivity(i);
     }
 
-    public void cancelar(View view){
+    public void cancelar(View view) {
         Intent i = new Intent(this, ListHistorial.class);
         startActivity(i);
     }

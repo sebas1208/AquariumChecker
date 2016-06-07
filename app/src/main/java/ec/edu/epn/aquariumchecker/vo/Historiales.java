@@ -1,62 +1,81 @@
 package ec.edu.epn.aquariumchecker.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by angel on 6/5/2016.
  */
 public class Historiales implements Serializable {
-    private String acuario,fecha,ph,gh,kh,co2,iluminacion,observaciones;
-    public Historiales(String acuario, String fecha, String ph, String gh, String kh, String Co2, String Iluminacion, String observaciones) {
-        this.acuario=acuario;
-        this.fecha=fecha;
-        this.ph=ph;
-        this.gh=gh;
-        this.kh=kh;
-        this.co2=Co2;
-        this.iluminacion=Iluminacion;
-        this.observaciones=observaciones;
+    private int id;
+    private int idAcuario;
+    private Date fecha;
+    private int gh;
+    private int ph;
+    private int kh;
+    private String co2;
+    private String iluminacion;
+    private String observaciones;
 
+    public Historiales(int idAcuario, Date fecha, int gh, int ph, int kh, String co2, String iluminacion, String observaciones) {
+        this.idAcuario = idAcuario;
+        this.fecha = fecha;
+        this.gh = gh;
+        this.ph = ph;
+        this.kh = kh;
+        this.co2 = co2;
+        this.iluminacion = iluminacion;
+        this.observaciones = observaciones;
     }
 
-    public Historiales(){}
-    public String getAcuario() {
-        return acuario;
+    public Historiales() {
     }
 
-    public void setAcuario(String acuario) {
-        this.acuario = acuario;
+    public int getIdAcuario() {
+        return idAcuario;
     }
 
-    public String getFecha() {
+    public void setIdAcuario(int idAcuario) {
+        this.idAcuario = idAcuario;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    public String getPh() {
-        return ph;
-    }
-
-    public void setPh(String ph) {
-        this.ph = ph;
-    }
-
-    public String getGh() {
+    public int getGh() {
         return gh;
     }
 
-    public void setGh(String gh) {
+    public void setGh(int gh) {
         this.gh = gh;
     }
 
-    public String getKh() {
+    public int getPh() {
+        return ph;
+    }
+
+    public void setPh(int ph) {
+        this.ph = ph;
+    }
+
+    public int getKh() {
         return kh;
     }
 
-    public void setKh(String kh) {
+    public void setKh(int kh) {
         this.kh = kh;
     }
 

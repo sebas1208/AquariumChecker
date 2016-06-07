@@ -93,17 +93,17 @@
 
     <string name="positivo">Aceptar</string>
     <string name="negativo">Cancelar</string>
-    <string name="title_activity_list_recordatorios">ListRecordatorios</string>
-    <string name="title_activity_list_historial">ListHistorial</string>
+    <string name="title_activity_list_recordatorios">Recordatorios</string>
+    <string name="title_activity_list_historial">Historial</string>
 
     <string name="btncalendario">Ver calendario</string>
     <string name="btnhora">Ver hora</string>
-    <string name="title_activity_mis_plantas_acuario">MisPlantasAcuario</string>
-    <string name="title_activity_nueva_galeria">NuevaGaleria</string>
+    <string name="title_activity_mis_plantas_acuario">Mis Plantas</string>
+    <string name="title_activity_nueva_galeria">Nueva Galeria</string>
     <string name="observaciones_galeria">Observaciones</string>
     <string name="tomar_foto">Tomar Foto</string>
     <string name="guardar_galeria">Guardar</string>
-    <string name="title_activity_nuevo_pez">NuevoPez</string>
+    <string name="title_activity_nuevo_pez">Nuevo Pez</string>
     <string name="foto">Tomar Foto</string>
     <string name="title_activity_ayuda">Ayuda</string>
     <string name="ayuda">Aquarium Checker es una aplicación para mantener tus acuarios al día.\n
@@ -115,6 +115,11 @@ Podras crear acuarios, tomar una galeria de fotos de tu acuario, agregar peces y
     <string name="texto_ayuda_galeria">Selecciones una galeria para ver su contenido o en el icono + para agregar una nueva</string>
     <string name="ayuda_peces">Puede eliminar un item o crear uno nuevo</string>
     <string name="title_activity_historiales">Historiales</string>
-    <string name="title_activity_rcordatorios_lista_acuaruios">RcordatoriosListaAcuaruios</string>
+<<<<<<< HEAD
+    <string name="title_activity_nuevo_planta">Nuevo Planta</string>
+=======
+    <string name="ayuda_historiales">Seleccionea un historial para editarlo</string>
+    <string name="title_activity_rcordatorios_lista_acuaruios">Recordatorios</string>
+>>>>>>> aa67e13f9a2126f04b3a17682e98eadd95729d7e
 
 </resources>

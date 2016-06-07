@@ -5,7 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
@@ -31,16 +34,18 @@ public class HistorialService {
     public long crearHistorial(Historiales nuevoHistorial){
         AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
         SQLiteDatabase db = op.getWritableDatabase();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
 
         ContentValues valores = new ContentValues();
-        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_FECHA,nuevoHistorial.getFecha());
+        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_FECHA,dateFormat.format(date));
         valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_PH,nuevoHistorial.getPh());
         valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_KH,nuevoHistorial.getKh());
         valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_GH,nuevoHistorial.getGh());
         valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_CO2,nuevoHistorial.getCo2());
         valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_ILUMINACION,nuevoHistorial.getIluminacion());
         valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_OBSERVACIONES,nuevoHistorial.getObservaciones());
-        valores.put(AquariumCheckerAppContract.TablaHistorial.ACUARIO_ID,nuevoHistorial.getAcuario());
+        valores.put(AquariumCheckerAppContract.TablaHistorial.ACUARIO_ID,nuevoHistorial.getIdAcuario());
 
 
         long idinsert = db.insert(AquariumCheckerAppContract.TablaHistorial.NOMBRE_TABLA, null, valores);
@@ -48,7 +53,7 @@ public class HistorialService {
         return idinsert;
     }
 
-    public List<Historiales> listHistoriales(AcuarioVO acuario){
+    public List<Historiales> listHistorialesPorAcuario(AcuarioVO acuario){
         AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
         List<Historiales> l = new ArrayList<>();
         String[] selectionValues = {String.valueOf(acuario.getId())};
@@ -77,15 +82,23 @@ public class HistorialService {
                 null
         );
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         while (cur.moveToNext()) {
-            Historiales historial = new Historiales(cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_FECHA)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_PH)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_KH)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_GH)),
+            Date date = null;
+            try {
+                date = sdf.parse(cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaGaleria.COLUMNA_FECHA)));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Historiales historial = new Historiales(
+                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.ACUARIO_ID)),
+                    date,
+                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_GH)),
+                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_PH)),
+                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_PH)),
                     cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_CO2)),
                     cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_ILUMINACION)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_OBSERVACIONES)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial._ID)));
+                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_OBSERVACIONES)));
             l.add(historial);
         }
         db.close();
