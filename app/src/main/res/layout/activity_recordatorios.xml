@@ -46,12 +46,27 @@
         android:text="@string/tituloCalendario"
         />
 
-    <CalendarView
+    <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/calendarView"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.11" />
+        android:text="@string/btncalendario"
+        android:id="@+id/btnCalendario" />
+
+    <TextView
+        android:id="@+id/txtFechaView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Fecha"
+        />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnhora"
+        android:id="@+id/btnhora" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,12 +75,6 @@
         android:text="@string/tituloHora"
         />
 
-    <Spinner
-        android:id="@+id/cmbHora"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </Spinner>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
