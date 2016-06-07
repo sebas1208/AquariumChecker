@@ -73,6 +73,9 @@ public class NuevoPez extends AppCompatActivity {
 
         PecesService pecesService = new PecesService(getApplicationContext());
         pecesService.createPez(pez);
+
+        Intent i = new Intent(this, MisPecesAcuarios.class);
+        startActivity(i);
     }
 
     public void tomarFotoPez(View view){

@@ -13,6 +13,11 @@
     tools:context=".views.GaleriaAcuario"
     tools:showIn="@layout/galeria_activity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/texto_ayuda_galeria"
+        android:textSize="20sp"/>
 
     <ListView
         android:layout_width="match_parent"

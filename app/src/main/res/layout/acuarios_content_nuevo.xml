@@ -124,7 +124,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/volumen_editText"/>
+            android:id="@+id/volumen_editText"
+            android:enabled="false"/>
 
     </LinearLayout>
 
@@ -148,7 +149,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_Cancelar"
-            android:layout_weight="0.14" />
+            android:layout_weight="0.14"
+            android:onClick="cancelar"/>
 
     </LinearLayout>
 

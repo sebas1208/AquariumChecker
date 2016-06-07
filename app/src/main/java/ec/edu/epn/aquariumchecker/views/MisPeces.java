@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,8 +19,9 @@ import ec.edu.epn.aquariumchecker.vo.Peces;
 
 public class MisPeces extends AppCompatActivity {
 
-    ListView listapeces;
-    List<Peces> peces = new ArrayList<>();
+    private ListView listapeces;
+    private List<Peces> peces = new ArrayList<>();
+    private PecesAdapter adapter;
 
     private AcuarioVO accuarioSeleccionado;
 
@@ -37,7 +39,7 @@ public class MisPeces extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        PecesAdapter adapter = new PecesAdapter(this, peces);
+        adapter = new PecesAdapter(this, peces);
         listapeces = (ListView) findViewById(R.id.mis_peces_list);
         listapeces.setAdapter(adapter);
     }
@@ -51,12 +53,20 @@ public class MisPeces extends AppCompatActivity {
 
     private void obtenerListaPeces(){
         PecesService pecesService = new PecesService(getApplicationContext());
-        peces.addAll(pecesService.listaPeces());
+        peces.addAll(pecesService.listaPecesPorAcuario(accuarioSeleccionado));
     }
 
     public void abrirPez(View v) {
         Intent i = new Intent(this, NuevoPez.class);
         i.putExtra("acuarioSeleccionado", accuarioSeleccionado);
         startActivity(i);
+    }
+
+    public void eliminar(View view){
+        int position = listapeces.getPositionForView((LinearLayout)view.getParent());
+        PecesService service = new PecesService(getApplicationContext());
+        service.removePeces(peces.get(position));
+        peces.remove(position);
+        adapter.notifyDataSetChanged();
     }
 }

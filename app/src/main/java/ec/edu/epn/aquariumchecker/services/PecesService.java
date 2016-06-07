@@ -43,6 +43,7 @@ public class PecesService {
         valores.put(AquariumCheckerAppContract.TablaPeces.COLUMNA_CANTIDAD,pez.getCantidad());
         valores.put(AquariumCheckerAppContract.TablaPeces.COLUMNA_DESCRIPCION,pez.getDescripcion());
         valores.put(AquariumCheckerAppContract.TablaPeces.COLUMNA_FOTO,pez.getFotoURL());
+        valores.put(AquariumCheckerAppContract.TablaPeces.ACUARIO_ID,pez.getAcuario_id());
         db.insert(AquariumCheckerAppContract.TablaPeces.NOMBRE_TABLA, null, valores);
         db.close();
     }
@@ -121,9 +122,16 @@ public class PecesService {
         return peces;
     }
 
-    public boolean removeGaleria(){
+    public boolean removePeces(Peces peces){
+        AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
+        SQLiteDatabase db = op.getWritableDatabase();
+        String[] id = { Integer.toString(peces.getId())};
 
-        return false;
+        db.delete(AquariumCheckerAppContract.TablaPeces.NOMBRE_TABLA,
+                AquariumCheckerAppContract.TablaPeces._ID + " = ?",
+                id);
+        db.close();
+        return true ;
     }
 
     public Context getAppContext() {

@@ -1,5 +1,6 @@
 package ec.edu.epn.aquariumchecker.views;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.support.v4.app.DialogFragment;
+import android.widget.Toast;
 
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.services.AcuarioService;
@@ -123,9 +125,21 @@ public class NuevoAcuario extends AppCompatActivity implements
         nuevoAcuario.setTipo_agua(cmbtiposAgua.getSelectedItem().toString());
         nuevoAcuario.setForma(cmbtiposForma.getSelectedItem().toString());
 
+        if(nuevoAcuario.camposValidos()){
+            AcuarioService service = new AcuarioService(getApplicationContext());
+            service.crearAcuario(nuevoAcuario);
+            Intent i = new Intent(this, MisAcuarios.class);
+            startActivity(i);
+        }else{
+            Toast toast = Toast.makeText(getApplicationContext(),"Llene todos los campos", Toast.LENGTH_SHORT);
+            toast.show();
+        }
 
-        AcuarioService service = new AcuarioService(getApplicationContext());
-        service.crearAcuario(nuevoAcuario);
+    }
+
+    public void cancelar(View view){
+        Intent i = new Intent(this, MisAcuarios.class);
+        startActivity(i);
     }
 
     @Override
