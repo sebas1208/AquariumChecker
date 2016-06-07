@@ -133,9 +133,16 @@ public class GaleriaService {
         return l;
     }
 
-    public boolean removeGaleria(){
+    public boolean removeGaleria(Galeria galeria){
+        AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
+        SQLiteDatabase db = op.getWritableDatabase();
+        String[] id = {String.valueOf(galeria.getId())};
 
-        return false;
+        db.delete(AquariumCheckerAppContract.TablaGaleria.NOMBRE_TABLA,
+                AquariumCheckerAppContract.TablaGaleria._ID + " = ?",
+                id);
+        db.close();
+        return true;
     }
 
     public Context getAppContext() {
