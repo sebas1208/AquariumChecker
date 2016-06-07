@@ -8,9 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import ec.edu.epn.aquariumchecker.R;
+import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
+import ec.edu.epn.aquariumchecker.vo.Peces;
 
 public class NuevoPez extends AppCompatActivity {
 
+    Peces pez;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +21,16 @@ public class NuevoPez extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getAcuarioEdit();
+
+
+}
+
+    private void getAcuarioEdit(){
+        pez = (Peces)getIntent().getSerializableExtra("peces");
+        if(pez == null){
+            pez = new Peces();
+        }
     }
 
 }
