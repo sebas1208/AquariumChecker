@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Aquarium Checker</string>
-    <string name="descripcion_mis_acuarios">%1$s (%2$f Litros)</string>
+    <string name="descripcion_mis_acuarios">%1$s (%2$s Litros)</string>
     <string-array name="tipoAgua">
         <item>Dulce</item>
         <item>Salada</item>
@@ -40,7 +40,7 @@
     <string name="VolumenEdit">Volumen</string>
     <string name="btn_GuardarEdit">Guardar</string>
     <string name="btn_CancelarEdit">Cancelar</string>
-    <string name="agregar_acuarios_descripcion">Seleccione un acuario para editarlo o en el icono + para agregar uno nuevo</string>
+    <string name="agregar_acuarios_descripcion">Seleccione un acuario o en el icono + para agregar uno nuevo</string>
 
     <string name="agregar_recordatorio_descripcion">Seleccione un recordatorio para editarlo o en el icono + para agregar uno nuevo</string>
     <string name="agregar_historial_descripcion">Seleccione un historial para editarlo o en el icono + para agregar uno nuevo</string>
@@ -104,5 +104,15 @@
     <string name="tomar_foto">Tomar Foto</string>
     <string name="guardar_galeria">Guardar</string>
     <string name="title_activity_nuevo_pez">NuevoPez</string>
+    <string name="foto">Tomar Foto</string>
+    <string name="title_activity_ayuda">Ayuda</string>
+    <string name="ayuda">Aquarium Checker es una aplicación para mantener tus acuarios al día.\n
+La pantalla principal te muestra los menus disponibles.
+Al hacer clic en uno de ellos se abrirá una pantalla para escojer un acuario.
+Si no tienes ningun acuario podras crear uno desde esa misma pantalla.\n
+Una vez escogido el acuario se te abrira una pantalla dependiendo el Menu.\n
+Podras crear acuarios, tomar una galeria de fotos de tu acuario, agregar peces y plantas, configurar recordatorios e historiales</string>
+    <string name="texto_ayuda_galeria">Selecciones una galeria para ver su contenido o en el icono + para agregar una nueva</string>
+    <string name="ayuda_peces">Puede eliminar un item o crear uno nuevo</string>
 
 </resources>

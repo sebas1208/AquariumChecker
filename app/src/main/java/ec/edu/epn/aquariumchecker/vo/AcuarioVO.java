@@ -1,6 +1,7 @@
 package ec.edu.epn.aquariumchecker.vo;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Created by natyd on 5/6/2016.
@@ -48,6 +49,13 @@ public class AcuarioVO implements Serializable{
         this.alto = 0.0;
         this.ancho = 0.0;
         this.profundidad_rectangular = 0.0;
+    }
+
+    public boolean camposValidos(){
+        return alto != null && ancho !=null && profundidad_rectangular != null &&
+                profundidad_cilindrica != null && diametro != null &&
+                nombre != null && !Objects.equals(nombre, "") && tipo_agua != null && !Objects.equals(tipo_agua, "") &&
+                forma != null && !Objects.equals(forma, "") && volumen != null;
     }
 
     public String obtenerMedidasRectangularesString(){

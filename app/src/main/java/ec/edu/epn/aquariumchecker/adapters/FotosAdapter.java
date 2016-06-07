@@ -13,47 +13,35 @@ import android.widget.TextView;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.vo.Peces;
+import ec.edu.epn.aquariumchecker.vo.Foto;
 
 /**
- * Created by sebastian on 05/06/16.
+ * Created by sebas on 7/6/2016.
  */
-public class PecesAdapter<T> extends ArrayAdapter<T> {
+public class FotosAdapter<T> extends ArrayAdapter<T> {
+    List<Foto> datos;
 
-    List<Peces> datos;
+    public FotosAdapter(Context context, List<T> objects){
+        super(context, 0,objects);
 
-    public PecesAdapter(Context context, List<T> objects) {
-        super(context, 0, objects);
-
-        datos = (List<Peces>) objects;
+        datos = (List<Foto>) objects;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View item = convertView;
-        if (item == null) {
+        if(item == null){
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            item = inflater.inflate(R.layout.plantas_peces_list_item, null);
+            item = inflater.inflate(R.layout.foto_item_list,null);
         }
-        TextView lblNombre = (TextView) item.findViewById(R.id.nombre_peces);
-        lblNombre.setText(datos.get(position).getNombre());
-
-        TextView lblCantidad = (TextView) item.findViewById(R.id.cantidad_peces);
-        lblCantidad.setText(String.format(getContext().getString(R.string.cantidad_peces_plantas),
-                datos.get(position).getCantidad()));
-
-        TextView lblDescripcion = (TextView) item.findViewById(R.id.descripcion_peces);
-        lblDescripcion.setText(datos.get(position).getDescripcion());
-
-        ImageView fotoPez = (ImageView) item.findViewById(R.id.foto_pez_list);
-
+        ImageView foto = (ImageView) item.findViewById(R.id.foto_acuario);
         int targetW = 150;
         int targetH = 150;
 
         // Get the dimensions of the bitmap
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         bmOptions.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(datos.get(position).getFotoURL(), bmOptions);
+        BitmapFactory.decodeFile(datos.get(position).getPath(), bmOptions);
         int photoW = bmOptions.outWidth;
         int photoH = bmOptions.outHeight;
 
@@ -65,8 +53,9 @@ public class PecesAdapter<T> extends ArrayAdapter<T> {
         bmOptions.inSampleSize = scaleFactor;
         bmOptions.inPurgeable = true;
 
-        Bitmap bitmap = BitmapFactory.decodeFile(datos.get(position).getFotoURL(), bmOptions);
-        fotoPez.setImageBitmap(bitmap);
+        Bitmap bitmap = BitmapFactory.decodeFile(datos.get(position).getPath(), bmOptions);
+        datos.get(position).setFoto(bitmap);
+        foto.setImageBitmap(bitmap);
 
         return item;
     }
