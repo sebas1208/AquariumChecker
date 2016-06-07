@@ -132,6 +132,8 @@ public class Recordatorios extends AppCompatActivity implements View.OnClickList
         recordatorioService.crearRecordatorio(nuevoRecordatorio);
         Toast.makeText(Recordatorios.this, "Datos almacenados",Toast.LENGTH_LONG).show();
 
+        Intent i = new Intent(this, ListRecordatorios.class);
+        startActivity(i);
     }
 
     public void cancelar(View view){
