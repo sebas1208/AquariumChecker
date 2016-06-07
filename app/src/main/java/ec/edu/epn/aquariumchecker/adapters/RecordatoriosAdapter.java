@@ -36,11 +36,9 @@ public class RecordatoriosAdapter<T> extends ArrayAdapter<T> {
             item = inflater.inflate(R.layout.recordatorio_list_item,null);
         }
         TextView lblNombre = (TextView) item.findViewById(R.id.mis_recordatorios_nombre_recordatorio);
-        lblNombre.setText(datos.get(position).getAcuario()+": ");
+        lblNombre.setText(datos.get(position).getTipoCambio()+": ");
         TextView lblDescripcion = (TextView) item.findViewById(R.id.mis_recordatorios_descripcion);
         lblDescripcion.setText("Fecha: "+datos.get(position).getFecha()+",Hora: "+ datos.get(position).getHora());
-        TextView lblDescripcion2 = (TextView) item.findViewById(R.id.mis_recordatorios_descripcion2);
-        lblDescripcion.setText("Tipo de recordatorio: "+datos.get(position).getTipoCambio());
 
         return item;
     }

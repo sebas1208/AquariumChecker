@@ -25,19 +25,7 @@
     </FrameLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/tituloRecordatorios"
-        android:id="@+id/textView2" />
 
-    <Spinner
-        android:id="@+id/cmbAcuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </Spinner>
 
     <TextView
         android:layout_width="wrap_content"
@@ -58,6 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Fecha"
 
         />
 
