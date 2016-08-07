@@ -74,7 +74,7 @@ public class EditarAcuario extends AppCompatActivity implements
     }
 
     private void getAcuarioEdit(){
-        acuarioEditar = (Acuario)getIntent().getSerializableExtra("acuarioEditar");
+        acuarioEditar = (Acuario)getIntent().getSerializableExtra("varAcuario");
         if(acuarioEditar == null){
             acuarioEditar = new Acuario();
         }

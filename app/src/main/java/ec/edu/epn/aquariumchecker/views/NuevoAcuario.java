@@ -1,18 +1,22 @@
 package ec.edu.epn.aquariumchecker.views;
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.support.v4.app.DialogFragment;
 import android.widget.Toast;
 
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.services.AcuarioService;
 import ec.edu.epn.aquariumchecker.views.dialogs.MedidasCilindricasDialog;
 import ec.edu.epn.aquariumchecker.views.dialogs.MedidasRectangularesDialog;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
@@ -126,10 +130,8 @@ public class NuevoAcuario extends AppCompatActivity implements
         nuevoAcuario.setForma(cmbtiposForma.getSelectedItem().toString());
 
         if(nuevoAcuario.camposValidos()){
-            AcuarioService service = new AcuarioService(getApplicationContext());
-            service.crearAcuario(nuevoAcuario);
-            Intent i = new Intent(this, MisAcuarios.class);
-            startActivity(i);
+            CrearAcuario crearAcuario = new CrearAcuario();
+            crearAcuario.execute(nuevoAcuario);
         }else{
             Toast toast = Toast.makeText(getApplicationContext(),"Llene todos los campos", Toast.LENGTH_SHORT);
             toast.show();
@@ -137,7 +139,36 @@ public class NuevoAcuario extends AppCompatActivity implements
 
     }
 
-    public void cancelar(View view){
+    public class CrearAcuario extends AsyncTask<Acuario, Void, Void> {
+        @Override
+        protected Void doInBackground(Acuario... params) {
+            Log.v("buscar", "2");
+            Acuario acuario = params [0];
+            Acuario acuario1 = new Acuario();
+            /*libros.add(new Libro(1,"Libro1","autor1",10));
+            libros.add(new Libro(2,"Libro2","autor2",10));
+            libros.add(new Libro(3,"Libro3","autor3",10));*/
+            final String url = "http://192.168.135.1:8080/AcuariosRest/acuario/"+""+acuario;
+            Log.v("buscar", "3");
+
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            Acuario acuario2 = restTemplate.postForObject(url,acuario, Acuario.class);
+            acuario1=acuario2;
+            Log.v("buscar", "4");
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Intent i = new Intent(NuevoAcuario.this, MisAcuarios.class);
+            startActivity(i);
+        }
+    }
+
+        public void cancelar(View view){
         Intent i = new Intent(this, MisAcuarios.class);
         startActivity(i);
     }

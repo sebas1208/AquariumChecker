@@ -32,6 +32,7 @@ public class AquariumCherckerMain extends AppCompatActivity                     
         acuarios.add(new Acuario("Acuario_1","tipo"));
 
         acuarioRecyvlerView.setAdapter(new AcuariosRvAdapter(acuarios));
+
     }
 
 
