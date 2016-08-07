@@ -130,8 +130,10 @@ public class NuevoAcuario extends AppCompatActivity implements
         nuevoAcuario.setForma(cmbtiposForma.getSelectedItem().toString());
 
         if(nuevoAcuario.camposValidos()){
-            CrearAcuario crearAcuario = new CrearAcuario();
+            Crear crearAcuario = new Crear();
             crearAcuario.execute(nuevoAcuario);
+            Intent i = new Intent(this, MisAcuarios.class);
+            startActivity(i);
         }else{
             Toast toast = Toast.makeText(getApplicationContext(),"Llene todos los campos", Toast.LENGTH_SHORT);
             toast.show();
@@ -139,24 +141,19 @@ public class NuevoAcuario extends AppCompatActivity implements
 
     }
 
-    public class CrearAcuario extends AsyncTask<Acuario, Void, Void> {
+    public class Crear extends AsyncTask<Acuario, Void, Void> {
         @Override
         protected Void doInBackground(Acuario... params) {
             Log.v("buscar", "2");
             Acuario acuario = params [0];
-            Acuario acuario1 = new Acuario();
-            /*libros.add(new Libro(1,"Libro1","autor1",10));
-            libros.add(new Libro(2,"Libro2","autor2",10));
-            libros.add(new Libro(3,"Libro3","autor3",10));*/
-            final String url = "http://192.168.135.1:8080/AcuariosRest/acuario/"+""+acuario;
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/acuario";
             Log.v("buscar", "3");
 
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(
                     new MappingJackson2HttpMessageConverter());
-            Acuario acuario2 = restTemplate.postForObject(url,acuario, Acuario.class);
-            acuario1=acuario2;
-            Log.v("buscar", "4");
+            restTemplate.postForObject(url, acuario, Acuario.class);
+            Log.v("Acuario Creado", "mensaje");
             return null;
         }
 

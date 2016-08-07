@@ -2,20 +2,24 @@ package ec.edu.epn.aquariumchecker.views;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.Objects;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.services.AcuarioService;
 import ec.edu.epn.aquariumchecker.views.dialogs.MedidasCilindricasDialog;
 import ec.edu.epn.aquariumchecker.views.dialogs.MedidasRectangularesDialog;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
@@ -164,8 +168,8 @@ public class EditarAcuario extends AppCompatActivity implements
         acuarioEditar.setForma(cmbtiposForma.getSelectedItem().toString());
 
         if(acuarioEditar.camposValidos()){
-            AcuarioService service = new AcuarioService(getApplicationContext());
-            service.editarAcuario(acuarioEditar);
+            Editar editar = new Editar();
+            editar.execute(acuarioEditar);
             Intent i = new Intent(this, MisAcuarios.class);
             startActivity(i);
         }else{
@@ -173,6 +177,33 @@ public class EditarAcuario extends AppCompatActivity implements
             toast.show();
         }
     }
+
+    public class Editar extends AsyncTask<Acuario, Void, Void> {
+        @Override
+        protected Void doInBackground(Acuario... params) {
+            Log.v("buscar", "2");
+            Acuario acuario = params [0];
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/acuario";
+            Log.v("buscar", "3");
+
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            restTemplate.put(url,acuario);
+            Log.v("Acuario editado", "1");
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Intent i = new Intent(EditarAcuario.this, MisAcuarios.class);
+            startActivity(i);
+        }
+    }
+
+
+
 
     public void cancelar(View view){
         Intent i = new Intent(this, MisAcuarios.class);
