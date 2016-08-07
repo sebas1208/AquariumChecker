@@ -28,18 +28,19 @@ public class MisAcuariosAdapter<T> extends ArrayAdapter<T> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View item = convertView;
-        if(item == null){
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            item = inflater.inflate(R.layout.acuarios_list_item,null);
-        }
-        TextView lblNombre = (TextView) item.findViewById(R.id.mis_acuarios_nombre_acuario);
-        lblNombre.setText(datos.get(position).getNombre());
-
-        TextView lblDescripcion = (TextView) item.findViewById(R.id.mis_acuarios_descripcion);
-        lblDescripcion.setText(String.format(getContext().getString(R.string.descripcion_mis_acuarios)
-                ,datos.get(position).getTipo_agua(),datos.get(position).getVolumen() + ""));
-
-        return item;
+//        View item = convertView;
+//        if(item == null){
+//            LayoutInflater inflater = LayoutInflater.from(getContext());
+//            item = inflater.inflate(R.layout.acuarios_list_item,null);
+//        }
+//        TextView lblNombre = (TextView) item.findViewById(R.id.mis_acuarios_nombre_acuario);
+//        lblNombre.setText(datos.get(position).getNombre());
+//
+//        TextView lblDescripcion = (TextView) item.findViewById(R.id.mis_acuarios_descripcion);
+//        lblDescripcion.setText(String.format(getContext().getString(R.string.descripcion_mis_acuarios)
+//                ,datos.get(position).getTipo_agua(),datos.get(position).getVolumen() + ""));
+//
+//        return item;
+        return null;
     }
 }

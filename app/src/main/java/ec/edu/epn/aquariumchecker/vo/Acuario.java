@@ -22,6 +22,11 @@ public class Acuario implements Serializable{
     public Acuario() {
     }
 
+    public Acuario(String nombre, String forma) {
+        this.nombre = nombre;
+        this.forma = forma;
+    }
+
     public Acuario(String nombre, String tipo_agua, String forma, double alto, double ancho, double profundidad_rectangular, double diametro, double profundidad_cilindrica, double volumen, int id) {
         this.nombre = nombre;
         this.tipo_agua = tipo_agua;

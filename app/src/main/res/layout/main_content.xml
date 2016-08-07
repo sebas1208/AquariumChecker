@@ -13,54 +13,11 @@
     tools:context=".views.AquariumCherckerMain"
     tools:showIn="@layout/main_activity">
 
-    <Button
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_Resumen"
-        android:text="@string/btnMisAcuarios"
-        android:onClick="abrirMisAcuarios"/>
+        android:layout_height="match_parent"
+        android:id="@+id/acuario_recycler_view">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_Galeria"
-        android:text="@string/btnGaleria"
-        android:onClick="abrirGaleria"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_peces"
-        android:text="@string/btnPeces"
-        android:onClick="abrirPeces"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_plantas"
-        android:text="@string/btnPlantas"
-        android:onClick="abrirPlantas"/>
-
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_recordatorio"
-        android:text="@string/btnRecordatorio"
-        android:onClick="abrirRecordatorio"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_historial"
-        android:text="@string/btnHistorial"
-        android:onClick="abrirHistorial"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_ayuda"
-        android:text="@string/btnAyuda"
-        android:onClick="abrirAyuda"/>
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
