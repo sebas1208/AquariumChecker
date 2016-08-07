@@ -13,84 +13,73 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author sebastian
  */
-public class Acuario implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    private Integer idAcuario;
-
+public class Acuario implements Serializable{
+	private int id;
     private String nombre;
-
-    private String tipoagua;
-
+    private String tipo_agua;
     private String forma;
-    
     private Double alto;
-    
     private Double ancho;
-    
-    private Double profMedidas;
-    
+    private Double profundidad_rectangular;
     private Double diametro;
-    
-    private Double profRedondo;
-    
+    private Double profundidad_cilindrica;
     private Double volumen;
     
-    private List<Plantas> plantasList;
-    
-    private List<Peces> pecesList;
-    
-    private List<Recordatorio> recordatorioList;
-    
-    private List<Historial> historialList;
-    
-    private List<Galeria> galeriaList;
 
     public Acuario() {
     }
 
-    public Acuario(String nombre, String tipoagua, String forma, Double alto, Double ancho, Double profMedidas, Double diametro, Double profRedondo, Double volumen) {
+    public Acuario(String nombre, String tipo_agua, String forma, double alto, double ancho, double profundidad_rectangular, double diametro, double profundidad_cilindrica, double volumen, int id) {
         this.nombre = nombre;
-        this.tipoagua = tipoagua;
+        this.tipo_agua = tipo_agua;
         this.forma = forma;
         this.alto = alto;
         this.ancho = ancho;
-        this.profMedidas = profMedidas;
+        this.profundidad_rectangular = profundidad_rectangular;
         this.diametro = diametro;
-        this.profRedondo = profRedondo;
+        this.profundidad_cilindrica = profundidad_cilindrica;
         this.volumen = volumen;
+        this.id = id;
     }
 
-    public Acuario(Integer idAcuario,String nombre, String tipoagua, String forma, Double alto, Double ancho, Double profMedidas, Double diametro, Double profRedondo, Double volumen) {
-        this.idAcuario = idAcuario;
-        this.nombre = nombre;
-        this.tipoagua = tipoagua;
-        this.forma = forma;
+    public Acuario(int id, String nombre, String tipo_agua, String forma, Double alto, Double ancho,
+			Double profundidad_rectangular, Double diametro, Double profundidad_cilindrica, Double volumen) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.tipo_agua = tipo_agua;
+		this.forma = forma;
+		this.alto = alto;
+		this.ancho = ancho;
+		this.profundidad_rectangular = profundidad_rectangular;
+		this.diametro = diametro;
+		this.profundidad_cilindrica = profundidad_cilindrica;
+		this.volumen = volumen;
+	}
+
+	public void setMedidasRectangulares(Double alto, Double ancho, Double profundidad_rectangular){
         this.alto = alto;
         this.ancho = ancho;
-        this.profMedidas = profMedidas;
+        this.profundidad_rectangular = profundidad_rectangular;
+        this.diametro = 0.0;
+        this.profundidad_cilindrica = 0.0;
+    }
+
+    public void setMedidasCilindricas(Double diametro, Double profundidad_cilindrica){
         this.diametro = diametro;
-        this.profRedondo = profRedondo;
-        this.volumen = volumen;
-    }
-    
-    
-    public Acuario(Integer idAcuario) {
-        this.idAcuario = idAcuario;
+        this.profundidad_cilindrica = profundidad_cilindrica;
+        this.alto = 0.0;
+        this.ancho = 0.0;
+        this.profundidad_rectangular = 0.0;
     }
 
-    public Acuario(Integer idAcuario, String nombre) {
-        this.idAcuario = idAcuario;
-        this.nombre = nombre;
+
+    public int getId() {
+        return id;
     }
 
-    public Integer getId() {
-        return idAcuario;
-    }
-
-    public void setId(Integer idAcuario) {
-        this.idAcuario = idAcuario;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -101,12 +90,12 @@ public class Acuario implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getTipoagua() {
-        return tipoagua;
+    public String getTipo_agua() {
+        return tipo_agua;
     }
 
-    public void setTipoagua(String tipoagua) {
-        this.tipoagua = tipoagua;
+    public void setTipo_agua(String tipo_agua) {
+        this.tipo_agua = tipo_agua;
     }
 
     public String getForma() {
@@ -117,105 +106,51 @@ public class Acuario implements Serializable {
         this.forma = forma;
     }
 
-    public Double getAlto() {
+    public double getAlto() {
         return alto;
     }
 
-    public void setAlto(Double alto) {
+    public void setAlto(double alto) {
         this.alto = alto;
     }
 
-    public Double getAncho() {
+    public double getAncho() {
         return ancho;
     }
 
-    public void setAncho(Double ancho) {
+    public void setAncho(double ancho) {
         this.ancho = ancho;
     }
 
-    public Double getProfMedidas() {
-        return profMedidas;
+    public double getProfundidad_rectangular() {
+        return profundidad_rectangular;
     }
 
-    public void setProfMedidas(Double profMedidas) {
-        this.profMedidas = profMedidas;
+    public void setProfundidad_rectangular(double profundidad_rectangular) {
+        this.profundidad_rectangular = profundidad_rectangular;
     }
 
-    public Double getDiametro() {
+    public double getDiametro() {
         return diametro;
     }
 
-    public void setDiametro(Double diametro) {
+    public void setDiametro(double diametro) {
         this.diametro = diametro;
     }
 
-    public Double getProfRedondo() {
-        return profRedondo;
+    public double getProfundidad_cilindrica() {
+        return profundidad_cilindrica;
     }
 
-    public void setProfRedondo(Double profRedondo) {
-        this.profRedondo = profRedondo;
+    public void setProfundidad_cilindrica(double profundidad_cilindrica) {
+        this.profundidad_cilindrica = profundidad_cilindrica;
     }
 
-    public Double getVolumen() {
+    public double getVolumen() {
         return volumen;
     }
 
-    public void setVolumen(Double volumen) {
+    public void setVolumen(double volumen) {
         this.volumen = volumen;
     }
-
-    @XmlTransient
-    public List<Plantas> getPlantasList() {
-        return plantasList;
-    }
-
-    public void setPlantasList(List<Plantas> plantasList) {
-        this.plantasList = plantasList;
-    }
-
-    @XmlTransient
-    public List<Peces> getPecesList() {
-        return pecesList;
-    }
-
-    public void setPecesList(List<Peces> pecesList) {
-        this.pecesList = pecesList;
-    }
-
-    @XmlTransient
-    public List<Recordatorio> getRecordatorioList() {
-        return recordatorioList;
-    }
-
-    public void setRecordatorioList(List<Recordatorio> recordatorioList) {
-        this.recordatorioList = recordatorioList;
-    }
-
-    @XmlTransient
-    public List<Historial> getHistorialList() {
-        return historialList;
-    }
-
-    public void setHistorialList(List<Historial> historialList) {
-        this.historialList = historialList;
-    }
-
-    @XmlTransient
-    public List<Galeria> getGaleriaList() {
-        return galeriaList;
-    }
-
-    public void setGaleriaList(List<Galeria> galeriaList) {
-        this.galeriaList = galeriaList;
-    }
-
-    public Integer getIdAcuario() {
-        return idAcuario;
-    }
-
-    public void setIdAcuario(Integer idAcuario) {
-        this.idAcuario = idAcuario;
-    }
-    
 }

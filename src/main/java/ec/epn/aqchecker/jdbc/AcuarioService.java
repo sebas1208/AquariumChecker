@@ -23,13 +23,13 @@ public class AcuarioService {
 
             int i = 1;
             ps.setString(i++, entity.getNombre());
-            ps.setString(i++, entity.getTipoagua());
+            ps.setString(i++, entity.getTipo_agua());
             ps.setString(i++, entity.getForma());
             ps.setDouble(i++, entity.getAlto());
             ps.setDouble(i++, entity.getAncho());
-            ps.setDouble(i++, entity.getProfMedidas());
+            ps.setDouble(i++, entity.getProfundidad_rectangular());
             ps.setDouble(i++, entity.getDiametro());
-            ps.setDouble(i++, entity.getProfRedondo());
+            ps.setDouble(i++, entity.getProfundidad_cilindrica());
             ps.setDouble(i++, entity.getVolumen());
             
             ps.executeUpdate();
@@ -52,13 +52,13 @@ public class AcuarioService {
 
             int i = 1;
             ps.setString(i++, entity.getNombre());
-            ps.setString(i++, entity.getTipoagua());
+            ps.setString(i++, entity.getTipo_agua());
             ps.setString(i++, entity.getForma());
             ps.setDouble(i++, entity.getAlto());
             ps.setDouble(i++, entity.getAncho());
-            ps.setDouble(i++, entity.getProfMedidas());
+            ps.setDouble(i++, entity.getProfundidad_rectangular());
             ps.setDouble(i++, entity.getDiametro());
-            ps.setDouble(i++, entity.getProfRedondo());
+            ps.setDouble(i++, entity.getProfundidad_cilindrica());
             ps.setDouble(i++, entity.getVolumen());
             
             ps.executeUpdate();
@@ -95,10 +95,10 @@ public class AcuarioService {
             ResultSet rs = ps.executeQuery();
             
             rs.next();
-            acuario = new Acuario(rs.getInt("id_acuario"), rs.getString("nombre"), rs.getString("tipoagua"),
+            acuario = new Acuario(rs.getInt("id"), rs.getString("nombre"), rs.getString("tipo_agua"),
                     rs.getString("forma"), rs.getDouble("alto"),rs.getDouble("ancho"), 
-                    rs.getDouble("prof_medidas") ,rs.getDouble("diametro"),
-                    rs.getDouble("prof_redondo") ,rs.getDouble("volumen"));
+                    rs.getDouble("profundidad_rectangular") ,rs.getDouble("diametro"),
+                    rs.getDouble("profundidad_cilindrica") ,rs.getDouble("volumen"));
 
             rs.close();
             ps.close();
