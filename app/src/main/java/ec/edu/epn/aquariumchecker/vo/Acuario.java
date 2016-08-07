@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * Created by natyd on 5/6/2016.
  */
-public class AcuarioVO implements Serializable{
+public class Acuario implements Serializable{
 
     private String nombre;
     private String tipo_agua;
@@ -19,10 +19,10 @@ public class AcuarioVO implements Serializable{
     private Double volumen;
     private int id;
 
-    public AcuarioVO() {
+    public Acuario() {
     }
 
-    public AcuarioVO(String nombre, String tipo_agua, String forma, double alto, double ancho, double profundidad_rectangular, double diametro, double profundidad_cilindrica, double volumen, int id) {
+    public Acuario(String nombre, String tipo_agua, String forma, double alto, double ancho, double profundidad_rectangular, double diametro, double profundidad_cilindrica, double volumen, int id) {
         this.nombre = nombre;
         this.tipo_agua = tipo_agua;
         this.forma = forma;

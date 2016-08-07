@@ -18,7 +18,7 @@ import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.services.AcuarioService;
 import ec.edu.epn.aquariumchecker.views.dialogs.MedidasCilindricasDialog;
 import ec.edu.epn.aquariumchecker.views.dialogs.MedidasRectangularesDialog;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 
 public class EditarAcuario extends AppCompatActivity implements
         MedidasRectangularesDialog.NoticeDialogListener,MedidasCilindricasDialog.NoticeDialogListener {
@@ -30,7 +30,7 @@ public class EditarAcuario extends AppCompatActivity implements
     private EditText edtVolumen;
     private final Double pi = Math.PI;
 
-    private AcuarioVO acuarioEditar;
+    private Acuario acuarioEditar;
 
     private String[] tiposAgua = {"Dulce", "Salada"};
     private String[] tiposForma = {"Rectangular", "Cilindrico"};
@@ -74,9 +74,9 @@ public class EditarAcuario extends AppCompatActivity implements
     }
 
     private void getAcuarioEdit(){
-        acuarioEditar = (AcuarioVO)getIntent().getSerializableExtra("acuarioEditar");
+        acuarioEditar = (Acuario)getIntent().getSerializableExtra("acuarioEditar");
         if(acuarioEditar == null){
-            acuarioEditar = new AcuarioVO();
+            acuarioEditar = new Acuario();
         }
     }
 

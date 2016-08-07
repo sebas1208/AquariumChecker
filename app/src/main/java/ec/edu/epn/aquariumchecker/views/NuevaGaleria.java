@@ -1,7 +1,6 @@
 package ec.edu.epn.aquariumchecker.views;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -10,10 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.io.File;
@@ -37,7 +33,7 @@ public class NuevaGaleria extends AppCompatActivity {
     private List<Foto> fotosList = new ArrayList<>();
     private FotosAdapter adapter;
 
-    private AcuarioVO acuarioSeleccionado;
+    private Acuario acuarioSeleccionado;
     private ec.edu.epn.aquariumchecker.vo.Galeria nuevaGaleria = new Galeria();
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -61,9 +57,9 @@ public class NuevaGaleria extends AppCompatActivity {
     }
 
     private void obtenerAcuarioSeleccionado(){
-        acuarioSeleccionado = (AcuarioVO)getIntent().getSerializableExtra("acuarioSeleccionado");
+        acuarioSeleccionado = (Acuario)getIntent().getSerializableExtra("acuarioSeleccionado");
         if(acuarioSeleccionado == null){
-            acuarioSeleccionado = new AcuarioVO();
+            acuarioSeleccionado = new Acuario();
         }
     }
 

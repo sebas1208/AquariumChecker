@@ -15,7 +15,7 @@ import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.services.AcuarioService;
 import ec.edu.epn.aquariumchecker.views.dialogs.MedidasCilindricasDialog;
 import ec.edu.epn.aquariumchecker.views.dialogs.MedidasRectangularesDialog;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 
 
 public class NuevoAcuario extends AppCompatActivity implements
@@ -26,7 +26,7 @@ public class NuevoAcuario extends AppCompatActivity implements
     private EditText edtMedida;
     private EditText edtNombre;
     private EditText edtVolumen;
-    private AcuarioVO nuevoAcuario = new AcuarioVO();
+    private Acuario nuevoAcuario = new Acuario();
     String[] tiposAgua = {"Dulce", "Salada"};
     String[] tiposForma = {"Rectangular", "Cilindrico"};
 

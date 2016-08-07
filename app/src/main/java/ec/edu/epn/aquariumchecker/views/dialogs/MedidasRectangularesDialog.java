@@ -7,10 +7,8 @@ import android.support.v4.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.widget.EditText;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 
 /**
  * Created by sebastian on 04/06/16.

@@ -11,7 +11,6 @@ import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
 
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
 import ec.edu.epn.aquariumchecker.vo.Recordatorio;
 
 /**

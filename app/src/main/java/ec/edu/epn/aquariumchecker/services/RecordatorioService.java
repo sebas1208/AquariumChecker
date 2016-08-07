@@ -10,8 +10,7 @@ import java.util.List;
 
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
-import ec.edu.epn.aquariumchecker.vo.Peces;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Recordatorio;
 
 /**
@@ -44,7 +43,7 @@ public class RecordatorioService{
 
         }
 
-        public List<Recordatorio> listRecordatorios(AcuarioVO acuario){
+        public List<Recordatorio> listRecordatorios(Acuario acuario){
             AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
             List<Recordatorio> l = new ArrayList<>();
             String[] selectionValues = {String.valueOf(acuario.getId())};

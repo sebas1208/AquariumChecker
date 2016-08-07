@@ -19,11 +19,6 @@
         <activity
             android:name=".views.AquariumCherckerMain"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".views.MisAcuarios"
@@ -177,7 +172,7 @@
             android:label="@string/title_activity_historiales"
             android:parentActivityName=".views.ListHistorial"
             android:theme="@style/AppTheme.NoActionBar">
-        <meta-data
+            <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ec.edu.epn.aquariumchecker.views.AquariumCherckerMain" />
         </activity>
@@ -186,8 +181,7 @@
             android:label="@string/title_activity_rcordatorios_lista_acuaruios"
             android:parentActivityName=".views.ListRecordatorios"
             android:theme="@style/AppTheme.NoActionBar">
-
-        <meta-data
+            <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ec.edu.epn.aquariumchecker.views.AquariumCherckerMain" />
         </activity>
@@ -200,7 +194,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ec.edu.epn.aquariumchecker.views.MisPlantasAcuario" />
         </activity>
+        <activity
+            android:name=".views.Navegacion"
+            android:label="@string/title_activity_navegacion"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

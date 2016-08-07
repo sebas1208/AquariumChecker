@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 
 
 /**
@@ -18,12 +18,12 @@ import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
  */
 public class MisAcuariosAdapter<T> extends ArrayAdapter<T> {
 
-    List<AcuarioVO> datos;
+    List<Acuario> datos;
 
     public MisAcuariosAdapter(Context context, List<T> objects){
         super(context, 0,objects);
 
-        datos = (List<AcuarioVO>) objects;
+        datos = (List<Acuario>) objects;
     }
 
     @Override

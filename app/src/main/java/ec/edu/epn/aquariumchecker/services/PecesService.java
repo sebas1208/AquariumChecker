@@ -4,20 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.ListView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.adapters.PecesAdapter;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
-import ec.edu.epn.aquariumchecker.vo.Foto;
-import ec.edu.epn.aquariumchecker.vo.Galeria;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Peces;
 
 /**
@@ -48,12 +41,12 @@ public class PecesService {
         db.close();
     }
 
-    public List<Peces> listaPecesPorAcuario(AcuarioVO acuarioVO){
+    public List<Peces> listaPecesPorAcuario(Acuario acuario){
         AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
         List<Peces> peces = new ArrayList<>();
         SQLiteDatabase db = oh.getReadableDatabase();
 
-        String[] id = {Integer.toString(acuarioVO.getId())};
+        String[] id = {Integer.toString(acuario.getId())};
 
         String[] columnas = {AquariumCheckerAppContract.TablaPeces.COLUMNA_NOMBRE,
                 AquariumCheckerAppContract.TablaPeces.COLUMNA_DESCRIPCION,

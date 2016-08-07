@@ -15,11 +15,11 @@ import java.util.List;
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.adapters.GaleriaAdapter;
 import ec.edu.epn.aquariumchecker.services.GaleriaService;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 
 public class Galeria extends AppCompatActivity {
     private List<ec.edu.epn.aquariumchecker.vo.Galeria> galeriasList = new ArrayList<>();
-    private AcuarioVO acuarioSeleccionado;
+    private Acuario acuarioSeleccionado;
     private ListView galerias;
     private GaleriaAdapter adapter;
     static final int NUEVA_GALERIA_REQUEST = 1;
@@ -52,9 +52,9 @@ public class Galeria extends AppCompatActivity {
     }
 
     private void obtenerAcuarioSeleccionado(){
-        acuarioSeleccionado = (AcuarioVO)getIntent().getSerializableExtra("acuarioSeleccionado");
+        acuarioSeleccionado = (Acuario)getIntent().getSerializableExtra("acuarioSeleccionado");
         if(acuarioSeleccionado == null){
-            acuarioSeleccionado = new AcuarioVO();
+            acuarioSeleccionado = new Acuario();
         }
     }
 

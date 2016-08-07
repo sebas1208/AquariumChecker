@@ -10,13 +10,13 @@ import java.util.List;
 
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 
 /**
  * Created by sebastian on 06/06/16.
  */
 public class AcuarioService {
-    private AcuarioVO acuario;
+    private Acuario acuario;
     private Context appContext;
 
     public AcuarioService(Context appContext) {
@@ -26,7 +26,7 @@ public class AcuarioService {
     public AcuarioService() {
     }
 
-    public void crearAcuario(AcuarioVO nuevoAcuario){
+    public void crearAcuario(Acuario nuevoAcuario){
         AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
         SQLiteDatabase db = op.getWritableDatabase();
 
@@ -44,9 +44,9 @@ public class AcuarioService {
         db.close();
     }
 
-    public List<AcuarioVO> listAcuarios(){
+    public List<Acuario> listAcuarios(){
         AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
-        List<AcuarioVO> l = new ArrayList<>();
+        List<Acuario> l = new ArrayList<>();
 
         SQLiteDatabase db = oh.getReadableDatabase();
         String[] columnas = {AquariumCheckerAppContract.TablaAcuario.COLUMNA_NOMBRE,
@@ -73,7 +73,7 @@ public class AcuarioService {
         );
 
         while (cur.moveToNext()) {
-            AcuarioVO acuario = new AcuarioVO(cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_NOMBRE)),
+            Acuario acuario = new Acuario(cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_NOMBRE)),
                     cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_TIPOAGUA)),
                     cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_FORMA)),
                     cur.getDouble(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ALTO)),
@@ -89,7 +89,7 @@ public class AcuarioService {
         return l;
     }
 
-    public void editarAcuario(AcuarioVO acuarioEditar){
+    public void editarAcuario(Acuario acuarioEditar){
         AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
         SQLiteDatabase db = op.getWritableDatabase();
         String[] id = {Integer.toString(acuarioEditar.getId())};

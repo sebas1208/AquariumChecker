@@ -18,7 +18,7 @@ import ec.edu.epn.aquariumchecker.vo.*;
 
 public class Historiales extends AppCompatActivity {
         private List<ec.edu.epn.aquariumchecker.vo.Historiales> historialeslist = new ArrayList<>();
-        private AcuarioVO acuarioSeleccionado;
+        private Acuario acuarioSeleccionado;
         private ListView historiales;
         static final int NUEVO_HISTORIAL_REQUEST = 1;
         static final int MOSTRAR_HISTORIAL_REQUEST = 1;
@@ -50,9 +50,9 @@ public class Historiales extends AppCompatActivity {
     }
 
     private void obtenerAcuarioSeleccionado(){
-        acuarioSeleccionado = (AcuarioVO)getIntent().getSerializableExtra("acuarioSeleccionado");
+        acuarioSeleccionado = (Acuario)getIntent().getSerializableExtra("acuarioSeleccionado");
         if(acuarioSeleccionado == null){
-            acuarioSeleccionado = new AcuarioVO();
+            acuarioSeleccionado = new Acuario();
         }
     }
 

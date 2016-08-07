@@ -2,8 +2,6 @@ package ec.edu.epn.aquariumchecker.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,18 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.adapters.HistorialAdapter;
 import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
-import ec.edu.epn.aquariumchecker.adapters.RecordatoriosAdapter;
 import ec.edu.epn.aquariumchecker.services.AcuarioService;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Historiales;
-import ec.edu.epn.aquariumchecker.vo.Recordatorio;
 
 public class ListHistorial extends AppCompatActivity {
 
     private ListView misAcuarios;
-    private List<AcuarioVO> acuarios = new ArrayList<>();
+    private List<Acuario> acuarios = new ArrayList<>();
     List<Historiales> historial = new ArrayList<>();
 
     @Override

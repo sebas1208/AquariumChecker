@@ -14,7 +14,7 @@ import java.util.List;
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.adapters.PecesAdapter;
 import ec.edu.epn.aquariumchecker.services.PecesService;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Peces;
 
 public class MisPeces extends AppCompatActivity {
@@ -23,7 +23,7 @@ public class MisPeces extends AppCompatActivity {
     private List<Peces> peces = new ArrayList<>();
     private PecesAdapter adapter;
 
-    private AcuarioVO accuarioSeleccionado;
+    private Acuario accuarioSeleccionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +45,9 @@ public class MisPeces extends AppCompatActivity {
     }
 
     private void obtenerAcuarioSeleccionado(){
-        accuarioSeleccionado = (AcuarioVO)getIntent().getSerializableExtra("acuarioSeleccionado");
+        accuarioSeleccionado = (Acuario)getIntent().getSerializableExtra("acuarioSeleccionado");
         if(accuarioSeleccionado == null){
-            accuarioSeleccionado = new AcuarioVO();
+            accuarioSeleccionado = new Acuario();
         }
     }
 

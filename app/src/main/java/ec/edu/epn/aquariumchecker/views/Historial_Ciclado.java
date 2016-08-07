@@ -11,18 +11,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.services.AcuarioService;
-import ec.edu.epn.aquariumchecker.services.FotoService;
-import ec.edu.epn.aquariumchecker.services.GaleriaService;
 import ec.edu.epn.aquariumchecker.services.HistorialService;
 import ec.edu.epn.aquariumchecker.vo.*;
-import ec.edu.epn.aquariumchecker.vo.Historiales;
 
 
 public class Historial_Ciclado extends AppCompatActivity implements View.OnClickListener {
@@ -34,7 +29,7 @@ public class Historial_Ciclado extends AppCompatActivity implements View.OnClick
     private TextView txtFecha, txtHora;
     private EditText txtph, txtgh, txtkh, txtobs;
 
-    private AcuarioVO acuarioSeleccionado;
+    private Acuario acuarioSeleccionado;
     private ec.edu.epn.aquariumchecker.vo.Historiales nuevoHistorial = new ec.edu.epn.aquariumchecker.vo.Historiales();
 
     @Override
@@ -76,9 +71,9 @@ public class Historial_Ciclado extends AppCompatActivity implements View.OnClick
     }
 
     private void obtenerAcuarioSeleccionado() {
-        acuarioSeleccionado = (AcuarioVO) getIntent().getSerializableExtra("acuarioSeleccionado");
+        acuarioSeleccionado = (Acuario) getIntent().getSerializableExtra("acuarioSeleccionado");
         if (acuarioSeleccionado == null) {
-            acuarioSeleccionado = new AcuarioVO();
+            acuarioSeleccionado = new Acuario();
         }
     }
 

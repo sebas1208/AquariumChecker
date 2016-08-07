@@ -7,8 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,15 +20,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.services.PecesService;
 import ec.edu.epn.aquariumchecker.services.PlantasService;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
-import ec.edu.epn.aquariumchecker.vo.Peces;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Planta;
 
 public class NuevoPlanta extends AppCompatActivity {
 
-    private AcuarioVO acuarioSeleccionado;
+    private Acuario acuarioSeleccionado;
     private Planta planta = new Planta();
     private String pathActual;
     private EditText edtNombrePlanta;
@@ -61,9 +57,9 @@ public class NuevoPlanta extends AppCompatActivity {
     }
 
     private void obtenerAcuarioSeleccionado() {
-        acuarioSeleccionado = (AcuarioVO) getIntent().getSerializableExtra("acuarioSeleccionado");
+        acuarioSeleccionado = (Acuario) getIntent().getSerializableExtra("acuarioSeleccionado");
         if (acuarioSeleccionado == null) {
-            acuarioSeleccionado = new AcuarioVO();
+            acuarioSeleccionado = new Acuario();
         }
     }
 

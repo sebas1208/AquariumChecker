@@ -13,7 +13,7 @@ import java.util.List;
 
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Galeria;
 
 /**
@@ -89,7 +89,7 @@ public class GaleriaService {
         return l;
     }
 
-    public List<Galeria> listGaleriasPorAcuario(AcuarioVO acuario){
+    public List<Galeria> listGaleriasPorAcuario(Acuario acuario){
         AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
         List<Galeria> l = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -1,8 +1,6 @@
 package ec.edu.epn.aquariumchecker.views;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,14 +14,12 @@ import java.util.List;
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
 import ec.edu.epn.aquariumchecker.services.AcuarioService;
-import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
-import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 
 public class MisAcuarios extends AppCompatActivity {
 
     private ListView misAcuarios;
-    private List<AcuarioVO> acuarios = new ArrayList<>();
+    private List<Acuario> acuarios = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

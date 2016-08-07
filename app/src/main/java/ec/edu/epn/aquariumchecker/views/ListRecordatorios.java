@@ -2,7 +2,6 @@ package ec.edu.epn.aquariumchecker.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,17 +14,14 @@ import java.util.List;
 import ec.edu.epn.aquariumchecker.R;
 
 import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
-import ec.edu.epn.aquariumchecker.adapters.RecordatoriosAdapter;
 import ec.edu.epn.aquariumchecker.services.AcuarioService;
-import ec.edu.epn.aquariumchecker.services.RecordatorioService;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
-import ec.edu.epn.aquariumchecker.vo.Recordatorio;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 
 public class ListRecordatorios extends AppCompatActivity {
 
 
     private ListView misAcuarios;
-    private List<AcuarioVO> acuarios = new ArrayList<>();
+    private List<Acuario> acuarios = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

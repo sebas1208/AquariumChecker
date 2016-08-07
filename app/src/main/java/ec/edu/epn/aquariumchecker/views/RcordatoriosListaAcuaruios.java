@@ -2,8 +2,6 @@ package ec.edu.epn.aquariumchecker.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,16 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.adapters.HistorialAdapter;
 import ec.edu.epn.aquariumchecker.adapters.RecordatoriosAdapter;
-import ec.edu.epn.aquariumchecker.services.HistorialService;
-import ec.edu.epn.aquariumchecker.services.PecesService;
 import ec.edu.epn.aquariumchecker.services.RecordatorioService;
 import ec.edu.epn.aquariumchecker.vo.*;
 
 public class RcordatoriosListaAcuaruios extends AppCompatActivity {
         private List<ec.edu.epn.aquariumchecker.vo.Recordatorio> recordatorioslist = new ArrayList<>();
-        private AcuarioVO acuarioSeleccionado;
+        private Acuario acuarioSeleccionado;
         private ListView recordatorios;
         static final int NUEVO_RECORDATORIO_REQUEST = 1;
         static final int MOSTRAR_RECORDATORIO_REQUEST = 1;
@@ -56,9 +51,9 @@ public class RcordatoriosListaAcuaruios extends AppCompatActivity {
     }
 
     private void obtenerAcuarioSeleccionado(){
-        acuarioSeleccionado = (AcuarioVO)getIntent().getSerializableExtra("acuarioSeleccionado");
+        acuarioSeleccionado = (Acuario)getIntent().getSerializableExtra("acuarioSeleccionado");
         if(acuarioSeleccionado == null){
-            acuarioSeleccionado = new AcuarioVO();
+            acuarioSeleccionado = new Acuario();
         }
     }
 

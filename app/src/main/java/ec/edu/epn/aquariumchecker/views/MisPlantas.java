@@ -2,12 +2,9 @@ package ec.edu.epn.aquariumchecker.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -15,14 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
-import ec.edu.epn.aquariumchecker.adapters.PecesAdapter;
 import ec.edu.epn.aquariumchecker.adapters.PlantasAdapter;
-import ec.edu.epn.aquariumchecker.services.PecesService;
 import ec.edu.epn.aquariumchecker.services.PlantasService;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
-import ec.edu.epn.aquariumchecker.vo.Forma;
-import ec.edu.epn.aquariumchecker.vo.Peces;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Planta;
 
 public class MisPlantas extends AppCompatActivity {
@@ -31,7 +23,7 @@ public class MisPlantas extends AppCompatActivity {
     private List<Planta> plantas = new ArrayList<>();
     private PlantasAdapter adapter;
 
-    private AcuarioVO accuarioSeleccionado;
+    private Acuario accuarioSeleccionado;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +45,9 @@ public class MisPlantas extends AppCompatActivity {
     }
 
     private void obtenerAcuarioSeleccionado(){
-        accuarioSeleccionado = (AcuarioVO)getIntent().getSerializableExtra("acuarioSeleccionado");
+        accuarioSeleccionado = (Acuario)getIntent().getSerializableExtra("acuarioSeleccionado");
         if(accuarioSeleccionado == null){
-            accuarioSeleccionado = new AcuarioVO();
+            accuarioSeleccionado = new Acuario();
         }
     }
 

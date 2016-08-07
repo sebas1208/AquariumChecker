@@ -21,13 +21,12 @@ import java.util.Date;
 
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.services.PecesService;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
-import ec.edu.epn.aquariumchecker.vo.Foto;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Peces;
 
 public class NuevoPez extends AppCompatActivity {
 
-    private AcuarioVO acuarioSeleccionado;
+    private Acuario acuarioSeleccionado;
     private Peces pez = new Peces();
     private String pathActual;
     private EditText edtNombrePez;
@@ -58,9 +57,9 @@ public class NuevoPez extends AppCompatActivity {
     }
 
     private void obtenerAcuarioSeleccionado() {
-        acuarioSeleccionado = (AcuarioVO) getIntent().getSerializableExtra("acuarioSeleccionado");
+        acuarioSeleccionado = (Acuario) getIntent().getSerializableExtra("acuarioSeleccionado");
         if (acuarioSeleccionado == null) {
-            acuarioSeleccionado = new AcuarioVO();
+            acuarioSeleccionado = new Acuario();
         }
     }
 

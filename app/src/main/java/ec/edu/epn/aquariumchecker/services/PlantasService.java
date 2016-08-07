@@ -10,8 +10,7 @@ import java.util.List;
 
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
-import ec.edu.epn.aquariumchecker.vo.Peces;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Planta;
 
 /**
@@ -42,12 +41,12 @@ public class PlantasService {
         db.close();
     }
 
-    public List<Planta> listaPlantasPorAcuario(AcuarioVO acuarioVO){
+    public List<Planta> listaPlantasPorAcuario(Acuario acuario){
         AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
         List<Planta> plantas = new ArrayList<>();
         SQLiteDatabase db = oh.getReadableDatabase();
 
-        String[] id = {Integer.toString(acuarioVO.getId())};
+        String[] id = {Integer.toString(acuario.getId())};
 
         String[] columnas = {AquariumCheckerAppContract.TablaPlantas.COLUMNA_NOMBRE,
                 AquariumCheckerAppContract.TablaPlantas.COLUMNA_DESCRIPCION,

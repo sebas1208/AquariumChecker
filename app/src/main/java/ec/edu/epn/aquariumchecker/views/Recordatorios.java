@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,21 +15,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.services.HistorialService;
 import ec.edu.epn.aquariumchecker.services.RecordatorioService;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
-import ec.edu.epn.aquariumchecker.vo.Recordatorio;
-
-import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
-import ec.edu.epn.aquariumchecker.vo.Forma;
-import ec.edu.epn.aquariumchecker.vo.Recordatorio;
-import ec.edu.epn.aquariumchecker.R;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 
 public class Recordatorios extends AppCompatActivity implements View.OnClickListener {
     private TextView txtFecha,txtHora;
@@ -39,7 +27,7 @@ public class Recordatorios extends AppCompatActivity implements View.OnClickList
     private Button  btnCalendario;
     private Button  btnHoras;
     private int anio,mes,dia,hora,minuto;
-    private AcuarioVO acuarioSeleccionado;
+    private Acuario acuarioSeleccionado;
     private ec.edu.epn.aquariumchecker.vo.Recordatorio nuevoRecordatorio = new ec.edu.epn.aquariumchecker.vo.Recordatorio();
 
 
@@ -75,9 +63,9 @@ public class Recordatorios extends AppCompatActivity implements View.OnClickList
     }
 
     private void obtenerAcuarioSeleccionado(){
-        acuarioSeleccionado = (AcuarioVO)getIntent().getSerializableExtra("acuarioSeleccionado");
+        acuarioSeleccionado = (Acuario)getIntent().getSerializableExtra("acuarioSeleccionado");
         if(acuarioSeleccionado == null){
-            acuarioSeleccionado = new AcuarioVO();
+            acuarioSeleccionado = new Acuario();
         }
     }
 

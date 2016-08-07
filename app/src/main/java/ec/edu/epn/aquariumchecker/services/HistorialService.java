@@ -13,7 +13,7 @@ import java.util.List;
 
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
-import ec.edu.epn.aquariumchecker.vo.AcuarioVO;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Historiales;
 
 /**
@@ -53,7 +53,7 @@ public class HistorialService {
         return idinsert;
     }
 
-    public List<Historiales> listHistorialesPorAcuario(AcuarioVO acuario){
+    public List<Historiales> listHistorialesPorAcuario(Acuario acuario){
         AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
         List<Historiales> l = new ArrayList<>();
         String[] selectionValues = {String.valueOf(acuario.getId())};
