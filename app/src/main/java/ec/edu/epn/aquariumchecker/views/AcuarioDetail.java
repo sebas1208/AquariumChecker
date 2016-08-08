@@ -9,8 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+<<<<<<< HEAD
+import android.widget.ListView;
+import android.widget.TextView;
+=======
 import android.widget.LinearLayout;
 import android.widget.Toast;
+>>>>>>> f3dd378e713290bd1966934d1880e9d5c419188e
 
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.services.AcuarioService;
@@ -20,6 +25,9 @@ public class AcuarioDetail extends AppCompatActivity {
 
     private Acuario acuario;
     private Toolbar toolbar;
+    private TextView hola;
+    private ListView Opciones;
+    String[]menuOpciones = {"Galerias", "Plantas", "Peces","Historiales","Recordatorios"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,4 +96,30 @@ public class AcuarioDetail extends AppCompatActivity {
                 .setNegativeButton(getString(R.string.not_confirm), null)						//Do nothing on no
                 .show();
     }
+
+    public void abrirGalerias(View view){
+        Intent i = new Intent(this,MisGalerias.class);
+        startActivity(i);
+    }
+
+    public void abrirPeces(View view){
+        Intent i = new Intent(this, MisPecesAcuarios.class);
+        startActivity(i);
+    }
+
+    public void abrirPlantas(View view){
+        Intent i = new Intent(this, MisPlantasAcuario.class);
+        startActivity(i);
+    }
+
+    public void abrirRecordatorios (View view){
+        Intent i = new Intent (this,ListRecordatorios.class);
+        startActivity(i);
+    }
+
+    public void abrirHistoriales (View view){
+        Intent i = new Intent (this,ListHistorial.class);
+        startActivity(i);
+    }
+
 }
