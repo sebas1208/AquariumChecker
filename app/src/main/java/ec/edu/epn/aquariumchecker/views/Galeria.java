@@ -1,15 +1,22 @@
 package ec.edu.epn.aquariumchecker.views;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
@@ -45,10 +52,7 @@ public class Galeria extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        adapter = new GaleriaAdapter(this, galeriasList);
         galerias = (ListView) findViewById(R.id.galeria_list);
-        galerias.setAdapter(adapter);
     }
 
     private void obtenerAcuarioSeleccionado(){
@@ -59,8 +63,8 @@ public class Galeria extends AppCompatActivity {
     }
 
     private void obtenerGaleriasPorAcuario(){
-        GaleriaService service = new GaleriaService(getApplicationContext());
-        galeriasList.addAll(service.listGaleriasPorAcuario(acuarioSeleccionado));
+        ListarGalerias listarGalerias = new ListarGalerias();
+        listarGalerias.execute();
     }
 
     public void abrirNuevaGaleria(View view){
@@ -92,6 +96,46 @@ public class Galeria extends AppCompatActivity {
                 obtenerAcuarioSeleccionado();
                 obtenerGaleriasPorAcuario();
             }
+        }
+    }
+
+    public class ListarGalerias extends AsyncTask<Void, Void, List<Galeria>> {
+
+        @Override
+        protected List<Galeria> doInBackground(Void... params) {
+            Log.v("buscar", "2");
+            List<Galeria> galeriasList = new ArrayList<Galeria>();
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/galeria";
+            Log.v("buscar","3");
+
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            Galeria[] galeriaArray = restTemplate.getForObject(url, Galeria[].class);
+            galeriasList = Arrays.asList(galeriaArray);
+            Log.v("buscar","4 son" + galeriasList.size());
+            return galeriasList;
+
+        }
+
+        @Override
+        protected void onPostExecute(List<Galeria> galeriasList) {
+            super.onPostExecute(galeriasList);
+
+            GaleriaAdapter adapter = new GaleriaAdapter(getApplicationContext(), galeriasList);
+            galerias.setAdapter(adapter);
+            galerias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Acuario acuario = (Acuario) parent.getItemAtPosition(position);
+                    /*Toast.makeText(MainLibro.this,"Libro: "+l,Toast.LENGTH_SHORT).show();*/
+
+                    Intent i = new Intent(Galeria.this, Fotos.class);
+                    i.putExtra("galeriaSeleccionada", acuario);
+                    startActivity(i);
+                    startActivityForResult(i, MOSTRAR_GALERIA_REQUEST);
+                }
+            });
         }
     }
 

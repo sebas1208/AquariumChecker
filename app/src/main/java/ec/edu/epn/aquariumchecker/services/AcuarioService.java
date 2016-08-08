@@ -2,21 +2,36 @@ package ec.edu.epn.aquariumchecker.services;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
-import java.util.ArrayList;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
+import ec.edu.epn.aquariumchecker.views.MisAcuarios;
+import ec.edu.epn.aquariumchecker.views.NuevoAcuario;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
 
 /**
  * Created by sebastian on 06/06/16.
  */
 public class AcuarioService {
-    private Acuario acuario;
+
+    final String url = "http://acuariumrest-sebas1208.rhcloud.com/acuario";
+
+    private RecyclerView.Adapter adapter;
+
     private Context appContext;
 
     public AcuarioService(Context appContext) {
@@ -26,67 +41,55 @@ public class AcuarioService {
     public AcuarioService() {
     }
 
-    public void crearAcuario(Acuario nuevoAcuario){
-        AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
-        SQLiteDatabase db = op.getWritableDatabase();
-
-        ContentValues valores = new ContentValues();
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_NOMBRE,nuevoAcuario.getNombre());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_TIPOAGUA,nuevoAcuario.getTipo_agua());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_FORMA,nuevoAcuario.getForma());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ALTO,nuevoAcuario.getAlto());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ANCHO,nuevoAcuario.getAncho());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_MEDIDAS,nuevoAcuario.getProfundidad_rectangular());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_DIAMETRO,nuevoAcuario.getDiametro());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_REDONDO,nuevoAcuario.getProfundidad_cilindrica());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_VOLUMEN,nuevoAcuario.getVolumen());
-        db.insert(AquariumCheckerAppContract.TablaAcuario.NOMBRE_TABLA, null, valores);
-        db.close();
+    public void listAcuarios(List<Acuario> acuarios, RecyclerView.Adapter adapter){
+        ListarAcuariosAsyncTask task = new ListarAcuariosAsyncTask();
+        task.execute(acuarios);
+        this.adapter = adapter;
     }
 
-    public List<Acuario> listAcuarios(){
-        AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
-        List<Acuario> l = new ArrayList<>();
+    public void crearAcuario(Acuario acuario){
+        CrearAcuarioAsyncTask task = new CrearAcuarioAsyncTask();
+        task.execute(acuario);
+    }
 
-        SQLiteDatabase db = oh.getReadableDatabase();
-        String[] columnas = {AquariumCheckerAppContract.TablaAcuario.COLUMNA_NOMBRE,
-                AquariumCheckerAppContract.TablaAcuario.COLUMNA_TIPOAGUA,
-                AquariumCheckerAppContract.TablaAcuario.COLUMNA_FORMA,
-                AquariumCheckerAppContract.TablaAcuario.COLUMNA_ALTO,
-                AquariumCheckerAppContract.TablaAcuario.COLUMNA_ANCHO,
-                AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_MEDIDAS,
-                AquariumCheckerAppContract.TablaAcuario.COLUMNA_DIAMETRO,
-                AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_REDONDO,
-                AquariumCheckerAppContract.TablaAcuario.COLUMNA_VOLUMEN,
-                AquariumCheckerAppContract.TablaAcuario._ID
-        };
+    public class CrearAcuarioAsyncTask extends AsyncTask<Acuario, Void, Void> {
 
+        @Override
+        protected Void doInBackground(Acuario... params) {
+            Acuario acuario = params [0];
 
-        Cursor cur = db.query(
-                AquariumCheckerAppContract.TablaAcuario.NOMBRE_TABLA,
-                columnas,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
-
-        while (cur.moveToNext()) {
-            Acuario acuario = new Acuario(cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_NOMBRE)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_TIPOAGUA)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_FORMA)),
-                    cur.getDouble(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ALTO)),
-                    cur.getDouble(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ANCHO)),
-                    cur.getDouble(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_MEDIDAS)),
-                    cur.getDouble(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_DIAMETRO)),
-                    cur.getDouble(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_REDONDO)),
-                    cur.getDouble(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario.COLUMNA_VOLUMEN)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaAcuario._ID)));
-            l.add(acuario);
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            restTemplate.getMessageConverters().add(
+                    new StringHttpMessageConverter());
+            restTemplate.postForEntity(url, acuario, String.class);
+            return null;
         }
-        db.close();
-        return l;
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
+
+    public class ListarAcuariosAsyncTask extends AsyncTask<List<Acuario>, Void, List<Acuario>> {
+
+        @Override
+        protected List<Acuario> doInBackground(List<Acuario>... acuarios) {
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            Acuario[] acuarioArray = restTemplate.getForObject(url, Acuario[].class);
+            acuarios[0].addAll(Arrays.asList(acuarioArray));
+            return acuarios[0];
+        }
+
+        @Override
+        protected void onPostExecute(List<Acuario> acuarios) {
+            super.onPostExecute(acuarios);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     public void editarAcuario(Acuario acuarioEditar){

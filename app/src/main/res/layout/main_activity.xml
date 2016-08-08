@@ -6,7 +6,13 @@
     android:fitsSystemWindows="true"
     tools:context=".views.AquariumCherckerMain">
 
-    <include layout="@layout/main_content" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/acuario_recycler_view"
+        android:padding="16dp">
+
+    </android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -14,9 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add_black_24dp"
+        android:src="@drawable/ic_add_white_18dp"
         android:onClick="abrirNuevoAcuario"/>
-
-
 
 </android.support.design.widget.CoordinatorLayout>

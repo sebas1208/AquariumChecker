@@ -47,7 +47,7 @@ public class MisAcuarios extends AppCompatActivity {
 
     private void getAcuarioList(){
         AcuarioService service = new AcuarioService(getApplicationContext());
-        acuarios.addAll(service.listAcuarios());
+        //acuarios.addAll(service.listAcuarios());
     }
 
     public void abrirNuevoAcuario(View view) {
@@ -68,7 +68,7 @@ public class MisAcuarios extends AppCompatActivity {
         protected List<Acuario> doInBackground(Void... params) {
             Log.v("buscar", "2");
             List<Acuario> acuarios = new ArrayList<Acuario>();
-            final String url = "http://192.168.135.1:8080/AcuariosRest/acuario";
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/acuario";
             Log.v("buscar","3");
 
             RestTemplate restTemplate = new RestTemplate();

@@ -36,7 +36,7 @@ public class ListHistorial extends AppCompatActivity {
         misAcuarios.setAdapter(adapter);
 
         AcuarioService service = new AcuarioService(getApplicationContext());
-        acuarios.addAll(service.listAcuarios());
+        //service.listAcuarios(acuarios,adapter);
     }
 
     public void abrirAcuario(View v) {

@@ -36,7 +36,7 @@ public class ListRecordatorios extends AppCompatActivity {
         misAcuarios.setAdapter(adapter);
 
         AcuarioService service = new AcuarioService(getApplicationContext());
-        acuarios.addAll(service.listAcuarios());
+        //acuarios.addAll(service.listAcuarios());
     }
 
     public void abrirAcuario(View v) {

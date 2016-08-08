@@ -11,13 +11,9 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".views.AquariumCherckerMain"
-    tools:showIn="@layout/main_activity">
+    tools:showIn="@layout/main_activity"
+    android:background="@color/primary">
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/acuario_recycler_view">
 
-    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
