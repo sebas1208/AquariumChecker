@@ -46,8 +46,8 @@ public class MisAcuarios extends AppCompatActivity {
     }
 
     private void getAcuarioList(){
-        AcuarioService service = new AcuarioService(getApplicationContext());
-        //acuarios.addAll(service.listAcuarios());
+//        AcuarioService service = new AcuarioService(getApplicationContext());
+//        //acuarios.addAll(service.listAcuarios());
     }
 
     public void abrirNuevoAcuario(View view) {

@@ -1,15 +1,19 @@
 package ec.edu.epn.aquariumchecker.views;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import ec.edu.epn.aquariumchecker.R;
+import ec.edu.epn.aquariumchecker.services.AcuarioService;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
 
 public class AcuarioDetail extends AppCompatActivity {
@@ -67,6 +71,21 @@ public class AcuarioDetail extends AppCompatActivity {
     }
 
     private void deleteAcuario(){
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder
+                .setTitle(getString(R.string.delete_acuario_title))
+                .setMessage(getString(R.string.delete_acuario_detail))
+                .setIcon(R.drawable.ic_delete_forever_grey_800_18dp)
+                .setPositiveButton(getString(R.string.comfirm), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        AcuarioService service = new AcuarioService();
+                        service.eliminarAcuario(acuario);
+                        Intent i = new Intent(AcuarioDetail.this,AquariumCherckerMain.class);
+                        startActivity(i);
+                        Toast.makeText(getApplicationContext(), R.string.delete_acuario_message,Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(getString(R.string.not_confirm), null)						//Do nothing on no
+                .show();
     }
 }

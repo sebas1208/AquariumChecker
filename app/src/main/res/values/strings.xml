@@ -216,5 +216,11 @@ Podras crear acuarios, tomar una galeria de fotos de tu acuario, agregar peces y
     <string name="forma_hint">Forma</string>
     <string name="medidas_hint">Medidas</string>
     <string name="volumen_hint">Volumen</string>
+    <string name="delete_acuario_title">Eliminar Acuario</string>
+    <string name="delete_acuario_detail">Estas seguro que quieres eliminar el acuario?</string>
+    <string name="comfirm">Yes</string>
+    <string name="not_confirm">No</string>
+    <string name="edit_message_complete">Acuario editado</string>
+    <string name="delete_acuario_message">Acuario eliminado</string>
 
 </resources>

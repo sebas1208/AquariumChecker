@@ -58,10 +58,9 @@ public class EditarAcuario extends AppCompatActivity implements
     }
 
     private void initComponents(){
-        setContentView(R.layout.acuarios_activity_nuevo);
+        setContentView(R.layout.acuarios_activity_editar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         tipoAguaSpinner = (MaterialBetterSpinner) findViewById(R.id.cmbTipoAgua);
         formaSpinner = (MaterialBetterSpinner) findViewById(R.id.cmbForma);
@@ -88,6 +87,7 @@ public class EditarAcuario extends AppCompatActivity implements
 
     private void setEditFields(){
         edtNombre.setText(acuarioEditar.getNombre());
+        formaSpinner.setText(acuarioEditar.getForma());
         if(Objects.equals(acuarioEditar.getTipo_agua(), tiposAgua[0])){
             tipoAguaSpinner.setText(acuarioEditar.getTipo_agua());
         }
@@ -96,12 +96,10 @@ public class EditarAcuario extends AppCompatActivity implements
         }
 
         if(Objects.equals(acuarioEditar.getForma(), tiposForma[0])){
-            formaSpinner.setSelection(0);
             edtMedida.setText(acuarioEditar.obtenerMedidasRectangularesString());
             edtVolumen.setText(acuarioEditar.obtenerVolumenRectangularString());
         }
         else {
-            formaSpinner.setText(acuarioEditar.getForma());
             edtMedida.setText(acuarioEditar.obtenerMedidasCilindricasString());
             edtVolumen.setText(acuarioEditar.obtenerVolumenCilindricoString());
         }
@@ -175,6 +173,7 @@ public class EditarAcuario extends AppCompatActivity implements
             Intent i = new Intent(this, AcuarioDetail.class);
             i.putExtra("varAcuario",acuarioEditar);
             startActivity(i);
+            Toast.makeText(getApplicationContext(), R.string.edit_message_complete,Toast.LENGTH_SHORT).show();
         }else{
             Toast toast = Toast.makeText(getApplicationContext(),"Llene todos los campos", Toast.LENGTH_SHORT);
             toast.show();
@@ -183,7 +182,8 @@ public class EditarAcuario extends AppCompatActivity implements
 
 
     public void cancelar(View view){
-        Intent i = new Intent(this, MisAcuarios.class);
+        Intent i = new Intent(this, AcuarioDetail.class);
+        i.putExtra("varAcuario", acuarioEditar);
         startActivity(i);
     }
 
