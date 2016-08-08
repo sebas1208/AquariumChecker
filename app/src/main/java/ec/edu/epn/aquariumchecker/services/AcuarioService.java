@@ -52,6 +52,11 @@ public class AcuarioService {
         task.execute(acuario);
     }
 
+    public void editarAcuario(Acuario acuario){
+        EditarAcuarioAsyncTask task = new EditarAcuarioAsyncTask();
+        task.execute(acuario);
+    }
+
     public class CrearAcuarioAsyncTask extends AsyncTask<Acuario, Void, Void> {
 
         @Override
@@ -92,24 +97,24 @@ public class AcuarioService {
         }
     }
 
-    public void editarAcuario(Acuario acuarioEditar){
-        AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
-        SQLiteDatabase db = op.getWritableDatabase();
-        String[] id = {Integer.toString(acuarioEditar.getId())};
+    public class EditarAcuarioAsyncTask extends AsyncTask<Acuario, Void, Acuario> {
+        @Override
+        protected Acuario doInBackground(Acuario... params) {
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/acuario";
 
-        ContentValues valores = new ContentValues();
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_NOMBRE,acuarioEditar.getNombre());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_TIPOAGUA,acuarioEditar.getTipo_agua());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_FORMA,acuarioEditar.getForma());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ALTO,acuarioEditar.getAlto());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ANCHO,acuarioEditar.getAncho());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_MEDIDAS,acuarioEditar.getProfundidad_rectangular());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_DIAMETRO,acuarioEditar.getDiametro());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_REDONDO,acuarioEditar.getProfundidad_cilindrica());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_VOLUMEN,acuarioEditar.getVolumen());
-        db.update(AquariumCheckerAppContract.TablaAcuario.NOMBRE_TABLA,valores,
-                AquariumCheckerAppContract.TablaAcuario._ID + " = ?",id);
-        db.close();
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            restTemplate.getMessageConverters().add(
+                    new StringHttpMessageConverter());
+            restTemplate.put(url, params[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Acuario acuario) {
+            super.onPostExecute(acuario);
+        }
     }
 
     public Context getAppContext() {
