@@ -71,11 +71,11 @@ public class NuevaGaleria extends AppCompatActivity {
 
         GaleriaService galeriaService = new GaleriaService(getApplicationContext());
         FotoService fotoService = new FotoService(getApplicationContext());
-        long idGaleria = galeriaService.createGaleria(nuevaGaleria);
+        //long idGaleria = galeriaService.createGaleria(nuevaGaleria);
 
         for (Foto foto: fotosList){
-            foto.setIdGaleria((int)idGaleria);
-            fotoService.createFoto(foto);
+//            foto.setIdGaleria((int)idGaleria);
+//            fotoService.createFoto(foto);
         }
 
         Intent i = new Intent(this, ec.edu.epn.aquariumchecker.views.Galeria.class);

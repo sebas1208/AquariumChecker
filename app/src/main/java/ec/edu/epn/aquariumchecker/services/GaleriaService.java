@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import ec.edu.epn.aquariumchecker.adapters.GaleriaAdapter;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
@@ -30,7 +31,9 @@ public class GaleriaService {
 
     private Context appContext;
 
-    private RecyclerView.Adapter adapter;
+    private List<Galeria> galerias;
+
+    private GaleriaAdapter adapter;
 
     public GaleriaService(Context appContext) {
         this.appContext = appContext;
@@ -44,9 +47,10 @@ public class GaleriaService {
         task.execute(galeria);
     }
 
-    public void findGaleriasByAcuario(Acuario acuario, List<Galeria> galerias, RecyclerView.Adapter adapter){
+    public void listGaleriasPorAcuario(Acuario acuario, List<Galeria> galerias, GaleriaAdapter adapter){
         ListarGaleriasByAcuarioAsyncTask task = new ListarGaleriasByAcuarioAsyncTask();
         task.execute(acuario);
+        this.galerias = galerias;
         this.adapter = adapter;
     }
 
@@ -93,49 +97,6 @@ public class GaleriaService {
         return l;
     }
 
-    public List<Galeria> listGaleriasPorAcuario(Acuario acuario){
-        AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
-        List<Galeria> l = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String[] selectionValues = {String.valueOf(acuario.getId())};
-
-        SQLiteDatabase db = oh.getReadableDatabase();
-        String[] columnas = {AquariumCheckerAppContract.TablaGaleria.COLUMNA_FECHA,
-                AquariumCheckerAppContract.TablaGaleria.COLUMNA_OBSERVACIONES,
-                AquariumCheckerAppContract.TablaGaleria.COLUMNA_FOTOS,
-                AquariumCheckerAppContract.TablaGaleria.ACUARIO_ID,
-                AquariumCheckerAppContract.TablaGaleria._ID,
-        };
-
-
-        Cursor cur = db.query(
-                AquariumCheckerAppContract.TablaGaleria.NOMBRE_TABLA,
-                columnas,
-                AquariumCheckerAppContract.TablaGaleria.ACUARIO_ID + " = ?",
-                selectionValues,
-                null,
-                null,
-                null
-        );
-
-        while (cur.moveToNext()) {
-            Date date = null;
-            try {
-                date = sdf.parse(cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaGaleria.COLUMNA_FECHA)));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            Galeria galeria = new Galeria(
-                    date,
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaGaleria.COLUMNA_OBSERVACIONES)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaGaleria.COLUMNA_FOTOS)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaGaleria._ID)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaGaleria.ACUARIO_ID)));
-            l.add(galeria);
-        }
-        db.close();
-        return l;
-    }
 
     public boolean removeGaleria(Galeria galeria){
         AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
@@ -179,20 +140,21 @@ public class GaleriaService {
         @Override
         protected List<Galeria> doInBackground(Acuario... params) {
             List<Galeria> galeriasList;
-            final String url = "http://acuariumrest-sebas1208.rhcloud.com/galeria/acuario" + params[0].getId();
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/galeria/acuario/" + params[0].getId();
 
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(
                     new MappingJackson2HttpMessageConverter());
             Galeria[] galeriaArray = restTemplate.getForObject(url, Galeria[].class);
-            galeriasList = Arrays.asList(galeriaArray);
-            return galeriasList;
+            galerias.addAll(Arrays.asList(galeriaArray));
+            return galerias;
 
         }
 
         @Override
         protected void onPostExecute(List<Galeria> galeriasList) {
             super.onPostExecute(galeriasList);
+            adapter.notifyDataSetChanged();
         }
     }
 

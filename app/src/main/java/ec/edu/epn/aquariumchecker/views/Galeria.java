@@ -53,18 +53,20 @@ public class Galeria extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         galerias = (ListView) findViewById(R.id.galeria_list);
+        adapter = new GaleriaAdapter(getApplicationContext(),galeriasList);
+        galerias.setAdapter(adapter);
     }
 
     private void obtenerAcuarioSeleccionado(){
-        acuarioSeleccionado = (Acuario)getIntent().getSerializableExtra("acuarioSeleccionado");
+        acuarioSeleccionado = (Acuario)getIntent().getSerializableExtra("varAcuario");
         if(acuarioSeleccionado == null){
             acuarioSeleccionado = new Acuario();
         }
     }
 
     private void obtenerGaleriasPorAcuario(){
-        ListarGalerias listarGalerias = new ListarGalerias();
-        listarGalerias.execute();
+        GaleriaService service = new GaleriaService();
+        service.listGaleriasPorAcuario(acuarioSeleccionado,galeriasList,adapter);
     }
 
     public void abrirNuevaGaleria(View view){

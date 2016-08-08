@@ -9,13 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-<<<<<<< HEAD
 import android.widget.ListView;
 import android.widget.TextView;
-=======
 import android.widget.LinearLayout;
 import android.widget.Toast;
->>>>>>> f3dd378e713290bd1966934d1880e9d5c419188e
 
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.services.AcuarioService;
@@ -98,7 +95,8 @@ public class AcuarioDetail extends AppCompatActivity {
     }
 
     public void abrirGalerias(View view){
-        Intent i = new Intent(this,MisGalerias.class);
+        Intent i = new Intent(this,Galeria.class);
+        i.putExtra("varAcuario", acuario);
         startActivity(i);
     }
 
