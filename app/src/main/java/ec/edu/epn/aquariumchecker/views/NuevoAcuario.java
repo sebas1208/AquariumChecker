@@ -134,7 +134,7 @@ public class NuevoAcuario extends AppCompatActivity implements
         if (nuevoAcuario.camposValidos()) {
             AcuarioService service = new AcuarioService();
             service.crearAcuario(nuevoAcuario);
-            Intent i = new Intent(this, MisAcuarios.class);
+            Intent i = new Intent(this, AquariumCherckerMain.class);
             startActivity(i);
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "Llene todos los campos", Toast.LENGTH_SHORT);

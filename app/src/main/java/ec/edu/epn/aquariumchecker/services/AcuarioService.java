@@ -1,26 +1,14 @@
 package ec.edu.epn.aquariumchecker.services;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
-import org.springframework.http.HttpMethod;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-
-import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
-import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
-import ec.edu.epn.aquariumchecker.views.MisAcuarios;
-import ec.edu.epn.aquariumchecker.views.NuevoAcuario;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
 
 /**
@@ -31,12 +19,6 @@ public class AcuarioService {
     final String url = "http://acuariumrest-sebas1208.rhcloud.com/acuario";
 
     private RecyclerView.Adapter adapter;
-
-    private Context appContext;
-
-    public AcuarioService(Context appContext) {
-        this.appContext = appContext;
-    }
 
     public AcuarioService() {
     }
@@ -49,6 +31,16 @@ public class AcuarioService {
 
     public void crearAcuario(Acuario acuario){
         CrearAcuarioAsyncTask task = new CrearAcuarioAsyncTask();
+        task.execute(acuario);
+    }
+
+    public void editarAcuario(Acuario acuario){
+        EditarAcuarioAsyncTask task = new EditarAcuarioAsyncTask();
+        task.execute(acuario);
+    }
+
+    public void eliminarAcuario(Acuario acuario){
+        ElimanarAcuarioAsyncTask task = new ElimanarAcuarioAsyncTask();
         task.execute(acuario);
     }
 
@@ -92,32 +84,43 @@ public class AcuarioService {
         }
     }
 
-    public void editarAcuario(Acuario acuarioEditar){
-        AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
-        SQLiteDatabase db = op.getWritableDatabase();
-        String[] id = {Integer.toString(acuarioEditar.getId())};
+    public class EditarAcuarioAsyncTask extends AsyncTask<Acuario, Void, Acuario> {
+        @Override
+        protected Acuario doInBackground(Acuario... params) {
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/acuario/" + params[0].getId();
 
-        ContentValues valores = new ContentValues();
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_NOMBRE,acuarioEditar.getNombre());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_TIPOAGUA,acuarioEditar.getTipo_agua());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_FORMA,acuarioEditar.getForma());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ALTO,acuarioEditar.getAlto());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_ANCHO,acuarioEditar.getAncho());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_MEDIDAS,acuarioEditar.getProfundidad_rectangular());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_DIAMETRO,acuarioEditar.getDiametro());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_PROFUNDIDAD_REDONDO,acuarioEditar.getProfundidad_cilindrica());
-        valores.put(AquariumCheckerAppContract.TablaAcuario.COLUMNA_VOLUMEN,acuarioEditar.getVolumen());
-        db.update(AquariumCheckerAppContract.TablaAcuario.NOMBRE_TABLA,valores,
-                AquariumCheckerAppContract.TablaAcuario._ID + " = ?",id);
-        db.close();
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            restTemplate.getMessageConverters().add(
+                    new StringHttpMessageConverter());
+            restTemplate.put(url, params[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Acuario acuario) {
+            super.onPostExecute(acuario);
+        }
     }
 
-    public Context getAppContext() {
-        return appContext;
-    }
+    public class ElimanarAcuarioAsyncTask extends AsyncTask<Acuario, Void, Acuario> {
+        @Override
+        protected Acuario doInBackground(Acuario... params) {
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/acuario/" + params[0].getId();
 
-    public void setAppContext(Context appContext) {
-        this.appContext = appContext;
-    }
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            restTemplate.getMessageConverters().add(
+                    new StringHttpMessageConverter());
+            restTemplate.delete(url, params[0]);
+            return null;
+        }
 
+        @Override
+        protected void onPostExecute(Acuario acuario) {
+            super.onPostExecute(acuario);
+        }
+    }
 }
