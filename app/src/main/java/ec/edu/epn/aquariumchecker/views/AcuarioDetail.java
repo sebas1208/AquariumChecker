@@ -9,13 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-<<<<<<< HEAD
 import android.widget.ListView;
 import android.widget.TextView;
-=======
-import android.widget.LinearLayout;
 import android.widget.Toast;
->>>>>>> f3dd378e713290bd1966934d1880e9d5c419188e
 
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.services.AcuarioService;
