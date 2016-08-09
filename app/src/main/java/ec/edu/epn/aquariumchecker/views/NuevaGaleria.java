@@ -33,7 +33,7 @@ public class NuevaGaleria extends AppCompatActivity {
     private List<Foto> fotosList = new ArrayList<>();
     private FotosAdapter adapter;
 
-    private Acuario acuarioSeleccionado;
+    private Acuario acuario;
     private ec.edu.epn.aquariumchecker.vo.Galeria nuevaGaleria = new Galeria();
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -57,29 +57,26 @@ public class NuevaGaleria extends AppCompatActivity {
     }
 
     private void obtenerAcuarioSeleccionado(){
-        acuarioSeleccionado = (Acuario)getIntent().getSerializableExtra("acuarioSeleccionado");
-        if(acuarioSeleccionado == null){
-            acuarioSeleccionado = new Acuario();
-        }
+        acuario = (Acuario)getIntent().getSerializableExtra("varAcuario");
     }
 
     public void guardarGaleria(View v){
         nuevaGaleria.setFecha(new Date());
         nuevaGaleria.setFotos("");
         nuevaGaleria.setObservaciones(edtObservaciones.getText().toString());
-        nuevaGaleria.setIdAcuario(acuarioSeleccionado.getId());
+        nuevaGaleria.setIdAcuario(acuario.getId());
 
         GaleriaService galeriaService = new GaleriaService(getApplicationContext());
         FotoService fotoService = new FotoService(getApplicationContext());
-        //long idGaleria = galeriaService.createGaleria(nuevaGaleria);
+        galeriaService.createGaleria(nuevaGaleria, fotosList);
 
-        for (Foto foto: fotosList){
+//        for (Foto foto: fotosList){
 //            foto.setIdGaleria((int)idGaleria);
 //            fotoService.createFoto(foto);
-        }
+//        }
 
         Intent i = new Intent(this, ec.edu.epn.aquariumchecker.views.Galeria.class);
-        i.putExtra("acuarioSeleccionado",acuarioSeleccionado);
+        i.putExtra("acuario", acuario);
         startActivity(i);
     }
 

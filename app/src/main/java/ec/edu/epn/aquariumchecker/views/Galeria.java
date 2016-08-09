@@ -26,7 +26,7 @@ import ec.edu.epn.aquariumchecker.vo.Acuario;
 
 public class Galeria extends AppCompatActivity {
     private List<ec.edu.epn.aquariumchecker.vo.Galeria> galeriasList = new ArrayList<>();
-    private Acuario acuarioSeleccionado;
+    private Acuario acuario;
     private ListView galerias;
     private GaleriaAdapter adapter;
     static final int NUEVA_GALERIA_REQUEST = 1;
@@ -58,20 +58,20 @@ public class Galeria extends AppCompatActivity {
     }
 
     private void obtenerAcuarioSeleccionado(){
-        acuarioSeleccionado = (Acuario)getIntent().getSerializableExtra("varAcuario");
-        if(acuarioSeleccionado == null){
-            acuarioSeleccionado = new Acuario();
+        acuario = (Acuario)getIntent().getSerializableExtra("varAcuario");
+        if(acuario == null){
+            acuario = new Acuario();
         }
     }
 
     private void obtenerGaleriasPorAcuario(){
         GaleriaService service = new GaleriaService();
-        service.listGaleriasPorAcuario(acuarioSeleccionado,galeriasList,adapter);
+        service.listGaleriasPorAcuario(acuario,galeriasList,adapter);
     }
 
     public void abrirNuevaGaleria(View view){
         Intent i = new Intent(this,NuevaGaleria.class);
-        i.putExtra("acuarioSeleccionado",acuarioSeleccionado);
+        i.putExtra("varAcuario", acuario);
         startActivityForResult(i,NUEVA_GALERIA_REQUEST);
     }
 

@@ -4,6 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
+
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,17 +33,27 @@ public class FotoService {
     }
 
     public void createFoto(Foto foto){
-        AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
-        SQLiteDatabase db = op.getWritableDatabase();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
+        CrearFotoAsyncTask task = new CrearFotoAsyncTask();
+        task.execute(foto);
+    }
 
-        ContentValues valores = new ContentValues();
-        valores.put(AquariumCheckerAppContract.TablaFoto.COLUMNA_PATH,foto.getPath());
-        valores.put(AquariumCheckerAppContract.TablaFoto.COLUMNA_DESCRIPCION,foto.getDescripcion());
-        valores.put(AquariumCheckerAppContract.TablaFoto.GALERIA_ID,foto.getIdGaleria());
-        db.insert(AquariumCheckerAppContract.TablaFoto.NOMBRE_TABLA, null, valores);
-        db.close();
+    public class CrearFotoAsyncTask extends AsyncTask<Foto, Void, Void> {
+        @Override
+        protected Void doInBackground(Foto... params) {
+            Foto foto = params [0];
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/planta";
+
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            restTemplate.postForObject(url, foto, Foto.class);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
     }
 
     public List<Foto> listFotos(){
