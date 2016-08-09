@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,6 @@ public class MisPeces extends AppCompatActivity {
     private ListView listapeces;
     private List<Peces> peces = new ArrayList<>();
     private PecesAdapter adapter;
-
     private Acuario accuarioSeleccionado;
 
     @Override
@@ -52,8 +51,8 @@ public class MisPeces extends AppCompatActivity {
     }
 
     private void obtenerListaPeces(){
-        PecesService pecesService = new PecesService(getApplicationContext());
-        peces.addAll(pecesService.listaPecesPorAcuario(accuarioSeleccionado));
+        PecesService pecesService = new PecesService();
+        pecesService.listaPecesPorAcuario(accuarioSeleccionado, peces, adapter);
     }
 
     public void abrirPez(View v) {
@@ -63,10 +62,10 @@ public class MisPeces extends AppCompatActivity {
     }
 
     public void eliminar(View view){
-        int position = listapeces.getPositionForView((LinearLayout)view.getParent());
-        PecesService service = new PecesService(getApplicationContext());
-        service.removePeces(peces.get(position));
-        peces.remove(position);
+        PecesService pecesService = new PecesService();
+        pecesService.eliminarPeces(accuarioSeleccionado);
         adapter.notifyDataSetChanged();
+        Toast.makeText(getApplicationContext(), "Se elimino el pez", Toast.LENGTH_SHORT).show();
     }
+
 }

@@ -1,15 +1,15 @@
 package ec.edu.epn.aquariumchecker.services;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 
-import java.util.ArrayList;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
 import java.util.List;
 
-import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
-import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
+import ec.edu.epn.aquariumchecker.adapters.PecesAdapter;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Peces;
 
@@ -17,122 +17,91 @@ import ec.edu.epn.aquariumchecker.vo.Peces;
  * Created by sebas on 7/6/2016.
  */
 public class PecesService {
-
-    private Context appContext;
-
-    public PecesService(Context appContext) {
-        this.appContext = appContext;
-    }
+    private List<Peces> peces;
+    private PecesAdapter adapter;
 
     public PecesService() {
     }
 
     public void createPez(Peces pez){
-        AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
-        SQLiteDatabase db = op.getWritableDatabase();
+        CrearPezAsyncTask task = new CrearPezAsyncTask();
+        task.execute(pez);
 
-        ContentValues valores = new ContentValues();
-        valores.put(AquariumCheckerAppContract.TablaPeces.COLUMNA_NOMBRE,pez.getNombre());
-        valores.put(AquariumCheckerAppContract.TablaPeces.COLUMNA_CANTIDAD,pez.getCantidad());
-        valores.put(AquariumCheckerAppContract.TablaPeces.COLUMNA_DESCRIPCION,pez.getDescripcion());
-        valores.put(AquariumCheckerAppContract.TablaPeces.COLUMNA_FOTO,pez.getFotoURL());
-        valores.put(AquariumCheckerAppContract.TablaPeces.ACUARIO_ID,pez.getAcuario_id());
-        db.insert(AquariumCheckerAppContract.TablaPeces.NOMBRE_TABLA, null, valores);
-        db.close();
+    }
+    public void eliminarPeces(Acuario acuario){
+        EliminarPecesAsyncTask task = new EliminarPecesAsyncTask();
+        task.execute(acuario);
     }
 
-    public List<Peces> listaPecesPorAcuario(Acuario acuario){
-        AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
-        List<Peces> peces = new ArrayList<>();
-        SQLiteDatabase db = oh.getReadableDatabase();
 
-        String[] id = {Integer.toString(acuario.getId())};
+    public void listaPecesPorAcuario(Acuario acuario, List<Peces> peces, PecesAdapter adapter){
+        ListarPecesByAcuarioAsyncTask task = new ListarPecesByAcuarioAsyncTask();
+        task.execute(acuario);
+        this.peces = peces;
+        this.adapter = adapter;
+    }
 
-        String[] columnas = {AquariumCheckerAppContract.TablaPeces.COLUMNA_NOMBRE,
-                AquariumCheckerAppContract.TablaPeces.COLUMNA_DESCRIPCION,
-                AquariumCheckerAppContract.TablaPeces.COLUMNA_CANTIDAD,
-                AquariumCheckerAppContract.TablaPeces.COLUMNA_FOTO,
-                AquariumCheckerAppContract.TablaPeces._ID,
-                AquariumCheckerAppContract.TablaPeces.ACUARIO_ID
-        };
+    public class ListarPecesByAcuarioAsyncTask extends AsyncTask<Acuario, Void, List<Peces>> {
 
-        Cursor cur = db.query(
-                AquariumCheckerAppContract.TablaPeces.NOMBRE_TABLA,
-                columnas,
-                AquariumCheckerAppContract.TablaPeces.ACUARIO_ID + " = ?", id,
-                null,
-                null,
-                null
-        );
+        @Override
+        protected List<Peces> doInBackground(Acuario... params) {
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/pez/acuario/" + params[0].getId();
 
-        while (cur.moveToNext()) {
-            Peces pez = new Peces(cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaPeces.COLUMNA_NOMBRE)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaPeces.COLUMNA_DESCRIPCION)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaPeces.COLUMNA_CANTIDAD)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaPeces.COLUMNA_FOTO)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaPeces._ID)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaPeces.ACUARIO_ID)));
-            peces.add(pez);
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            Peces[] pecesArray = restTemplate.getForObject(url, Peces[].class);
+            peces.addAll(Arrays.asList(pecesArray));
+            return peces;
+
         }
 
-        return peces;
+        @Override
+        protected void onPostExecute(List<Peces> pecesList) {
+            super.onPostExecute(pecesList);
+            adapter.notifyDataSetChanged();
+        }
     }
 
-    public List<Peces> listaPeces(){
+    public class CrearPezAsyncTask extends AsyncTask<Peces, Void, String> {
+        @Override
+        protected String doInBackground(Peces... params) {
+            Peces pez = params[0];
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/pez";
 
-        AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
-        List<Peces> peces = new ArrayList<>();
-        SQLiteDatabase db = oh.getReadableDatabase();
-
-        String[] columnas = {AquariumCheckerAppContract.TablaPeces.COLUMNA_NOMBRE,
-                AquariumCheckerAppContract.TablaPeces.COLUMNA_DESCRIPCION,
-                AquariumCheckerAppContract.TablaPeces.COLUMNA_CANTIDAD,
-                AquariumCheckerAppContract.TablaPeces.COLUMNA_FOTO,
-                AquariumCheckerAppContract.TablaPeces._ID,
-                AquariumCheckerAppContract.TablaPeces.ACUARIO_ID
-        };
-
-        Cursor cur = db.query(
-                AquariumCheckerAppContract.TablaPeces.NOMBRE_TABLA,
-                columnas,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
-
-        while (cur.moveToNext()) {
-            Peces pez = new Peces(cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaPeces.COLUMNA_NOMBRE)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaPeces.COLUMNA_DESCRIPCION)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaPeces.COLUMNA_CANTIDAD)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaPeces.COLUMNA_FOTO)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaPeces._ID)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaPeces.ACUARIO_ID)));
-            peces.add(pez);
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            restTemplate.getMessageConverters().add(
+                    new StringHttpMessageConverter());
+            String id = restTemplate.postForObject(url, pez, String.class);
+            return id;
         }
 
-        return peces;
+        @Override
+        protected void onPostExecute(String id) {
+
+        }
     }
+        public class EliminarPecesAsyncTask extends AsyncTask<Acuario, Void, Peces> {
+            @Override
+            protected Peces doInBackground(Acuario... params) {
+                final String url = "http://acuariumrest-sebas1208.rhcloud.com/peces/acuario" + params[0].getId();
 
-    public boolean removePeces(Peces peces){
-        AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
-        SQLiteDatabase db = op.getWritableDatabase();
-        String[] id = { Integer.toString(peces.getId())};
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(
+                        new MappingJackson2HttpMessageConverter());
+                restTemplate.getMessageConverters().add(
+                        new StringHttpMessageConverter());
+                restTemplate.delete(url, params[0]);
+                return null;
+            }
 
-        db.delete(AquariumCheckerAppContract.TablaPeces.NOMBRE_TABLA,
-                AquariumCheckerAppContract.TablaPeces._ID + " = ?",
-                id);
-        db.close();
-        return true ;
-    }
+            @Override
+            protected void onPostExecute(Peces peces) {
+                super.onPostExecute(peces);
+        }
 
-    public Context getAppContext() {
-        return appContext;
-    }
-
-    public void setAppContext(Context appContext) {
-        this.appContext = appContext;
     }
 
 }

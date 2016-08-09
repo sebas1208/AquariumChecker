@@ -70,10 +70,9 @@ public class NuevoPez extends AppCompatActivity {
         pez.setAcuario_id(acuarioSeleccionado.getId());
         pez.setFotoURL(pathActual);
 
-        PecesService pecesService = new PecesService(getApplicationContext());
+        PecesService pecesService = new PecesService();
         pecesService.createPez(pez);
-
-        Intent i = new Intent(this, MisPecesAcuarios.class);
+        Intent i = new Intent(this, MisPeces.class);
         startActivity(i);
     }
 
