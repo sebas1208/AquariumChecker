@@ -70,10 +70,10 @@ public class NuevoPlanta extends AppCompatActivity {
         planta.setAcuarioId(acuarioSeleccionado.getId());
         planta.setFotoURL(pathActual);
 
-        PlantasService plantasService = new PlantasService(getApplicationContext());
+        PlantasService plantasService = new PlantasService();
         plantasService.createPlanta(planta);
 
-        Intent i = new Intent(this, MisPlantasAcuario.class);
+        Intent i = new Intent(this, MisPlantas.class);
         startActivity(i);
     }
 

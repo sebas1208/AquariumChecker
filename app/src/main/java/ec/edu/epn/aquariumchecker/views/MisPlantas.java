@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +52,8 @@ public class MisPlantas extends AppCompatActivity {
     }
 
     private void obtenerListaPlantas(){
-        PlantasService plantasService = new PlantasService(getApplicationContext());
-        plantas.addAll(plantasService.listaPlantasPorAcuario(accuarioSeleccionado));
+        PlantasService plantasService = new PlantasService();
+        plantasService.listaPlantasPorAcuario(accuarioSeleccionado, plantas, adapter);
     }
 
 
@@ -64,11 +64,10 @@ public class MisPlantas extends AppCompatActivity {
     }
 
     public void eliminar(View view){
-        int position = listaplantas.getPositionForView((LinearLayout)view.getParent());
-        PlantasService service = new PlantasService(getApplicationContext());
-        service.removePlantas(plantas.get(position));
-        plantas.remove(position);
+        PlantasService plantaService = new PlantasService();
+        plantaService.eliminarPlanta(accuarioSeleccionado);
         adapter.notifyDataSetChanged();
+        Toast.makeText(getApplicationContext(), "Se elimino el pez", Toast.LENGTH_SHORT).show();
     }
 
 }

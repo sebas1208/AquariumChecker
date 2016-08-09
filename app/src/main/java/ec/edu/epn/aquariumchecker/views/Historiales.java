@@ -19,9 +19,12 @@ import ec.edu.epn.aquariumchecker.vo.*;
 public class Historiales extends AppCompatActivity {
         private List<ec.edu.epn.aquariumchecker.vo.Historiales> historialeslist = new ArrayList<>();
         private Acuario acuarioSeleccionado;
+
         private ListView historiales;
+        private HistorialAdapter adapter;
         static final int NUEVO_HISTORIAL_REQUEST = 1;
         static final int MOSTRAR_HISTORIAL_REQUEST = 1;
+
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +60,9 @@ public class Historiales extends AppCompatActivity {
     }
 
     private void obtenerHistorialesPorAcuario(){
-        HistorialService service = new HistorialService(getApplicationContext());
-        historialeslist.addAll(service.listHistorialesPorAcuario(acuarioSeleccionado));
+
+        HistorialService service = new HistorialService();
+        service.listHistorialesPorAcuario(acuarioSeleccionado,historialeslist,adapter);
     }
 
     public void abrirNuevoHistorial(View view){

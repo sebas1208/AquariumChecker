@@ -1,15 +1,15 @@
 package ec.edu.epn.aquariumchecker.services;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 
-import java.util.ArrayList;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
 import java.util.List;
 
-import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
-import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
+import ec.edu.epn.aquariumchecker.adapters.PlantasAdapter;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Planta;
 
@@ -17,122 +17,92 @@ import ec.edu.epn.aquariumchecker.vo.Planta;
  * Created by natyd on 7/6/2016.
  */
 public class PlantasService {
-
-    private Context appContext;
-
-    public PlantasService(Context appContext) {
-        this.appContext = appContext;
-    }
+    private List<Planta> plantas;
+    private PlantasAdapter adapter;
 
     public PlantasService() {
     }
 
     public void createPlanta(Planta planta){
-        AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
-        SQLiteDatabase db = op.getWritableDatabase();
-
-        ContentValues valores = new ContentValues();
-        valores.put(AquariumCheckerAppContract.TablaPlantas.COLUMNA_NOMBRE,planta.getNombre());
-        valores.put(AquariumCheckerAppContract.TablaPlantas.COLUMNA_CANTIDAD,planta.getCantidad());
-        valores.put(AquariumCheckerAppContract.TablaPlantas.COLUMNA_DESCRIPCION,planta.getDescripcion());
-        valores.put(AquariumCheckerAppContract.TablaPlantas.COLUMNA_FOTO,planta.getFotoURL());
-        valores.put(AquariumCheckerAppContract.TablaPlantas.ACUARIO_ID,planta.getAcuarioId());
-        db.insert(AquariumCheckerAppContract.TablaPlantas.NOMBRE_TABLA, null, valores);
-        db.close();
+        CrearPlantaAsyncTask task = new CrearPlantaAsyncTask();
+        task.execute(planta);
     }
 
-    public List<Planta> listaPlantasPorAcuario(Acuario acuario){
-        AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
-        List<Planta> plantas = new ArrayList<>();
-        SQLiteDatabase db = oh.getReadableDatabase();
+    public void eliminarPlanta(Acuario acuario){
+        EliminarPlantaAsyncTask task = new EliminarPlantaAsyncTask();
+        task.execute(acuario);
+    }
 
-        String[] id = {Integer.toString(acuario.getId())};
+    public void listaPlantasPorAcuario(Acuario acuario, List<Planta> plantas, PlantasAdapter adapter){
+        ListarPlantasByAcuarioAsyncTask task = new ListarPlantasByAcuarioAsyncTask();
+        task.execute(acuario);
+        this.plantas = plantas;
+        this.adapter = adapter;
+    }
 
-        String[] columnas = {AquariumCheckerAppContract.TablaPlantas.COLUMNA_NOMBRE,
-                AquariumCheckerAppContract.TablaPlantas.COLUMNA_DESCRIPCION,
-                AquariumCheckerAppContract.TablaPlantas.COLUMNA_CANTIDAD,
-                AquariumCheckerAppContract.TablaPlantas.COLUMNA_FOTO,
-                AquariumCheckerAppContract.TablaPlantas._ID,
-                AquariumCheckerAppContract.TablaPlantas.ACUARIO_ID
-        };
 
-        Cursor cur = db.query(
-                AquariumCheckerAppContract.TablaPlantas.NOMBRE_TABLA,
-                columnas,
-                AquariumCheckerAppContract.TablaPlantas.ACUARIO_ID + " = ?", id,
-                null,
-                null,
-                null
-        );
 
-        while (cur.moveToNext()) {
-            Planta planta = new Planta(cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaPlantas.COLUMNA_NOMBRE)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaPlantas.COLUMNA_DESCRIPCION)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaPlantas.COLUMNA_CANTIDAD)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaPlantas.COLUMNA_FOTO)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaPlantas._ID)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaPlantas.ACUARIO_ID)));
-            plantas.add(planta);
+    public class ListarPlantasByAcuarioAsyncTask extends AsyncTask<Acuario, Void, List<Planta>> {
+
+        @Override
+        protected List<Planta> doInBackground(Acuario... params) {
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/plantas/acuario/" + params[0].getId();
+
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            Planta[] plantasArray = restTemplate.getForObject(url, Planta[].class);
+            plantas.addAll(Arrays.asList(plantasArray));
+            return plantas;
+
         }
 
-        return plantas;
+        @Override
+        protected void onPostExecute(List<Planta> plantasList) {
+            super.onPostExecute(plantasList);
+            adapter.notifyDataSetChanged();
+        }
     }
 
-    public List<Planta> listaPlantas(){
+    public class CrearPlantaAsyncTask extends AsyncTask<Planta, Void, String> {
+        @Override
+        protected String doInBackground(Planta... params) {
+            Planta planta = params[0];
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/plantas";
 
-        AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
-        List<Planta> plantas = new ArrayList<>();
-        SQLiteDatabase db = oh.getReadableDatabase();
-
-        String[] columnas = {AquariumCheckerAppContract.TablaPlantas.COLUMNA_NOMBRE,
-                AquariumCheckerAppContract.TablaPlantas.COLUMNA_DESCRIPCION,
-                AquariumCheckerAppContract.TablaPlantas.COLUMNA_CANTIDAD,
-                AquariumCheckerAppContract.TablaPlantas.COLUMNA_FOTO,
-                AquariumCheckerAppContract.TablaPlantas._ID,
-                AquariumCheckerAppContract.TablaPlantas.ACUARIO_ID
-        };
-
-        Cursor cur = db.query(
-                AquariumCheckerAppContract.TablaPlantas.NOMBRE_TABLA,
-                columnas,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
-
-        while (cur.moveToNext()) {
-            Planta planta = new Planta(cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaPlantas.COLUMNA_NOMBRE)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaPlantas.COLUMNA_DESCRIPCION)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaPlantas.COLUMNA_CANTIDAD)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaPlantas.COLUMNA_FOTO)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaPlantas._ID)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaPlantas.ACUARIO_ID)));
-            plantas.add(planta);
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            restTemplate.getMessageConverters().add(
+                    new StringHttpMessageConverter());
+            String id = restTemplate.postForObject(url, planta, String.class);
+            return id;
         }
 
-        return plantas;
+        @Override
+        protected void onPostExecute(String id) {
+
+        }
     }
+    public class EliminarPlantaAsyncTask extends AsyncTask<Acuario, Void, Planta> {
+        @Override
+        protected Planta doInBackground(Acuario... params) {
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/plantas/acuario" + params[0].getId();
 
-    public boolean removePlantas(Planta planta){
-        AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
-        SQLiteDatabase db = op.getWritableDatabase();
-        String[] id = { Integer.toString(planta.getId())};
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            restTemplate.getMessageConverters().add(
+                    new StringHttpMessageConverter());
+            restTemplate.delete(url, params[0]);
+            return null;
+        }
 
-        db.delete(AquariumCheckerAppContract.TablaPlantas.NOMBRE_TABLA,
-                AquariumCheckerAppContract.TablaPlantas._ID + " = ?",
-                id);
-        db.close();
-        return true ;
-    }
+        @Override
+        protected void onPostExecute(Planta planta) {
+            super.onPostExecute(planta);
+        }
 
-    public Context getAppContext() {
-        return appContext;
-    }
-
-    public void setAppContext(Context appContext) {
-        this.appContext = appContext;
     }
 
 }
