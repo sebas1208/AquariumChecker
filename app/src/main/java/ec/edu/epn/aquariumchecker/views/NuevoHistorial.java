@@ -20,7 +20,7 @@ import ec.edu.epn.aquariumchecker.services.HistorialService;
 import ec.edu.epn.aquariumchecker.vo.*;
 
 
-public class Historial_Ciclado extends AppCompatActivity implements View.OnClickListener {
+public class NuevoHistorial extends AppCompatActivity {
 
     private Spinner cmbCo2;
     private Button btnCalendario;
@@ -58,7 +58,6 @@ public class Historial_Ciclado extends AppCompatActivity implements View.OnClick
                         android.R.layout.simple_spinner_dropdown_item,
                         co2);
         cmbCo2.setAdapter(adaptadorCo2);
-        btnCalendario.setOnClickListener(this);
 
 
         //combo de iluminacion

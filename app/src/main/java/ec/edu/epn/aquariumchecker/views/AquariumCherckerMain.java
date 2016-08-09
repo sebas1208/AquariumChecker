@@ -2,6 +2,7 @@ package ec.edu.epn.aquariumchecker.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +19,7 @@ import ec.edu.epn.aquariumchecker.adapters.AcuariosRvAdapter;
 import ec.edu.epn.aquariumchecker.services.AcuarioService;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
 
-public class AquariumCherckerMain extends AppCompatActivity                                                     {
+public class AquariumCherckerMain extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     private RecyclerView acuarioRecyvlerView;
     private List<Acuario> acuarios;
@@ -57,5 +58,11 @@ public class AquariumCherckerMain extends AppCompatActivity                     
     public void abrirAyuda (View view){
         Intent i = new Intent (this,Ayuda.class);
         startActivity(i);
+    }
+
+    @Override
+    public void onRefresh() {
+        AcuarioService service = new AcuarioService(getApplicationContext());
+        service.listAcuarios(acuarios,adapter);
     }
 }

@@ -53,10 +53,7 @@ public class Historiales extends AppCompatActivity {
     }
 
     private void obtenerAcuarioSeleccionado(){
-        acuarioSeleccionado = (Acuario)getIntent().getSerializableExtra("acuarioSeleccionado");
-        if(acuarioSeleccionado == null){
-            acuarioSeleccionado = new Acuario();
-        }
+        acuarioSeleccionado = (Acuario)getIntent().getSerializableExtra("varAcuario");
     }
 
     private void obtenerHistorialesPorAcuario(){
@@ -66,14 +63,14 @@ public class Historiales extends AppCompatActivity {
     }
 
     public void abrirNuevoHistorial(View view){
-        Intent i = new Intent(this,Historial_Ciclado.class);
-        i.putExtra("acuarioSeleccionado",acuarioSeleccionado);
+        Intent i = new Intent(this,NuevoHistorial.class);
+        i.putExtra("varAcuario",acuarioSeleccionado);
         startActivityForResult(i,NUEVO_HISTORIAL_REQUEST);
     }
 
     public void abrirHistorial(View view){
         int position = historiales.getPositionForView((LinearLayout)view.getParent());
-        Intent i = new Intent(this, Historial_Ciclado.class);
+        Intent i = new Intent(this, NuevoHistorial.class);
        // i.putExtra("galeriaSeleccionada",historiales.get(position));
         startActivityForResult(i, MOSTRAR_HISTORIAL_REQUEST);
     }
