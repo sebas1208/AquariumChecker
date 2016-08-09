@@ -71,7 +71,6 @@ public class AquariumCherckerMain extends AppCompatActivity                     
 
     public void abrirNuevoAcuario(View view){
         Intent i = new Intent(this, NuevoAcuario.class);
-        //i.putExtra("adapter",);
         startActivity(i);
     }
 

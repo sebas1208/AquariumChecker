@@ -25,8 +25,8 @@ public class AcuarioService {
 
     public void listAcuarios(List<Acuario> acuarios, RecyclerView.Adapter adapter){
         ListarAcuariosAsyncTask task = new ListarAcuariosAsyncTask();
-        task.execute(acuarios);
         this.adapter = adapter;
+        task.execute(acuarios);
     }
 
     public void crearAcuario(Acuario acuario){
@@ -107,7 +107,7 @@ public class AcuarioService {
     public class ElimanarAcuarioAsyncTask extends AsyncTask<Acuario, Void, Acuario> {
         @Override
         protected Acuario doInBackground(Acuario... params) {
-            final String url = "http://acuariumrest-sebas1208.rhcloud.com/acuario/" + params[0].getId();
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/historial/" + params[0].getId();
 
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(
