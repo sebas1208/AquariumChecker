@@ -1,13 +1,18 @@
 package ec.edu.epn.aquariumchecker.views;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +20,7 @@ import java.util.List;
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.adapters.FotosAdapter;
 import ec.edu.epn.aquariumchecker.services.FotoService;
+import ec.edu.epn.aquariumchecker.services.GaleriaService;
 import ec.edu.epn.aquariumchecker.vo.*;
 import ec.edu.epn.aquariumchecker.vo.Galeria;
 
@@ -35,7 +41,7 @@ public class GaleriaDetail extends AppCompatActivity {
     }
 
     private void initComponents(){
-        setContentView(R.layout.fotos_activity);
+        setContentView(R.layout.activity_galeria_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -81,9 +87,46 @@ public class GaleriaDetail extends AppCompatActivity {
 
     public void abrirGaleria(View v){
         Acuario acuario = (Acuario) getIntent().getSerializableExtra("varAcuario");
-        Intent i = new Intent(this, ec.edu.epn.aquariumchecker.views.Galeria.class);
+        Intent i = new Intent(this, MisGalerias.class);
         i.putExtra("varAcuario", acuario);
         startActivity(i);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_geleria_detail, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_delete:
+                deleteGaleria();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void deleteGaleria(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder
+                .setTitle(getString(R.string.delete_acuario_title))
+                .setMessage(getString(R.string.delete_acuario_detail))
+                .setIcon(R.drawable.ic_delete_forever_grey_800_18dp)
+                .setPositiveButton(getString(R.string.comfirm), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        GaleriaService service = new GaleriaService(getApplicationContext());
+                        service.removeGaleria(galeriaSeleccionada);
+                        Intent i = new Intent(GaleriaDetail.this, MisGalerias.class);
+                        i.putExtra("varAcuario", getIntent().getSerializableExtra("varAcuario"));
+                        startActivity(i);
+                        Toast.makeText(getApplicationContext(), R.string.delete_acuario_message, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(getString(R.string.not_confirm), null)                        //Do nothing on no
+                .show();
+    }
 }

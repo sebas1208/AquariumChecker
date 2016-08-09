@@ -4,9 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -26,9 +28,14 @@ import ec.edu.epn.aquariumchecker.vo.Galeria;
  */
 public class GaleriaService {
 
+    private Context context;
     private List<Galeria> galerias;
     private GaleriaRvAdapter adapter;
     private List<Foto> fotos;
+
+    public GaleriaService(Context context) {
+        this.context = context;
+    }
 
     public GaleriaService() {
     }
@@ -47,8 +54,9 @@ public class GaleriaService {
     }
 
 
-    public boolean removeGaleria(Galeria galeria) {
-        return true;
+    public void removeGaleria(Galeria galeria) {
+        EliminarGaleriaAsyncTask task = new EliminarGaleriaAsyncTask();
+        task.execute(galeria);
     }
 
     public class ListarGaleriasAsyncTask extends AsyncTask<Void, Void, List<Galeria>> {
@@ -74,6 +82,7 @@ public class GaleriaService {
     }
 
     public class ListarGaleriasByAcuarioAsyncTask extends AsyncTask<Acuario, Void, List<Galeria>> {
+        private Exception e;
 
         @Override
         protected List<Galeria> doInBackground(Acuario... params) {
@@ -83,16 +92,24 @@ public class GaleriaService {
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(
                     new MappingJackson2HttpMessageConverter());
-            Galeria[] galeriaArray = restTemplate.getForObject(url, Galeria[].class);
-            galerias.addAll(Arrays.asList(galeriaArray));
+            try {
+                Galeria[] galeriaArray = restTemplate.getForObject(url, Galeria[].class);
+                galerias.addAll(Arrays.asList(galeriaArray));
+            }catch (HttpClientErrorException e){
+                this.e = e;
+            }
             return galerias;
 
         }
 
         @Override
         protected void onPostExecute(List<Galeria> galeriasList) {
-            super.onPostExecute(galeriasList);
-            adapter.notifyDataSetChanged();
+            if(e == null) {
+                adapter.notifyDataSetChanged();
+            }else{
+                Toast.makeText(context,"Error en la red, intentalo de nuevo",Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 
@@ -121,19 +138,16 @@ public class GaleriaService {
         }
     }
 
-    public class EliminarAsyncTask extends AsyncTask<Galeria, Void, Void> {
+    public class EliminarGaleriaAsyncTask extends AsyncTask<Galeria, Void, Void> {
         @Override
         protected Void doInBackground(Galeria... params) {
-            Log.v("buscar", "2");
             Galeria galeria = params[0];
             final String url = "http://acuariumrest-sebas1208.rhcloud.com/galeria/{id}";
-            Log.v("buscar", "3");
 
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(
                     new MappingJackson2HttpMessageConverter());
             restTemplate.delete(url, galeria.getId());
-            Log.v("Galeria Eliminar", "mensaje");
             return null;
         }
 

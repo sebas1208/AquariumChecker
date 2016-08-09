@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
@@ -35,9 +36,10 @@ public class RecordatoriosAdapter<T> extends ArrayAdapter<T> {
             item = inflater.inflate(R.layout.recordatorio_list_item,null);
         }
         TextView lblNombre = (TextView) item.findViewById(R.id.mis_recordatorios_nombre_recordatorio);
-        lblNombre.setText(datos.get(position).getTipoCambio()+": ");
+        lblNombre.setText(datos.get(position).getTipoRecordatorio());
         TextView lblDescripcion = (TextView) item.findViewById(R.id.mis_recordatorios_descripcion);
-        lblDescripcion.setText("Fecha: "+datos.get(position).getFecha()+",Hora: "+ datos.get(position).getHora());
+        lblDescripcion.setText("Fecha: " + new SimpleDateFormat("dd/M/yyyy").format(datos.get(position).getFecha())
+                +" Hora: "+ new SimpleDateFormat("hh:mm").format(datos.get(position).getHora()));
 
         return item;
     }

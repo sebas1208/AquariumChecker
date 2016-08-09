@@ -21,7 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/fotos_content" />
+    <include layout="@layout/content_galeria_detail" />
 
     <Button
         android:id="@+id/fab"

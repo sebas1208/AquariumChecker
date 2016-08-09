@@ -7,6 +7,7 @@
         android:required="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
 
     <application
         android:allowBackup="true"
@@ -63,11 +64,11 @@
         <activity
             android:name=".views.GaleriaDetail"
             android:label="Galeria"
-            android:parentActivityName=".views.Galeria"
+            android:parentActivityName=".views.MisGalerias"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.Galeria" />
+                android:value=".views.MisGalerias" />
         </activity>
         <activity
             android:name=".views.MisPlantas"
@@ -92,9 +93,10 @@
                 android:value="ec.edu.epn.aquariumchecker.views.ListHistorial" />
         </activity>
         <activity
-            android:name=".views.Recordatorios"
+            android:name=".views.NuevoRecordatorio"
             android:label="@string/title_activity_recordatorios"
-            android:parentActivityName=".views.ListRecordatorios">
+            android:parentActivityName=".views.ListRecordatorios"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ec.edu.epn.aquariumchecker.views.AquariumCherckerMain" />
@@ -131,7 +133,7 @@
             android:label="@string/title_activity_mis_plantas_acuario"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".views.Galeria"
+            android:name=".views.MisGalerias"
             android:label="@string/title_activity_galeria"
             android:parentActivityName=".views.AcuarioDetail"
             android:theme="@style/AppTheme.NoActionBar">
@@ -142,12 +144,12 @@
         <activity
             android:name=".views.NuevaGaleria"
             android:label="@string/title_activity_nueva_galeria"
-            android:parentActivityName=".views.Galeria"
+            android:parentActivityName=".views.MisGalerias"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:theme="@style/AppTheme.NoActionBar"
-                android:value="ec.edu.epn.aquariumchecker.views.Galeria" />
+                android:value=".views.MisGalerias" />
         </activity>
         <activity
             android:name=".views.NuevoPez"
@@ -177,13 +179,13 @@
                 android:value="ec.edu.epn.aquariumchecker.views.AquariumCherckerMain" />
         </activity>
         <activity
-            android:name=".views.RcordatoriosListaAcuaruios"
+            android:name=".views.MisRecordatorios"
             android:label="@string/title_activity_rcordatorios_lista_acuaruios"
-            android:parentActivityName=".views.ListRecordatorios"
+            android:parentActivityName=".views.AcuarioDetail"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ec.edu.epn.aquariumchecker.views.AquariumCherckerMain" />
+                android:value="ec.edu.epn.aquariumchecker.views.AcuarioDetail" />
         </activity>
         <activity
             android:name=".views.NuevoPlanta"

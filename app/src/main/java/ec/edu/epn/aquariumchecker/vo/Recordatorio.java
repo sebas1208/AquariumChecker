@@ -10,19 +10,19 @@ import java.util.Date;
 
 public class Recordatorio implements Serializable {
 
-    private String acuario;
-    private String fecha;
-    private String hora;
-    private String tipoCambio;
+    private String idAcuario;
+    private Date fecha;
+    private Date hora;
+    private String tipoRecordatorio;
     private String id;
 
-    public Recordatorio(String fecha, String hora, String tipoCambio,String id ,String acuario) {
-        this.fecha=fecha;
-        this.hora=hora;
-        this.tipoCambio=tipoCambio;
-        this.id=id;
-        this.acuario=acuario;
-        }
+    public Recordatorio(String id, Date fecha, Date hora, String tipoRecordatorio, String idAcuario) {
+        this.fecha = fecha;
+        this.hora = hora;
+        this.tipoRecordatorio = tipoRecordatorio;
+        this.id = id;
+        this.idAcuario = idAcuario;
+    }
 
     public String getId() {
         return id;
@@ -32,38 +32,39 @@ public class Recordatorio implements Serializable {
         this.id = id;
     }
 
-    public Recordatorio(){};
+    public Recordatorio() {
+    }
 
-    public String getAcuario() {
-        return acuario;
+    public String getIdAcuario() {
+        return idAcuario;
     }
 
 
-    public void setAcuario(String acuario) {
-        this.acuario = acuario;
+    public void setIdAcuario(String idAcuario) {
+        this.idAcuario = idAcuario;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    public String getHora() {
+    public Date getHora() {
         return hora;
     }
 
-    public void setHora(String hora) {
+    public void setHora(Date hora) {
         this.hora = hora;
     }
 
-    public String getTipoCambio() {
-        return tipoCambio;
+    public String getTipoRecordatorio() {
+        return tipoRecordatorio;
     }
 
-    public void setTipoCambio(String tipoCambio) {
-        this.tipoCambio = tipoCambio;
+    public void setTipoRecordatorio(String tipoRecordatorio) {
+        this.tipoRecordatorio = tipoRecordatorio;
     }
 }

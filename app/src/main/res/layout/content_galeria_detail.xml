@@ -11,7 +11,7 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".views.GaleriaDetail"
-    tools:showIn="@layout/fotos_activity">
+    tools:showIn="@layout/activity_galeria_detail">
 
     <ListView
         android:layout_width="match_parent"

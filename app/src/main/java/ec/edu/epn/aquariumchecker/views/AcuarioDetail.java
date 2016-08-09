@@ -23,7 +23,7 @@ public class AcuarioDetail extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView hola;
     private ListView Opciones;
-    String[] menuOpciones = {"Galerias", "Plantas", "Peces", "Historiales", "Recordatorios"};
+    String[] menuOpciones = {"Galerias", "Plantas", "Peces", "Historiales", "Recordatorio"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +94,7 @@ public class AcuarioDetail extends AppCompatActivity {
     }
 
     public void abrirGalerias(View view) {
-        Intent i = new Intent(this, Galeria.class);
+        Intent i = new Intent(this, MisGalerias.class);
         i.putExtra("varAcuario", acuario);
         startActivity(i);
     }
@@ -111,7 +111,8 @@ public class AcuarioDetail extends AppCompatActivity {
     }
 
     public void abrirRecordatorios(View view) {
-        Intent i = new Intent(this, ListRecordatorios.class);
+        Intent i = new Intent(this, MisRecordatorios.class);
+        i.putExtra("varAcuario", acuario);
         startActivity(i);
     }
 

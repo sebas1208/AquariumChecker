@@ -48,51 +48,11 @@ public class AquariumCherckerMain extends AppCompatActivity                     
         startActivity(i);
     }
 
-    public void abrirGaleria(View view){
-        Intent i = new Intent(this, GaleriaAcuario.class);
-        startActivity(i);
-    }
-
-    public void abrirMisAcuarios(View view){
-        Intent i = new Intent(this, MisAcuarios.class);
-        startActivity(i);
-    }
-
-    public void abrirPeces(View view){
-        Intent i = new Intent(this, MisPecesAcuarios.class);
-        startActivity(i);
-    }
-
-    public void abrirPlantas(View view){
-        Intent i = new Intent(this, MisPlantasAcuario.class);
-        startActivity(i);
-    }
-
 
     public void abrirNuevoAcuario(View view){
         Intent i = new Intent(this, NuevoAcuario.class);
         startActivity(i);
     }
-
-
-    public void abrirRecordatorio (View view){
-        Intent i = new Intent (this,ListRecordatorios.class);
-        startActivity(i);
-    }
-
-    public void abrirHistorial (View view){
-        Intent i = new Intent (this,ListHistorial.class);
-        startActivity(i);
-    }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode == NUEVO_ACUARIO) {
-//            if (resultCode == RESULT_OK) {
-//                adapter.notifyDataSetChanged();
-//            }
-//        }
-//    }
 
     public void abrirAyuda (View view){
         Intent i = new Intent (this,Ayuda.class);

@@ -21,7 +21,6 @@ import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
 import ec.edu.epn.aquariumchecker.adapters.FotosAdapter;
-import ec.edu.epn.aquariumchecker.services.FotoService;
 import ec.edu.epn.aquariumchecker.services.GaleriaService;
 import ec.edu.epn.aquariumchecker.vo.*;
 import ec.edu.epn.aquariumchecker.vo.Galeria;
@@ -69,8 +68,8 @@ public class NuevaGaleria extends AppCompatActivity {
         GaleriaService galeriaService = new GaleriaService();
         galeriaService.createGaleria(nuevaGaleria, fotosList);
 
-        Intent i = new Intent(this, ec.edu.epn.aquariumchecker.views.Galeria.class);
-        i.putExtra("acuario", acuario);
+        Intent i = new Intent(this, MisGalerias.class);
+        i.putExtra("varAcuario", acuario);
         startActivity(i);
     }
 

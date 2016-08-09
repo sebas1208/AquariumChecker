@@ -77,6 +77,7 @@ public class AcuarioService {
     }
 
     public class ListarAcuariosAsyncTask extends AsyncTask<List<Acuario>, Void, List<Acuario>> {
+        private Exception e;
 
         @Override
         protected List<Acuario> doInBackground(List<Acuario>... acuarios) {
@@ -87,16 +88,19 @@ public class AcuarioService {
                 Acuario[] acuarioArray = restTemplate.getForObject(url, Acuario[].class);
                 acuarios[0].addAll(Arrays.asList(acuarioArray));
             }
-            catch (HttpClientErrorException e) {
-                Toast.makeText(context,"Error en la red, intentalo de nuevo",Toast.LENGTH_SHORT).show();
+            catch (Exception e) {
+                this.e = e;
             }
             return acuarios[0];
         }
 
         @Override
         protected void onPostExecute(List<Acuario> acuarios) {
-            super.onPostExecute(acuarios);
-            adapter.notifyDataSetChanged();
+            if(e == null){
+                adapter.notifyDataSetChanged();
+            }else{
+                Toast.makeText(context,"Error en la red, intentalo de nuevo",Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

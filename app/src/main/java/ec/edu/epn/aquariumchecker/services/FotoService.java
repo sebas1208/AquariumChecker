@@ -36,7 +36,7 @@ public class FotoService {
     public FotoService() {
     }
 
-    public void createFoto(Foto foto){
+    public void  createFoto(Foto foto){
         CrearFotoAsyncTask task = new CrearFotoAsyncTask();
         task.execute(foto);
     }

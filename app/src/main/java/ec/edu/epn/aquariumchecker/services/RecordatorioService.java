@@ -41,44 +41,23 @@ public class RecordatorioService {
     }
 
     public void listRecordatoriosPorAcuario(Acuario acuario, List<Recordatorio> recordatorios, RecordatoriosAdapter adapter) {
-        ListarRecordatoriosByAcuarioAsyncTask task = new ListarRecordatoriosByAcuarioAsyncTask();
-        task.execute(acuario);
         this.recordatorios = recordatorios;
         this.adapter = adapter;
+        ListarRecordatoriosByAcuarioAsyncTask task = new ListarRecordatoriosByAcuarioAsyncTask();
+        task.execute(acuario);
     }
 
 
-    public boolean removeRecordatorio(Recordatorio recordatorio) {
-        return true;
+    public void removeRecordatorio(Recordatorio recordatorio) {
+        EliminarAsyncTask task = new EliminarAsyncTask();
+        task.execute(recordatorio);
     }
 
-    public class ListarRecordatoriosAsyncTask extends AsyncTask<Void, Void, List<Recordatorio>> {
-
-        @Override
-        protected List<Recordatorio> doInBackground(Void... params) {
-            List<Recordatorio> galeriasList = new ArrayList<Recordatorio>();
-            final String url = "http://acuariumrest-sebas1208.rhcloud.com/recordatorio";
-
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getMessageConverters().add(
-                    new MappingJackson2HttpMessageConverter());
-            Recordatorio[] galeriaArray = restTemplate.getForObject(url, Recordatorio[].class);
-            galeriasList = Arrays.asList(galeriaArray);
-            return galeriasList;
-
-        }
-
-        @Override
-        protected void onPostExecute(List<Recordatorio> galeriasList) {
-            super.onPostExecute(galeriasList);
-        }
-    }
 
     public class ListarRecordatoriosByAcuarioAsyncTask extends AsyncTask<Acuario, Void, List<Recordatorio>> {
 
         @Override
         protected List<Recordatorio> doInBackground(Acuario... params) {
-            List<Recordatorio> recordatoriosList;
             final String url = "http://acuariumrest-sebas1208.rhcloud.com/recordatorio/acuario/" + params[0].getId();
 
             RestTemplate restTemplate = new RestTemplate();
@@ -112,29 +91,18 @@ public class RecordatorioService {
             return id;
         }
 
-        @Override
-        protected void onPostExecute(String id) {
-           /* FotoService service = new FotoService();
-            for (Foto foto : fotos) {
-                foto.setIdGaleria(Integer.valueOf(id));
-                service.createFoto(foto);
-            }*/
-        }
     }
 
     public class EliminarAsyncTask extends AsyncTask<Recordatorio, Void, Void> {
         @Override
         protected Void doInBackground(Recordatorio... params) {
-            Log.v("buscar", "2");
             Recordatorio recordatorio = params[0];
             final String url = "http://acuariumrest-sebas1208.rhcloud.com/recordatorio/{id}";
-            Log.v("buscar", "3");
 
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(
                     new MappingJackson2HttpMessageConverter());
             restTemplate.delete(url, recordatorio.getId());
-            Log.v("recordatorio Eliminar", "mensaje");
             return null;
         }
 

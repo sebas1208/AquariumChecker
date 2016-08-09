@@ -14,7 +14,6 @@ import java.util.List;
 import ec.edu.epn.aquariumchecker.R;
 
 import ec.edu.epn.aquariumchecker.adapters.MisAcuariosAdapter;
-import ec.edu.epn.aquariumchecker.services.AcuarioService;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
 
 public class ListRecordatorios extends AppCompatActivity {
@@ -41,7 +40,7 @@ public class ListRecordatorios extends AppCompatActivity {
 
     public void abrirAcuario(View v) {
         int position = misAcuarios.getPositionForView((LinearLayout)v.getParent());
-        Intent i = new Intent(this, ec.edu.epn.aquariumchecker.views.RcordatoriosListaAcuaruios.class);
+        Intent i = new Intent(this, MisRecordatorios.class);
         i.putExtra("acuarioSeleccionado",acuarios.get(position));
         startActivity(i);
     }
