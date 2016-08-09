@@ -27,16 +27,18 @@ public class GaleriaService {
 
     private List<Galeria> galerias;
     private GaleriaAdapter adapter;
+    private List<Foto> fotos;
 
     public GaleriaService() {
     }
 
-    public void createGaleria(Galeria galeria, List<Foto> fotos){
+    public void createGaleria(Galeria galeria, List<Foto> fotos) {
         CrearGaleriaAsyncTask task = new CrearGaleriaAsyncTask();
         task.execute(galeria);
+        this.fotos = fotos;
     }
 
-    public void listGaleriasPorAcuario(Acuario acuario, List<Galeria> galerias, GaleriaAdapter adapter){
+    public void listGaleriasPorAcuario(Acuario acuario, List<Galeria> galerias, GaleriaAdapter adapter) {
         ListarGaleriasByAcuarioAsyncTask task = new ListarGaleriasByAcuarioAsyncTask();
         task.execute(acuario);
         this.galerias = galerias;
@@ -44,7 +46,7 @@ public class GaleriaService {
     }
 
 
-    public boolean removeGaleria(Galeria galeria){
+    public boolean removeGaleria(Galeria galeria) {
         return true;
     }
 
@@ -96,7 +98,7 @@ public class GaleriaService {
     public class CrearGaleriaAsyncTask extends AsyncTask<Galeria, Void, String> {
         @Override
         protected String doInBackground(Galeria... params) {
-            Galeria galeria = params [0];
+            Galeria galeria = params[0];
             final String url = "http://acuariumrest-sebas1208.rhcloud.com/galeria";
 
             RestTemplate restTemplate = new RestTemplate();
@@ -110,7 +112,11 @@ public class GaleriaService {
 
         @Override
         protected void onPostExecute(String id) {
-
+            FotoService service = new FotoService();
+            for (Foto foto : fotos) {
+                foto.setIdGaleria(Integer.valueOf(id));
+                service.createFoto(foto);
+            }
         }
     }
 

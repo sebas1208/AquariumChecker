@@ -84,7 +84,7 @@ public class Galeria extends AppCompatActivity {
 
     public void eliminarGaleria(View view){
         int position = galerias.getPositionForView((LinearLayout)view.getParent());
-        GaleriaService galeriaService = new GaleriaService(getApplicationContext());
+        GaleriaService galeriaService = new GaleriaService();
         galeriaService.removeGaleria(galeriasList.get(position));
 
         adapter.notifyDataSetChanged();

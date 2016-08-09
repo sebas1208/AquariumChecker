@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -41,12 +42,14 @@ public class FotoService {
         @Override
         protected Void doInBackground(Foto... params) {
             Foto foto = params [0];
-            final String url = "http://acuariumrest-sebas1208.rhcloud.com/planta";
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/foto";
 
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(
                     new MappingJackson2HttpMessageConverter());
-            restTemplate.postForObject(url, foto, Foto.class);
+            restTemplate.getMessageConverters().add(
+                    new StringHttpMessageConverter());
+            restTemplate.postForObject(url, foto, String.class);
             return null;
         }
 

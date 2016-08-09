@@ -2,6 +2,8 @@ package ec.edu.epn.aquariumchecker.vo;
 
 import android.graphics.Bitmap;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 /**
@@ -12,6 +14,8 @@ public class Foto implements Serializable {
     private String path;
     private int id;
     private int idGaleria;
+
+    @JsonIgnore
     private Bitmap foto;
 
     public Foto(String descripcion, String path, int id, int idGaleria) {

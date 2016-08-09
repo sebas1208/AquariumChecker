@@ -26,8 +26,6 @@ import ec.edu.epn.aquariumchecker.vo.Acuario;
 
 public class GaleriaAcuario extends AppCompatActivity {
 
-    private Spinner cmbAcuariosGaleria;
-    private Spinner cmbFechasGaleria;
     private ListView misAcuarios;
     private List<Acuario> acuarios = new ArrayList<>();
 
@@ -35,8 +33,6 @@ public class GaleriaAcuario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initComponents();
-        ListarAcuarios listarAcuarios = new ListarAcuarios();
-        listarAcuarios.execute();
     }
 
     private void initComponents(){
@@ -51,7 +47,7 @@ public class GaleriaAcuario extends AppCompatActivity {
     public void abrirAcuario(View v) {
         int position = misAcuarios.getPositionForView((LinearLayout)v.getParent());
         Intent i = new Intent(this, Galeria.class);
-        i.putExtra("acuarioSeleccionado",acuarios.get(position));
+        i.putExtra("varAcuario",acuarios.get(position));
         startActivity(i);
     }
 
@@ -59,45 +55,4 @@ public class GaleriaAcuario extends AppCompatActivity {
         Intent i = new Intent(this, NuevoAcuario.class);
         startActivity(i);
     }
-
-
-    public class ListarAcuarios extends AsyncTask<Void, Void, List<Acuario>> {
-
-        @Override
-        protected List<Acuario> doInBackground(Void... params) {
-            Log.v("buscar", "2");
-            List<Acuario> acuarios = new ArrayList<Acuario>();
-            final String url = "http://acuariumrest-sebas1208.rhcloud.com/acuario";
-            Log.v("buscar","3");
-
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getMessageConverters().add(
-                    new MappingJackson2HttpMessageConverter());
-            Acuario[] acuarioArray = restTemplate.getForObject(url, Acuario[].class);
-            acuarios = Arrays.asList(acuarioArray);
-            Log.v("buscar","4 son" + acuarios.size());
-            return acuarios;
-
-        }
-
-        @Override
-        protected void onPostExecute(List<Acuario> acuarios) {
-            super.onPostExecute(acuarios);
-
-            MisAcuariosAdapter adapter = new MisAcuariosAdapter(getApplicationContext(), acuarios);
-            misAcuarios.setAdapter(adapter);
-            misAcuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Acuario acuario = (Acuario) parent.getItemAtPosition(position);
-                    /*Toast.makeText(MainLibro.this,"Libro: "+l,Toast.LENGTH_SHORT).show();*/
-
-                    Intent i = new Intent(GaleriaAcuario.this, Galeria.class);
-                    i.putExtra("acuarioSeleccionado", acuario);
-                    startActivity(i);
-                }
-            });
-        }
-    }
-
 }

@@ -66,14 +66,8 @@ public class NuevaGaleria extends AppCompatActivity {
         nuevaGaleria.setObservaciones(edtObservaciones.getText().toString());
         nuevaGaleria.setIdAcuario(acuario.getId());
 
-        GaleriaService galeriaService = new GaleriaService(getApplicationContext());
-        FotoService fotoService = new FotoService(getApplicationContext());
+        GaleriaService galeriaService = new GaleriaService();
         galeriaService.createGaleria(nuevaGaleria, fotosList);
-
-//        for (Foto foto: fotosList){
-//            foto.setIdGaleria((int)idGaleria);
-//            fotoService.createFoto(foto);
-//        }
 
         Intent i = new Intent(this, ec.edu.epn.aquariumchecker.views.Galeria.class);
         i.putExtra("acuario", acuario);
