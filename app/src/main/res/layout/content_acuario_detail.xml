@@ -13,43 +13,45 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Galerias"
                 android:onClick="abrirGalerias"
-                android:gravity="center_horizontal"/>
+                android:gravity="center"
+                android:layout_gravity="center_horizontal" />
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Peces"
                 android:onClick="abrirPeces"
-                android:gravity="center_horizontal"/>
+                android:gravity="center"
+                android:layout_gravity="center_horizontal" />
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Plantas"
                 android:onClick="abrirPlantas"
-                android:gravity="center_horizontal"/>
+                android:gravity="center"
+                android:layout_gravity="center_horizontal" />
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Recordatorios"
                 android:onClick="abrirRecordatorios"
-                android:gravity="center_horizontal"/>
+                android:gravity="center"
+                android:layout_gravity="center_horizontal" />
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Historiales"
                 android:onClick="abrirHistoriales"
-                android:gravity="center_horizontal"/>
+                android:gravity="center"
+                android:layout_gravity="center_horizontal" />
 
-        </LinearLayout>
+
 
     </LinearLayout>
 
