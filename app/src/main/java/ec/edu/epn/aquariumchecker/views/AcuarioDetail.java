@@ -105,7 +105,7 @@ public class AcuarioDetail extends AppCompatActivity {
     }
 
     public void abrirPlantas(View view){
-        Intent i = new Intent(this, MisPlantasAcuario.class);
+        Intent i = new Intent(this, MisPlantas.class);
         startActivity(i);
     }
 
