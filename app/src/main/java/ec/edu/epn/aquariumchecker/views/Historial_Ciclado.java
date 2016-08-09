@@ -24,6 +24,7 @@ public class Historial_Ciclado extends AppCompatActivity implements View.OnClick
 
     private Spinner cmbCo2;
     private Button btnCalendario;
+    private Acuario acuario;
     private int anio, mes, dia, hora, minuto;
     private Spinner cmbIluminacion;
     private TextView txtFecha, txtHora;
@@ -110,8 +111,10 @@ public class Historial_Ciclado extends AppCompatActivity implements View.OnClick
 
         nuevoHistorial.setIdAcuario(acuarioSeleccionado.getId());
 
-        HistorialService historialService = new HistorialService(getApplicationContext());
-        historialService.crearHistorial(nuevoHistorial);
+        HistorialService service = new HistorialService();
+        service.createHistorial(nuevoHistorial);
+        //  HistorialService historialService = new HistorialService(getApplicationContext());
+        // historialService.crearHistorial(nuevoHistorial);
 
         Intent i = new Intent(this, ListHistorial.class);
         startActivity(i);

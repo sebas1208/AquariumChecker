@@ -19,6 +19,7 @@ import ec.edu.epn.aquariumchecker.vo.*;
 public class RcordatoriosListaAcuaruios extends AppCompatActivity {
         private List<ec.edu.epn.aquariumchecker.vo.Recordatorio> recordatorioslist = new ArrayList<>();
         private Acuario acuarioSeleccionado;
+
         private ListView recordatorios;
         static final int NUEVO_RECORDATORIO_REQUEST = 1;
         static final int MOSTRAR_RECORDATORIO_REQUEST = 1;
@@ -58,13 +59,14 @@ public class RcordatoriosListaAcuaruios extends AppCompatActivity {
     }
 
     private void obtenerRecordatorioPorAcuario(){
-        RecordatorioService service = new RecordatorioService(getApplicationContext());
-        recordatorioslist.addAll(service.listRecordatorios(acuarioSeleccionado));
+
+        RecordatorioService service = new RecordatorioService();
+        service.listRecordatoriosPorAcuario(acuarioSeleccionado,recordatorioslist,adapter);
     }
 
     public void eliminar(View view){
         int position = recordatorios.getPositionForView((LinearLayout)view.getParent());
-        RecordatorioService service = new RecordatorioService(getApplicationContext());
+        RecordatorioService service = new RecordatorioService();
         service.removeRecordatorio(recordatorioslist.get(position));
         recordatorioslist.remove(position);
         adapter.notifyDataSetChanged();

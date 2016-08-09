@@ -116,8 +116,8 @@ public class Recordatorios extends AppCompatActivity implements View.OnClickList
 
         nuevoRecordatorio.setAcuario(String.valueOf(acuarioSeleccionado.getId()));
 
-        RecordatorioService recordatorioService = new RecordatorioService(getApplicationContext());
-        recordatorioService.crearRecordatorio(nuevoRecordatorio);
+        RecordatorioService service = new RecordatorioService();
+        service.createRecordatorio(nuevoRecordatorio);
         Toast.makeText(Recordatorios.this, "Datos almacenados",Toast.LENGTH_LONG).show();
 
         Intent i = new Intent(this, ListRecordatorios.class);

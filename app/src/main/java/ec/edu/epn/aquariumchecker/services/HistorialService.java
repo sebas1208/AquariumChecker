@@ -1,134 +1,138 @@
 package ec.edu.epn.aquariumchecker.services;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
+import android.util.Log;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Arrays;
 import java.util.List;
 
-import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
-import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
+import ec.edu.epn.aquariumchecker.adapters.HistorialAdapter;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Historiales;
+import ec.edu.epn.aquariumchecker.vo.Galeria;
 
 /**
  * Created by angel on 6/7/2016.
  */
+
 public class HistorialService {
 
-        private Historiales historial;
-        private Context appContext;
+    private List<Historiales> historiales;
+    private Historiales historial;
+    private HistorialAdapter adapter;
 
-        public HistorialService(Context appContext) {
-        this.appContext = appContext;
+
+    public HistorialService() {
     }
 
-        public HistorialService() {
+    public void createHistorial(Historiales historial) {
+        CrearhistorialAsyncTask task = new CrearhistorialAsyncTask();
+        task.execute(historial);
+        //this.fotos = fotos;
     }
 
-    public long crearHistorial(Historiales nuevoHistorial){
-        AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
-        SQLiteDatabase db = op.getWritableDatabase();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-
-        ContentValues valores = new ContentValues();
-        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_FECHA,dateFormat.format(date));
-        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_PH,nuevoHistorial.getPh());
-        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_KH,nuevoHistorial.getKh());
-        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_GH,nuevoHistorial.getGh());
-        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_CO2,nuevoHistorial.getCo2());
-        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_ILUMINACION,nuevoHistorial.getIluminacion());
-        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_OBSERVACIONES,nuevoHistorial.getObservaciones());
-        valores.put(AquariumCheckerAppContract.TablaHistorial.ACUARIO_ID,nuevoHistorial.getIdAcuario());
-
-
-        long idinsert = db.insert(AquariumCheckerAppContract.TablaHistorial.NOMBRE_TABLA, null, valores);
-        db.close();
-        return idinsert;
+    public void listHistorialesPorAcuario(Acuario acuario, List<Historiales> historiales, HistorialAdapter adapter) {
+        ListarHistorialesByAcuarioAsyncTask task = new ListarHistorialesByAcuarioAsyncTask();
+        task.execute(acuario);
+        this.historiales = historiales;
+        this.adapter = adapter;
     }
 
-    public List<Historiales> listHistorialesPorAcuario(Acuario acuario){
-        AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
-        List<Historiales> l = new ArrayList<>();
-        String[] selectionValues = {String.valueOf(acuario.getId())};
 
-        SQLiteDatabase db = oh.getReadableDatabase();
-        String[] columnas = {AquariumCheckerAppContract.TablaHistorial.COLUMNA_FECHA,
-                AquariumCheckerAppContract.TablaHistorial.COLUMNA_PH,
-                AquariumCheckerAppContract.TablaHistorial.COLUMNA_KH,
-                AquariumCheckerAppContract.TablaHistorial.COLUMNA_GH,
-                AquariumCheckerAppContract.TablaHistorial.COLUMNA_CO2,
-                AquariumCheckerAppContract.TablaHistorial.COLUMNA_ILUMINACION,
-                AquariumCheckerAppContract.TablaHistorial.COLUMNA_OBSERVACIONES,
-                AquariumCheckerAppContract.TablaHistorial.ACUARIO_ID,
-                AquariumCheckerAppContract.TablaHistorial._ID,
+    public boolean removeHistorial(Historiales historial) {
+        return true;
+    }
 
-        };
+    public class ListarHistorialesAsyncTask extends AsyncTask<Void, Void, List<Historiales>> {
 
+        @Override
+        protected List<Historiales> doInBackground(Void... params) {
+            List<Historiales> historialesList = new ArrayList<Historiales>();
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/historial";
 
-        Cursor cur = db.query(
-                AquariumCheckerAppContract.TablaHistorial.NOMBRE_TABLA,
-                columnas,
-                AquariumCheckerAppContract.TablaHistorial.ACUARIO_ID + " = ?",
-                selectionValues,
-                null,
-                null,
-                null
-        );
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            Historiales[] historialArray = restTemplate.getForObject(url, Historiales[].class);
+            historialesList = Arrays.asList(historialArray);
+            return historialesList;
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        while (cur.moveToNext()) {
-            Date date = null;
-            try {
-                date = sdf.parse(cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaGaleria.COLUMNA_FECHA)));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            Historiales historial = new Historiales(
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.ACUARIO_ID)),
-                    date,
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_GH)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_PH)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_PH)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_CO2)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_ILUMINACION)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaHistorial.COLUMNA_OBSERVACIONES)));
-            l.add(historial);
         }
-        db.close();
-        return l;
+
+        @Override
+        protected void onPostExecute(List<Historiales> historialesList) {
+            super.onPostExecute(historialesList);
+        }
     }
 
-    public void editHistorial(Historiales historialEditar){
-       /* AquariumCheckerAppOpenHelper op = new AquariumCheckerAppOpenHelper(appContext);
-        SQLiteDatabase db = op.getWritableDatabase();
-        String[] id = {historialEditar.getAcuario()};
+    public class ListarHistorialesByAcuarioAsyncTask extends AsyncTask<Acuario, Void, List<Historiales>> {
 
-        ContentValues valores = new ContentValues();
-        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_FECHA,historialEditar.getFecha());
-        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_PH,historialEditar.getPh());
-        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_KH,historialEditar.getKh());
-        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_GH,historialEditar.getGh());
-        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_CO2,historialEditar.getCo2());
-        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_ILUMINACION,historialEditar.getIluminacion());
-        valores.put(AquariumCheckerAppContract.TablaHistorial.COLUMNA_OBSERVACIONES,historialEditar.getObservaciones());
-        db.update(AquariumCheckerAppContract.TablaHistorial.NOMBRE_TABLA,valores,
-                AquariumCheckerAppContract.TablaHistorial._ID + " = ?",id);
-        db.close();*/
+        @Override
+        protected List<Historiales> doInBackground(Acuario... params) {
+            List<Historiales> historialesList;
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/historial/acuario/" + params[0].getId();
+
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            Historiales[] historialArray = restTemplate.getForObject(url, Historiales[].class);
+            historiales.addAll(Arrays.asList(historialArray));
+            return historiales;
+
+        }
+
+        @Override
+        protected void onPostExecute(List<Historiales> historialesList) {
+            super.onPostExecute(historialesList);
+            adapter.notifyDataSetChanged();
+        }
     }
 
-    public Context getAppContext() {
-        return appContext;
+    public class CrearhistorialAsyncTask extends AsyncTask<Historiales, Void, String> {
+        @Override
+        protected String doInBackground(Historiales... params) {
+            Historiales historial = params[0];
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/historial";
+
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            restTemplate.getMessageConverters().add(
+                    new StringHttpMessageConverter());
+            String id = restTemplate.postForObject(url, historial, String.class);
+            return id;
+        }
+
+        @Override
+        protected void onPostExecute(String id) {
+           /* FotoService service = new FotoService();
+            for (Foto foto : fotos) {
+                foto.setIdGaleria(Integer.valueOf(id));
+                service.createFoto(foto);
+            }*/
+        }
     }
 
-    public void setAppContext(Context appContext) {
-        this.appContext = appContext;
-    }
+    public class EliminarAsyncTask extends AsyncTask<Historiales, Void, Void> {
+        @Override
+        protected Void doInBackground(Historiales... params) {
+            Log.v("buscar", "2");
+            Historiales historial = params[0];
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/historial/{id}";
+            Log.v("buscar", "3");
 
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            restTemplate.delete(url, historial.getId());
+            Log.v("Historial Eliminar", "mensaje");
+            return null;
+        }
+
+    }
 }
