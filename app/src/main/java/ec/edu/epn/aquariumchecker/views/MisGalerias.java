@@ -53,7 +53,6 @@ public class MisGalerias extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        galerias = (ListView) findViewById(R.id.galeria_list);
     }
 
     private void obtenerAcuarioSeleccionado(){
@@ -76,7 +75,7 @@ public class MisGalerias extends AppCompatActivity {
 
     public void abrirFotos(View view){
         int position = galerias.getPositionForView((LinearLayout)view.getParent());
-        Intent i = new Intent(this, Fotos.class);
+        Intent i = new Intent(this, GaleriaDetail.class);
         i.putExtra("galeriaSeleccionada",galeriasList.get(position));
         startActivityForResult(i, MOSTRAR_GALERIA_REQUEST);
     }
@@ -131,7 +130,7 @@ public class MisGalerias extends AppCompatActivity {
                     Galeria galeria = (Galeria) parent.getItemAtPosition(position);
                     /*Toast.makeText(MainLibro.this,"Libro: "+l,Toast.LENGTH_SHORT).show();*/
 
-                    Intent i = new Intent(MisGalerias.this, Fotos.class);
+                    Intent i = new Intent(MisGalerias.this, GaleriaDetail.class);
                     i.putExtra("galeriaSeleccionada", galeria);
                     startActivity(i);
                     startActivityForResult(i, MOSTRAR_GALERIA_REQUEST);

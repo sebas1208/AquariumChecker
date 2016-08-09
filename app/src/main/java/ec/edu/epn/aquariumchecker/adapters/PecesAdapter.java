@@ -53,7 +53,7 @@ public class PecesAdapter<T> extends ArrayAdapter<T> {
         // Get the dimensions of the bitmap
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         bmOptions.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(datos.get(position).getFotoURL(), bmOptions);
+        BitmapFactory.decodeFile(datos.get(position).getFoto(), bmOptions);
         int photoW = bmOptions.outWidth;
         int photoH = bmOptions.outHeight;
 
@@ -65,7 +65,7 @@ public class PecesAdapter<T> extends ArrayAdapter<T> {
         bmOptions.inSampleSize = scaleFactor;
         bmOptions.inPurgeable = true;
 
-        Bitmap bitmap = BitmapFactory.decodeFile(datos.get(position).getFotoURL(), bmOptions);
+        Bitmap bitmap = BitmapFactory.decodeFile(datos.get(position).getFoto(), bmOptions);
         fotoPez.setImageBitmap(bitmap);
 
         return item;

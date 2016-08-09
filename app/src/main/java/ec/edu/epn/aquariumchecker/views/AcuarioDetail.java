@@ -23,7 +23,7 @@ public class AcuarioDetail extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView hola;
     private ListView Opciones;
-    String[]menuOpciones = {"Galerias", "Plantas", "Peces","Historiales","Recordatorios"};
+    String[] menuOpciones = {"Galerias", "Plantas", "Peces", "Historiales", "Recordatorios"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +32,14 @@ public class AcuarioDetail extends AppCompatActivity {
         initComponents();
     }
 
-    private void getAcuario(){
-        acuario = (Acuario)getIntent().getSerializableExtra("varAcuario");
-        if(acuario == null){
+    private void getAcuario() {
+        acuario = (Acuario) getIntent().getSerializableExtra("varAcuario");
+        if (acuario == null) {
             acuario = new Acuario();
         }
     }
 
-    private void initComponents(){
+    private void initComponents() {
         setContentView(R.layout.activity_acuario_detail);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(acuario.getNombre());
@@ -68,13 +68,13 @@ public class AcuarioDetail extends AppCompatActivity {
         }
     }
 
-    private void editAcuario(){
+    private void editAcuario() {
         Intent i = new Intent(this, EditarAcuario.class);
         i.putExtra("varAcuario", acuario);
         startActivity(i);
     }
 
-    private void deleteAcuario(){
+    private void deleteAcuario() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder
                 .setTitle(getString(R.string.delete_acuario_title))
@@ -84,38 +84,39 @@ public class AcuarioDetail extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         AcuarioService service = new AcuarioService();
                         service.eliminarAcuario(acuario);
-                        Intent i = new Intent(AcuarioDetail.this,AquariumCherckerMain.class);
+                        Intent i = new Intent(AcuarioDetail.this, AquariumCherckerMain.class);
                         startActivity(i);
-                        Toast.makeText(getApplicationContext(), R.string.delete_acuario_message,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.delete_acuario_message, Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setNegativeButton(getString(R.string.not_confirm), null)						//Do nothing on no
+                .setNegativeButton(getString(R.string.not_confirm), null)                        //Do nothing on no
                 .show();
     }
 
-    public void abrirGalerias(View view){
-        Intent i = new Intent(this,Galeria.class);
+    public void abrirGalerias(View view) {
+        Intent i = new Intent(this, Galeria.class);
         i.putExtra("varAcuario", acuario);
         startActivity(i);
     }
 
-    public void abrirPeces(View view){
+    public void abrirPeces(View view) {
         Intent i = new Intent(this, MisPeces.class);
+        i.putExtra("varAcuario", acuario);
         startActivity(i);
     }
 
-    public void abrirPlantas(View view){
+    public void abrirPlantas(View view) {
         Intent i = new Intent(this, MisPlantas.class);
         startActivity(i);
     }
 
-    public void abrirRecordatorios (View view){
-        Intent i = new Intent (this,ListRecordatorios.class);
+    public void abrirRecordatorios(View view) {
+        Intent i = new Intent(this, ListRecordatorios.class);
         startActivity(i);
     }
 
-    public void abrirHistoriales (View view){
-        Intent i = new Intent (this,ListHistorial.class);
+    public void abrirHistoriales(View view) {
+        Intent i = new Intent(this, ListHistorial.class);
         startActivity(i);
     }
 

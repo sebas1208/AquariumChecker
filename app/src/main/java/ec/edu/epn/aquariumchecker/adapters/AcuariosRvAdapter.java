@@ -2,6 +2,7 @@ package ec.edu.epn.aquariumchecker.adapters;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,18 +24,22 @@ public class AcuariosRvAdapter extends RecyclerView.Adapter<AcuariosRvAdapter.Ac
         this.acuarios = acuarios;
     }
 
-    public static class AcuarioViewHolder extends RecyclerView.ViewHolder {
-        CardView cv;
+    public static class AcuarioViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView acuarioTitle;
         TextView acuarioDetail;
         ImageView acuarioImage;
 
         public AcuarioViewHolder(View itemView) {
             super(itemView);
-            cv = (CardView) itemView.findViewById(R.id.acuario_recycler_view);
             acuarioTitle =  (TextView) itemView.findViewById(R.id.acuario_title);
             acuarioDetail =  (TextView) itemView.findViewById(R.id.acuario_detail);
             acuarioImage = (ImageView) itemView.findViewById(R.id.acuario_image);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position  =   getAdapterPosition();
+            Log.w("", "Selected"+position);
         }
     }
 

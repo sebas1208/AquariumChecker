@@ -222,5 +222,6 @@ Podras crear acuarios, tomar una galeria de fotos de tu acuario, agregar peces y
     <string name="not_confirm">No</string>
     <string name="edit_message_complete">Acuario editado</string>
     <string name="delete_acuario_message">Acuario eliminado</string>
+    <string name="delete_galeria_message">Galeria Eliminda</string>
 
 </resources>

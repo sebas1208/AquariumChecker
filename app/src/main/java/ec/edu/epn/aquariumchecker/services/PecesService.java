@@ -23,18 +23,19 @@ public class PecesService {
     public PecesService() {
     }
 
-    public void createPez(Peces pez){
+    public void createPez(Peces pez) {
         CrearPezAsyncTask task = new CrearPezAsyncTask();
         task.execute(pez);
 
     }
-    public void eliminarPeces(Acuario acuario){
+
+    public void eliminarPeces(Peces pez) {
         EliminarPecesAsyncTask task = new EliminarPecesAsyncTask();
-        task.execute(acuario);
+        task.execute(pez);
     }
 
 
-    public void listaPecesPorAcuario(Acuario acuario, List<Peces> peces, PecesAdapter adapter){
+    public void listaPecesPorAcuario(Acuario acuario, List<Peces> peces, PecesAdapter adapter) {
         ListarPecesByAcuarioAsyncTask task = new ListarPecesByAcuarioAsyncTask();
         task.execute(acuario);
         this.peces = peces;
@@ -45,7 +46,7 @@ public class PecesService {
 
         @Override
         protected List<Peces> doInBackground(Acuario... params) {
-            final String url = "http://acuariumrest-sebas1208.rhcloud.com/pez/acuario/" + params[0].getId();
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/peces/acuario/" + params[0].getId();
 
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(
@@ -67,7 +68,7 @@ public class PecesService {
         @Override
         protected String doInBackground(Peces... params) {
             Peces pez = params[0];
-            final String url = "http://acuariumrest-sebas1208.rhcloud.com/pez";
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/peces";
 
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(
@@ -83,25 +84,20 @@ public class PecesService {
 
         }
     }
-        public class EliminarPecesAsyncTask extends AsyncTask<Acuario, Void, Peces> {
-            @Override
-            protected Peces doInBackground(Acuario... params) {
-                final String url = "http://acuariumrest-sebas1208.rhcloud.com/peces/acuario" + params[0].getId();
 
-                RestTemplate restTemplate = new RestTemplate();
-                restTemplate.getMessageConverters().add(
-                        new MappingJackson2HttpMessageConverter());
-                restTemplate.getMessageConverters().add(
-                        new StringHttpMessageConverter());
-                restTemplate.delete(url, params[0]);
-                return null;
-            }
+    public class EliminarPecesAsyncTask extends AsyncTask<Peces, Void, Void> {
+        @Override
+        protected Void doInBackground(Peces... params) {
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/peces/" + params[0].getId();
 
-            @Override
-            protected void onPostExecute(Peces peces) {
-                super.onPostExecute(peces);
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            restTemplate.getMessageConverters().add(
+                    new StringHttpMessageConverter());
+            restTemplate.delete(url, params[0]);
+            return null;
         }
-
     }
 
 }

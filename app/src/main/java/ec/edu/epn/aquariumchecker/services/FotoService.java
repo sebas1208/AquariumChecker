@@ -5,18 +5,23 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import ec.edu.epn.aquariumchecker.adapters.FotosAdapter;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
+import ec.edu.epn.aquariumchecker.vo.Acuario;
 import ec.edu.epn.aquariumchecker.vo.Foto;
 import ec.edu.epn.aquariumchecker.vo.Galeria;
 
@@ -24,11 +29,9 @@ import ec.edu.epn.aquariumchecker.vo.Galeria;
  * Created by sebas on 7/6/2016.
  */
 public class FotoService {
-    private Context appContext;
 
-    public FotoService(Context appContext) {
-        this.appContext = appContext;
-    }
+    private List<Foto> fotos;
+    private FotosAdapter adapter;
 
     public FotoService() {
     }
@@ -36,6 +39,13 @@ public class FotoService {
     public void createFoto(Foto foto){
         CrearFotoAsyncTask task = new CrearFotoAsyncTask();
         task.execute(foto);
+    }
+
+    public void listarFotosPorGaleria(Galeria galeria, List<Foto> fotos, FotosAdapter adapter){
+        this.fotos = fotos;
+        this.adapter = adapter;
+        ListarFotoPorGaleriaAsyncTask task = new ListarFotoPorGaleriaAsyncTask();
+        task.execute(galeria);
     }
 
     public class CrearFotoAsyncTask extends AsyncTask<Foto, Void, Void> {
@@ -59,88 +69,35 @@ public class FotoService {
         }
     }
 
-    public List<Foto> listFotos(){
-        AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
-        List<Foto> l = new ArrayList<>();
+    public class ListarFotoPorGaleriaAsyncTask extends AsyncTask<Galeria, Void, List<Foto>> {
 
-        SQLiteDatabase db = oh.getReadableDatabase();
-        String[] columnas = {AquariumCheckerAppContract.TablaFoto.COLUMNA_PATH,
-                AquariumCheckerAppContract.TablaFoto.COLUMNA_DESCRIPCION,
-                AquariumCheckerAppContract.TablaFoto.GALERIA_ID,
-                AquariumCheckerAppContract.TablaFoto._ID,
-        };
+        @Override
+        protected List<Foto> doInBackground(Galeria... params) {
+            final String url = "http://acuariumrest-sebas1208.rhcloud.com/foto/galeria/" + params[0].getId();
 
-
-        Cursor cur = db.query(
-                AquariumCheckerAppContract.TablaFoto.NOMBRE_TABLA,
-                columnas,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
-
-        while (cur.moveToNext()) {
-            Foto foto = new Foto(
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaFoto.COLUMNA_DESCRIPCION)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaFoto.COLUMNA_PATH)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaFoto._ID)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaFoto.GALERIA_ID))
-            );
-            l.add(foto);
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(
+                    new MappingJackson2HttpMessageConverter());
+            try{
+                Foto[] fotoArray = restTemplate.getForObject(url, Foto[].class);
+                fotos.addAll(Arrays.asList(fotoArray));
+            }
+            catch (HttpClientErrorException e) {
+                Log.v("Error", "Conexion de red");
+            }
+            return fotos;
         }
-        db.close();
-        return l;
+
+        @Override
+        protected void onPostExecute(List<Foto> fotos) {
+            adapter.notifyDataSetChanged();
+        }
     }
 
-    public List<Foto> listaFotosPorGaleria(Galeria galeria){
-        AquariumCheckerAppOpenHelper oh = new AquariumCheckerAppOpenHelper(appContext);
-        List<Foto> l = new ArrayList<>();
-        String[] selectionValues = {String.valueOf(galeria.getId())};
-
-        SQLiteDatabase db = oh.getReadableDatabase();
-        String[] columnas = {AquariumCheckerAppContract.TablaFoto.COLUMNA_PATH,
-                AquariumCheckerAppContract.TablaFoto.COLUMNA_DESCRIPCION,
-                AquariumCheckerAppContract.TablaFoto.GALERIA_ID,
-                AquariumCheckerAppContract.TablaFoto._ID,
-        };
-
-
-        Cursor cur = db.query(
-                AquariumCheckerAppContract.TablaFoto.NOMBRE_TABLA,
-                columnas,
-                AquariumCheckerAppContract.TablaFoto.GALERIA_ID + " = ?",
-                selectionValues,
-                null,
-                null,
-                null
-        );
-
-        while (cur.moveToNext()) {
-            Foto foto = new Foto(
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaFoto.COLUMNA_DESCRIPCION)),
-                    cur.getString(cur.getColumnIndex(AquariumCheckerAppContract.TablaFoto.COLUMNA_PATH)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaFoto._ID)),
-                    cur.getInt(cur.getColumnIndex(AquariumCheckerAppContract.TablaFoto.GALERIA_ID))
-                   );
-            l.add(foto);
-        }
-        db.close();
-        return l;
-    }
 
     public boolean removeGaleria(){
 
         return false;
-    }
-
-    public Context getAppContext() {
-        return appContext;
-    }
-
-    public void setAppContext(Context appContext) {
-        this.appContext = appContext;
     }
 
 }

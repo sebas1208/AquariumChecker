@@ -34,13 +34,11 @@ public class PlantasService {
     }
 
     public void listaPlantasPorAcuario(Acuario acuario, List<Planta> plantas, PlantasAdapter adapter){
-        ListarPlantasByAcuarioAsyncTask task = new ListarPlantasByAcuarioAsyncTask();
-        task.execute(acuario);
         this.plantas = plantas;
         this.adapter = adapter;
+        ListarPlantasByAcuarioAsyncTask task = new ListarPlantasByAcuarioAsyncTask();
+        task.execute(acuario);
     }
-
-
 
     public class ListarPlantasByAcuarioAsyncTask extends AsyncTask<Acuario, Void, List<Planta>> {
 

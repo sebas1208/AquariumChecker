@@ -61,8 +61,8 @@
                 android:value="ec.edu.epn.aquariumchecker.views.AquariumCherckerMain" />
         </activity>
         <activity
-            android:name=".views.Fotos"
-            android:label="@string/title_activity_fotos"
+            android:name=".views.GaleriaDetail"
+            android:label="Galeria"
             android:parentActivityName=".views.Galeria"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -120,11 +120,11 @@
         <activity
             android:name=".views.MisPeces"
             android:label="@string/title_activity_mis_peces"
-            android:parentActivityName=".views.MisPecesAcuarios"
+            android:parentActivityName=".views.AcuarioDetail"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ec.edu.epn.aquariumchecker.views.MisPecesAcuarios" />
+                android:value="ec.edu.epn.aquariumchecker.views.AcuarioDetail" />
         </activity>
         <activity
             android:name=".views.MisPlantasAcuario"
@@ -133,21 +133,21 @@
         <activity
             android:name=".views.Galeria"
             android:label="@string/title_activity_galeria"
-            android:parentActivityName=".views.GaleriaAcuario"
+            android:parentActivityName=".views.AcuarioDetail"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ec.edu.epn.aquariumchecker.views.GaleriaAcuario" />
+                android:value="ec.edu.epn.aquariumchecker.views.AcuarioDetail" />
         </activity>
         <activity
             android:name=".views.NuevaGaleria"
             android:label="@string/title_activity_nueva_galeria"
-            android:parentActivityName=".views.GaleriaAcuario"
+            android:parentActivityName=".views.Galeria"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:theme="@style/AppTheme.NoActionBar"
-                android:value="ec.edu.epn.aquariumchecker.views.GaleriaAcuario" />
+                android:value="ec.edu.epn.aquariumchecker.views.Galeria" />
         </activity>
         <activity
             android:name=".views.NuevoPez"
@@ -197,7 +197,9 @@
         <activity
             android:name=".views.Navegacion"
             android:label="@string/title_activity_navegacion"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
             android:name=".views.AcuarioDetail"
             android:label="@string/title_activity_acuario_detail"

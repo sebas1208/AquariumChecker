@@ -9,20 +9,20 @@ public class Peces implements Serializable{
     private String nombre;
     private String descripcion;
     private int cantidad;
-    private String fotoURL;
+    private String foto;
     private int id;
-    private int acuario_id;
+    private int idAcuario;
 
     public Peces() {
     }
 
-    public Peces(String nombre, String descripcion, int cantidad, String fotoURL, int id, int acuario_id) {
+    public Peces(String nombre, String descripcion, int cantidad, String foto, int id, int idAcuario) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
-        this.fotoURL = fotoURL;
+        this.foto = foto;
         this.id = id;
-        this.acuario_id = acuario_id;
+        this.idAcuario = idAcuario;
     }
 
     public String getNombre() {
@@ -49,12 +49,12 @@ public class Peces implements Serializable{
         this.cantidad = cantidad;
     }
 
-    public String getFotoURL() {
-        return fotoURL;
+    public String getFoto() {
+        return foto;
     }
 
-    public void setFotoURL(String fotoURL) {
-        this.fotoURL = fotoURL;
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public int getId() {
@@ -65,11 +65,11 @@ public class Peces implements Serializable{
         this.id = id;
     }
 
-    public int getAcuario_id() {
-        return acuario_id;
+    public int getIdAcuario() {
+        return idAcuario;
     }
 
-    public void setAcuario_id(int acuario_id) {
-        this.acuario_id = acuario_id;
+    public void setIdAcuario(int idAcuario) {
+        this.idAcuario = idAcuario;
     }
 }

@@ -8,14 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.R;
-import ec.edu.epn.aquariumchecker.adapters.GaleriaAdapter;
+import ec.edu.epn.aquariumchecker.adapters.GaleriaRvAdapter;
 import ec.edu.epn.aquariumchecker.services.GaleriaService;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
 
@@ -23,7 +21,7 @@ public class Galeria extends AppCompatActivity {
     private List<ec.edu.epn.aquariumchecker.vo.Galeria> galeriasList = new ArrayList<>();
     private Acuario acuario;
     private RecyclerView galeriaRecyclerView;
-    private GaleriaAdapter adapter;
+    private GaleriaRvAdapter adapter;
     static final int NUEVA_GALERIA_REQUEST = 1;
     static final int MOSTRAR_GALERIA_REQUEST = 1;
 
@@ -50,15 +48,12 @@ public class Galeria extends AppCompatActivity {
 
         galeriaRecyclerView = (RecyclerView) findViewById(R.id.galeria_recycler_view);
         galeriaRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapter = new GaleriaAdapter(getApplicationContext(),galeriasList);
-        //galeriasListView.setAdapter(adapter);
+        adapter = new GaleriaRvAdapter(galeriasList);
+        galeriaRecyclerView.setAdapter(adapter);
     }
 
     private void obtenerAcuarioSeleccionado(){
         acuario = (Acuario)getIntent().getSerializableExtra("varAcuario");
-        if(acuario == null){
-            acuario = new Acuario();
-        }
     }
 
     private void obtenerGaleriasPorAcuario(){
@@ -72,29 +67,11 @@ public class Galeria extends AppCompatActivity {
         startActivityForResult(i,NUEVA_GALERIA_REQUEST);
     }
 
-//    public void abrirFotos(View view){
-//        int position = galeriasListView.getPositionForView((LinearLayout)view.getParent());
-//        Intent i = new Intent(this, Fotos.class);
-//        i.putExtra("varGaleria", galeriasList.get(position));
-//        startActivityForResult(i, MOSTRAR_GALERIA_REQUEST);
-//    }
-//
-//    public void eliminarGaleria(View view){
-//        int position = galeriasListView.getPositionForView((LinearLayout)view.getParent());
-//        GaleriaService galeriaService = new GaleriaService();
-//        galeriaService.removeGaleria(galeriasList.get(position));
-//
-//        adapter.notifyDataSetChanged();
-//        Toast.makeText(getApplicationContext(),"Se elimino la Galeria",Toast.LENGTH_SHORT).show();
-//    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == NUEVA_GALERIA_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                obtenerAcuarioSeleccionado();
-                obtenerGaleriasPorAcuario();
-            }
-        }
+    public void abrirGaleriaDetail(View view){
+        int position = galeriaRecyclerView.getChildPosition((LinearLayout)view.getParent());
+        Intent i = new Intent(this, GaleriaDetail.class);
+        i.putExtra("varGaleria", galeriasList.get(position));
+        i.putExtra("varAcuario", acuario);
+        startActivity(i);
     }
 }

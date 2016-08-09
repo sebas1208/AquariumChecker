@@ -32,9 +32,6 @@ public class MisAcuarios extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initComponents();
-        //getAcuarioList();
-        ListarAcuarios listarAcuarios = new ListarAcuarios();
-        listarAcuarios.execute();
     }
 
     private void initComponents(){
@@ -61,44 +58,4 @@ public class MisAcuarios extends AppCompatActivity {
         i.putExtra("acuarioEditar",acuarios.get(position));
         startActivity(i);
     }
-
-    public class ListarAcuarios extends AsyncTask <Void, Void, List<Acuario>>{
-
-        @Override
-        protected List<Acuario> doInBackground(Void... params) {
-            Log.v("buscar", "2");
-            List<Acuario> acuarios = new ArrayList<Acuario>();
-            final String url = "http://acuariumrest-sebas1208.rhcloud.com/acuario";
-            Log.v("buscar","3");
-
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getMessageConverters().add(
-                    new MappingJackson2HttpMessageConverter());
-            Acuario[] acuarioArray = restTemplate.getForObject(url, Acuario[].class);
-            acuarios = Arrays.asList(acuarioArray);
-            Log.v("buscar","4 son" + acuarios.size());
-            return acuarios;
-
-        }
-
-        @Override
-        protected void onPostExecute(List<Acuario> acuarios) {
-            super.onPostExecute(acuarios);
-
-            MisAcuariosAdapter adapter = new MisAcuariosAdapter(getApplicationContext(), acuarios);
-            misAcuarios.setAdapter(adapter);
-            misAcuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Acuario acuario = (Acuario) parent.getItemAtPosition(position);
-                    /*Toast.makeText(MainLibro.this,"Libro: "+l,Toast.LENGTH_SHORT).show();*/
-
-                    Intent i = new Intent(MisAcuarios.this, EditarAcuario.class);
-                    i.putExtra("varAcuario", acuario);
-                    startActivity(i);
-                }
-            });
-        }
-    }
-
 }

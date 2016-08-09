@@ -33,7 +33,7 @@ public class AquariumCherckerMain extends AppCompatActivity                     
         acuarioRecyvlerView = (RecyclerView) findViewById(R.id.acuario_recycler_view);
         acuarioRecyvlerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        AcuarioService service = new AcuarioService();
+        AcuarioService service = new AcuarioService(getApplicationContext());
         acuarios = new ArrayList<>();
         adapter = new AcuariosRvAdapter(acuarios);
         acuarioRecyvlerView.setAdapter(adapter);

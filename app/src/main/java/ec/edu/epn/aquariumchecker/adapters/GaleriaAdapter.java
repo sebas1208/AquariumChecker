@@ -32,7 +32,7 @@ public class GaleriaAdapter<T> extends ArrayAdapter<T> {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             item = inflater.inflate(R.layout.galeria_list_item,null);
         }
-        TextView fecha = (TextView) item.findViewById(R.id.fecha_galeria);
+        TextView fecha = (TextView) item.findViewById(R.id.galeria_title);
         String date = new SimpleDateFormat("dd/M/yyyy hh:mm").format(datos.get(position).getFecha());
         fecha.setText(date);
 

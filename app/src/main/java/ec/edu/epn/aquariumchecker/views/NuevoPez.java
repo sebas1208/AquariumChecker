@@ -26,7 +26,7 @@ import ec.edu.epn.aquariumchecker.vo.Peces;
 
 public class NuevoPez extends AppCompatActivity {
 
-    private Acuario acuarioSeleccionado;
+    private Acuario acuario;
     private Peces pez = new Peces();
     private String pathActual;
     private EditText edtNombrePez;
@@ -48,7 +48,6 @@ public class NuevoPez extends AppCompatActivity {
         setContentView(R.layout.activity_nuevo_pez);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         edtNombrePez = (EditText) findViewById(R.id.txtNombrePez);
         edtDescripcionPez = (EditText) findViewById(R.id.txtDescripcionPez);
@@ -57,22 +56,20 @@ public class NuevoPez extends AppCompatActivity {
     }
 
     private void obtenerAcuarioSeleccionado() {
-        acuarioSeleccionado = (Acuario) getIntent().getSerializableExtra("acuarioSeleccionado");
-        if (acuarioSeleccionado == null) {
-            acuarioSeleccionado = new Acuario();
-        }
+        acuario = (Acuario) getIntent().getSerializableExtra("varAcuario");
     }
 
     public void guardarPez(View v){
         pez.setNombre(edtNombrePez.getText().toString());
         pez.setDescripcion(edtDescripcionPez.getText().toString());
         pez.setCantidad(Integer.valueOf(edtCantidadPez.getText().toString()));
-        pez.setAcuario_id(acuarioSeleccionado.getId());
-        pez.setFotoURL(pathActual);
+        pez.setIdAcuario(acuario.getId());
+        pez.setFoto(pathActual);
 
         PecesService pecesService = new PecesService();
         pecesService.createPez(pez);
         Intent i = new Intent(this, MisPeces.class);
+        i.putExtra("varAcuario",acuario);
         startActivity(i);
     }
 
@@ -97,8 +94,8 @@ public class NuevoPez extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
-            int targetW = 150;
-            int targetH = 150;
+            int targetW = 200;
+            int targetH = 200;
 
             BitmapFactory.Options bmOptions = new BitmapFactory.Options();
             bmOptions.inJustDecodeBounds = true;
@@ -131,6 +128,12 @@ public class NuevoPez extends AppCompatActivity {
         pathActual = image.getAbsolutePath();
         Log.v("Path", pathActual);
         return image;
+    }
+
+    public void cancelar(View view){
+        Intent i = new Intent(this, MisPeces.class);
+        i.putExtra("varAcuario",acuario);
+        startActivity(i);
     }
 
 }

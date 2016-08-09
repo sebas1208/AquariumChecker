@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ public class MisPeces extends AppCompatActivity {
     private ListView listapeces;
     private List<Peces> peces = new ArrayList<>();
     private PecesAdapter adapter;
-    private Acuario accuarioSeleccionado;
+    private Acuario acuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,26 +45,25 @@ public class MisPeces extends AppCompatActivity {
     }
 
     private void obtenerAcuarioSeleccionado(){
-        accuarioSeleccionado = (Acuario)getIntent().getSerializableExtra("acuarioSeleccionado");
-        if(accuarioSeleccionado == null){
-            accuarioSeleccionado = new Acuario();
-        }
+        acuario = (Acuario)getIntent().getSerializableExtra("varAcuario");
     }
 
     private void obtenerListaPeces(){
         PecesService pecesService = new PecesService();
-        pecesService.listaPecesPorAcuario(accuarioSeleccionado, peces, adapter);
+        pecesService.listaPecesPorAcuario(acuario, peces, adapter);
     }
 
-    public void abrirPez(View v) {
+    public void abrirNuevoPez(View v) {
         Intent i = new Intent(this, NuevoPez.class);
-        i.putExtra("acuarioSeleccionado", accuarioSeleccionado);
+        i.putExtra("varAcuario", acuario);
         startActivity(i);
     }
 
     public void eliminar(View view){
+        int position = listapeces.getPositionForView((LinearLayout) view.getParent());
         PecesService pecesService = new PecesService();
-        pecesService.eliminarPeces(accuarioSeleccionado);
+        pecesService.eliminarPeces(peces.get(position));
+        peces.remove(position);
         adapter.notifyDataSetChanged();
         Toast.makeText(getApplicationContext(), "Se elimino el pez", Toast.LENGTH_SHORT).show();
     }

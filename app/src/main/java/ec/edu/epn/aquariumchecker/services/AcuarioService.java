@@ -1,10 +1,15 @@
 package ec.edu.epn.aquariumchecker.services;
 
+import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.widget.Toast;
 
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -18,7 +23,13 @@ public class AcuarioService {
 
     final String url = "http://acuariumrest-sebas1208.rhcloud.com/acuario";
 
+    private Context context;
+
     private RecyclerView.Adapter adapter;
+
+    public AcuarioService(Context context) {
+        this.context = context;
+    }
 
     public AcuarioService() {
     }
@@ -72,8 +83,13 @@ public class AcuarioService {
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(
                     new MappingJackson2HttpMessageConverter());
-            Acuario[] acuarioArray = restTemplate.getForObject(url, Acuario[].class);
-            acuarios[0].addAll(Arrays.asList(acuarioArray));
+            try{
+                Acuario[] acuarioArray = restTemplate.getForObject(url, Acuario[].class);
+                acuarios[0].addAll(Arrays.asList(acuarioArray));
+            }
+            catch (HttpClientErrorException e) {
+                Toast.makeText(context,"Error en la red, intentalo de nuevo",Toast.LENGTH_SHORT).show();
+            }
             return acuarios[0];
         }
 

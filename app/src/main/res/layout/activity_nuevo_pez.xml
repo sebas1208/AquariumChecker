@@ -23,12 +23,4 @@
 
     <include layout="@layout/content_nuevo_pez" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:text="@string/guardar_galeria"
-        android:textSize="20dp"
-        android:onClick="guardarPez"/>
-
 </android.support.design.widget.CoordinatorLayout>

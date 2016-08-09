@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import ec.edu.epn.aquariumchecker.adapters.GaleriaAdapter;
+import ec.edu.epn.aquariumchecker.adapters.GaleriaRvAdapter;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppContract;
 import ec.edu.epn.aquariumchecker.sqlite.AquariumCheckerAppOpenHelper;
 import ec.edu.epn.aquariumchecker.vo.Acuario;
@@ -26,23 +27,23 @@ import ec.edu.epn.aquariumchecker.vo.Galeria;
 public class GaleriaService {
 
     private List<Galeria> galerias;
-    private GaleriaAdapter adapter;
+    private GaleriaRvAdapter adapter;
     private List<Foto> fotos;
 
     public GaleriaService() {
     }
 
     public void createGaleria(Galeria galeria, List<Foto> fotos) {
+        this.fotos = fotos;
         CrearGaleriaAsyncTask task = new CrearGaleriaAsyncTask();
         task.execute(galeria);
-        this.fotos = fotos;
     }
 
-    public void listGaleriasPorAcuario(Acuario acuario, List<Galeria> galerias, GaleriaAdapter adapter) {
-        ListarGaleriasByAcuarioAsyncTask task = new ListarGaleriasByAcuarioAsyncTask();
-        task.execute(acuario);
+    public void listGaleriasPorAcuario(Acuario acuario, List<Galeria> galerias, GaleriaRvAdapter adapter) {
         this.galerias = galerias;
         this.adapter = adapter;
+        ListarGaleriasByAcuarioAsyncTask task = new ListarGaleriasByAcuarioAsyncTask();
+        task.execute(acuario);
     }
 
 
@@ -76,7 +77,7 @@ public class GaleriaService {
 
         @Override
         protected List<Galeria> doInBackground(Acuario... params) {
-            List<Galeria> galeriasList;
+
             final String url = "http://acuariumrest-sebas1208.rhcloud.com/galeria/acuario/" + params[0].getId();
 
             RestTemplate restTemplate = new RestTemplate();
