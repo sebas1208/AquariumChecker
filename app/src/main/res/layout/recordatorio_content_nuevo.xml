@@ -38,7 +38,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/area_tipo_agua"
+        android:id="@+id/area_ph"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
-        android:layout_below="@+id/area_tipo_agua"
+        android:layout_below="@+id/area_ph"
         android:orientation="horizontal">
 
         <ImageView

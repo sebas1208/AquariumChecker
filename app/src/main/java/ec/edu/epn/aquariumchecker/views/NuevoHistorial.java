@@ -41,9 +41,8 @@ public class NuevoHistorial extends AppCompatActivity {
     }
 
     private void initComponents(){
-        setContentView(R.layout.activity_historial_ciclado);
+        setContentView(R.layout.activity_historial);
         btnCalendario = (Button) findViewById(R.id.btnCalendario);
-        txtFecha = (TextView) findViewById(R.id.txtFechaView);
         txtph = (EditText) findViewById(R.id.txtph);
         txtgh = (EditText) findViewById(R.id.txtghact);
         txtkh = (EditText) findViewById(R.id.txtkh);
@@ -71,10 +70,7 @@ public class NuevoHistorial extends AppCompatActivity {
     }
 
     private void obtenerAcuarioSeleccionado() {
-        acuarioSeleccionado = (Acuario) getIntent().getSerializableExtra("acuarioSeleccionado");
-        if (acuarioSeleccionado == null) {
-            acuarioSeleccionado = new Acuario();
-        }
+        acuarioSeleccionado = (Acuario) getIntent().getSerializableExtra("varAcuario");
     }
 
     public void onClick(View v) {
@@ -120,7 +116,8 @@ public class NuevoHistorial extends AppCompatActivity {
     }
 
     public void cancelar(View view) {
-        Intent i = new Intent(this, ListHistorial.class);
+        Intent i = new Intent(this, Historiales.class);
+        i.putExtra("varAcuario",acuarioSeleccionado);
         startActivity(i);
     }
 
